@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mathematics | Chapter 1 Blog Topic 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:"Segoe UI",Arial;
+    background:#eef3ff;
+}
+
+.header{
+    background:#007bff;
+    padding:18px;
+    color:white;
+    font-size:26px;
+}
+
+.blog-box{
+    width:90%;
+    max-width:900px;
+    background:white;
+    margin:25px auto;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.2);
+}
+
+h2{
+    color:#007bff;
+}
+
+button{
+    background:#007bff;
+    border:none;
+    color:white;
+    padding:12px 18px;
+    border-radius:8px;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+.nav-btns{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+}
+</style>
+</head>
+<script src="/Quizzone/Global/loader.js"></script>
+<body>
+
+<div class="header">Mathematics → Chapter 1 → Topic 1</div>
+
+<div class="blog-box">
+
+    <h2>Topic 1: Introduction to Number System</h2>
+
+    <p>
+        The number system is the foundation of all mathematical concepts.  
+        It includes Natural Numbers, Whole Numbers, Integers, Rational and  
+        Irrational Numbers. This chapter introduces how these number types  
+        work together to build higher mathematics.
+    </p>
+
+    <p>
+        Understanding the number system helps in learning algebra, geometry,  
+        calculus and every advanced mathematical field.
+    </p>
+
+    <button onclick="markAsRead()">Mark as Read ✓</button>
+
+    <div class="nav-btns">
+        <button onclick="previous()">← Previous Topic</button>
+        <button onclick="next()">Next Topic →</button>
+    </div>
+
+</div>
+
+<script>
+function markAsRead(){
+    let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+    if(!user){ alert("Login Required!"); return; }
+
+    user.progress.blogs = (user.progress.blogs || 0) + 1;
+
+    localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(user));
+
+    let allUsers = JSON.parse(localStorage.getItem("QuizzoneUsersDB"));
+    let idx = allUsers.findIndex(x=>x.email===user.email);
+    allUsers[idx] = user;
+    localStorage.setItem("QuizzoneUsersDB",JSON.stringify(allUsers));
+
+    alert("Topic marked as read!");
+}
+
+function previous(){
+    alert("No previous topic added yet!");
+}
+
+function next(){
+    alert("Next topic will be added soon!");
+}
+</script>
+
+</body>
+</html>

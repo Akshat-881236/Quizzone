@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone | Sign Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* ------------------------------------------
+   GLOBAL UI
+------------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #007bff, #00d4ff);
+    font-family: "Segoe UI", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 420px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+.logo {
+    text-align: center;
+    font-size: 34px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.tagline {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 14px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 17px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover { background: #005fcc; }
+
+label { font-weight: bold; }
+
+/* PASSWORD STRENGTH BAR */
+.strength-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    background: red;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* PROFILE PHOTO PREVIEW */
+#photoPreview {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #007bff;
+    display: none;
+    margin-bottom: 12px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 600px) {
+    .wrapper { width: 90%; }
+    .logo { font-size: 28px; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="logo">Quizzone</div>
+    <div class="tagline">"Where Knowledge Meets Mastery"</div>
+
+    <h2 style="text-align:center;">Create Your Account</h2>
+
+    <label>User Name</label>
+    <input type="text" id="username" placeholder="Enter Username">
+
+    <label>Father Name</label>
+    <input type="text" id="fatherName" placeholder="Enter Father's Name">
+
+    <label>Date of Birth (Min Age: 12)</label>
+    <input type="date" id="dob">
+
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Email Address">
+
+    <label>Contact Number</label>
+    <input type="tel" id="contact" placeholder="Contact Number">
+
+    <label>Address</label>
+    <textarea id="address" rows="2" placeholder="Enter Address"></textarea>
+
+    <label>Upload Passport Size Photo</label>
+    <input type="file" id="photo" accept="image/*" onchange="previewPhoto()">
+    <img id="photoPreview">
+
+    <label>Password</label>
+    <input type="password" id="password" oninput="checkStrength()" placeholder="Create Password">
+
+    <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+
+    <button onclick="register()">Create Account</button>
+
+</div>
+
+
+<script>
+
+/* ------------------------------------------
+   PHOTO PREVIEW
+------------------------------------------- */
+function previewPhoto() {
+    let file = document.getElementById("photo").files[0];
+    let img = document.getElementById("photoPreview");
+
+    if (file) {
+        img.src = URL.createObjectURL(file);
+        img.style.display = "block";
+    }
+}
+
+/* ------------------------------------------
+   PASSWORD STRENGTH CHECKER
+------------------------------------------- */
+function checkStrength() {
+    let pass = document.getElementById("password").value;
+    let bar = document.getElementById("strengthFill");
+    let strength = 0;
+
+    if (pass.length >= 6) strength++;
+    if (/[A-Z]/.test(pass)) strength++;
+    if (/[0-9]/.test(pass)) strength++;
+    if (/[^A-Za-z0-9]/.test(pass)) strength++;
+
+    bar.style.width = (strength * 25) + "%";
+
+    if (strength <= 1) bar.style.background = "red";
+    else if (strength == 2) bar.style.background = "orange";
+    else if (strength == 3) bar.style.background = "#00b300";
+    else bar.style.background = "#008000";
+}
+
+/* ------------------------------------------
+   AGE RESTRICTION
+------------------------------------------- */
+function getAge(dateString) {
+    let today = new Date();
+    let dob = new Date(dateString);
+    let age = today.getFullYear() - dob.getFullYear();
+
+    let m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+
+    return age;
+}
+
+/* ------------------------------------------
+   REGISTER FUNCTION
+------------------------------------------- */
+function register() {
+
+    let username = document.getElementById("username").value.trim();
+    let fatherName = document.getElementById("fatherName").value.trim();
+    let dob = document.getElementById("dob").value;
+    let email = document.getElementById("email").value.trim();
+    let contact = document.getElementById("contact").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let password = document.getElementById("password").value;
+    let photoFile = document.getElementById("photo").files[0];
+
+    if (!username || !fatherName || !dob || !email || !contact || !address || !password || !photoFile) {
+        alert("All fields are required!");
+        return;
+    }
+
+    if (getAge(dob) < 12) {
+        alert("Minimum age required is 12 years!");
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("QuizzoneUsersDB")) || [];
+
+    // Prevent duplicate entries
+    let duplicate = users.find(u =>
+        u.email === email ||
+        u.username === username ||
+        u.dob === dob ||
+        u.fatherName === fatherName
+    );
+
+    if (duplicate) {
+        alert("Duplicate Entry Found! Email, Username, DOB & Father Name must be unique.");
+        return;
+    }
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+
+        let newUser = {
+            username,
+            fatherName,
+            dob,
+            email,
+            contact,
+            address,
+            password,
+            photo: e.target.result,
+            progress: {},
+            scores: {}
+        };
+
+        users.push(newUser);
+
+        localStorage.setItem("QuizzoneUsersDB", JSON.stringify(users));
+
+        alert("Account Created Successfully!");
+        window.location.href = "index.htm"; // redirect back to login
+    }
+
+    reader.readAsDataURL(photoFile);
+}
+
+</script>
+
+</body>
+</html>

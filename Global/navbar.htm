@@ -1,0 +1,48 @@
+<div class="qn-navbar">
+    <div class="qn-logo" onclick="goHome()">Quizzone</div>
+
+    <div class="qn-links">
+        <span onclick="goDashboard()">Dashboard</span>
+        <span onclick="goDisciplines()">Disciplines</span>
+        <span onclick="goCompetency()">Competency Tests</span>
+        <span onclick="goSettings()">Settings</span>
+        <span onclick="logout()" class="logout">Logout</span>
+    </div>
+</div>
+
+<style>
+.qn-navbar {
+    width: 100%;
+    background: #007bff;
+    padding: 12px 25px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.qn-logo {
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.qn-links span {
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.qn-links span:hover {
+    text-decoration: underline;
+}
+
+/* MOBILE NAV */
+@media(max-width: 700px) {
+    .qn-links {
+        display: none;
+    }
+}
+.logout {
+    color: yellow;
+}
+</style>

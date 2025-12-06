@@ -2,206 +2,114 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quizzone | Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quizzone — Learn. Practice. Master.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
-/* --------------------------------------------------
-   GLOBAL STYLES — CLEAN, MODERN, RESPONSIVE
--------------------------------------------------- */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(to right, #007bff, #00d4ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body{
+    margin:0;
+    overflow-x:hidden;
+    font-family:"Segoe UI",Arial;
+    background: linear-gradient(130deg,#7db9ff,#b8e0ff,#d4f2ff);
+    background-size: 400% 400%;
+    animation: bgMove 12s infinite alternate ease-in-out;
+}
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    100%{background-position:100% 50%;}
 }
 
-.wrapper {
-    width: 380px;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    animation: fadeIn 0.7s ease;
+/* Floating Shapes */
+.shape{
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:rgba(255,255,255,0.25);
+    border-radius:25px;
+    filter:blur(2px);
+    animation: float 10s infinite ease-in-out alternate;
+}
+.shape:nth-child(1){ top:10%; left:5%; animation-duration:12s; }
+.shape:nth-child(2){ top:30%; right:5%; animation-duration:15s; }
+.shape:nth-child(3){ bottom:10%; left:20%; animation-duration:14s; }
+
+@keyframes float{
+    0%{ transform:translateY(0px) rotate(0deg);}
+    100%{ transform:translateY(-40px) rotate(20deg);}
 }
 
-@keyframes fadeIn {
-    from {opacity:0; transform: scale(0.95);}
-    to {opacity:1; transform: scale(1);}
+/* Main Container */
+.hero{
+    position:relative;
+    width:90%;
+    max-width:1200px;
+    margin:140px auto;
+    text-align:center;
+    color:#003f80;
 }
 
-.logo {
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    color: #007bff;
+.hero h1{
+    font-size:48px;
+    animation: fadeInSlide 1.2s ease-out;
 }
 
-.tagline {
-    text-align: center;
-    font-size: 14px;
-    margin-bottom: 15px;
-    color: #333;
+.hero p{
+    font-size:20px;
+    margin-top:12px;
+    opacity:0.8;
+    animation: fadeInSlide 1.5s ease-out;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #aaa;
+@keyframes fadeInSlide{
+    0%{opacity:0; transform:translateY(20px);}
+    100%{opacity:1; transform:translateY(0);}
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: #007bff;
-    color: white;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
+/* Glass Buttons */
+.btn-box{
+    margin-top:40px;
+}
+.btn{
+    text-decoration:none;
+    padding:14px 28px;
+    margin:10px;
+    font-size:18px;
+    border-radius:12px;
+    backdrop-filter: blur(8px);
+    background:rgba(255,255,255,0.4);
+    border:1px solid rgba(255,255,255,0.5);
+    display:inline-block;
+    color:#003f80;
+    transition:0.3s;
+}
+.btn:hover{
+    background:rgba(255,255,255,0.9);
 }
 
-button:hover {
-    background: #005fcc;
+/* Responsive */
+@media(max-width:700px){
+    .hero h1{ font-size:32px; }
+    .hero p{ font-size:16px; }
 }
-
-/* FORGOT PASSWORD LINK */
-.forgot {
-    text-align: right;
-    font-size: 13px;
-    cursor: pointer;
-    color: #007bff;
-}
-
-/* NEW USER LINK */
-.new-user {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 14px;
-}
-.new-user span {
-    color: #007bff;
-    cursor: pointer;
-}
-
-/* CAPTCHA BOX */
-.captcha-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.captcha {
-    padding: 8px 20px;
-    background: #333;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-}
-
-/* MEDIA QUERIES */
-@media(max-width: 600px) {
-    .wrapper { width: 320px; }
-    .logo { font-size: 28px; }
-}
-@media(min-width: 1000px) {
-    .wrapper { width: 420px; }
-}
-
 </style>
 </head>
 <body>
 
-<div class="wrapper">
+<!-- Floating Shapes -->
+<div class="shape"></div>
+<div class="shape"></div>
+<div class="shape"></div>
 
-    <div class="logo">Quizzone</div>
-    <div class="tagline">"Where Knowledge Meets Mastery"</div>
+<div class="hero">
+    <h1>Welcome to <b>Quizzone</b></h1>
+    <p>Your personalized learning platform for Blogs, Quizzes, Competency Tests & Career Skills.</p>
 
-    <h3 style="text-align:center;">Login</h3>
-
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-
-    <div class="captcha-box">
-        <div class="captcha" id="captchaText">---</div>
-        <button style="width:35%;padding:6px;background:#00c2ff;" onclick="generateCaptcha()">↻</button>
+    <div class="btn-box">
+        <a href="Login.html" class="btn">Login</a>
+        <a href="SignUp.html" class="btn">Create Account</a>
+        <a href="../Disciplines/index.html" class="btn">Explore Disciplines</a>
     </div>
-
-    <input type="text" id="captchaInput" placeholder="Enter Captcha">
-
-    <button onclick="login()">Login</button>
-
-    <div class="forgot" onclick="forgotPassword()">Forgot Password?</div>
-
-    <div class="new-user">
-        New to Quizzone?
-        <span onclick="window.location.href='SignUp.htm'">Create Account</span>
-    </div>
-
 </div>
-
-
-<script>
-// ------------------------ CAPTCHA ------------------------
-function generateCaptcha() {
-    let text = Math.random().toString(36).substring(2, 8).toUpperCase();
-    document.getElementById("captchaText").innerHTML = text;
-    return text;
-}
-generateCaptcha();
-
-// ------------------------ LOGIN FUNCTION ------------------------
-function login() {
-    let email = document.getElementById("loginEmail").value.trim();
-    let pass = document.getElementById("loginPassword").value.trim();
-    let captcha = document.getElementById("captchaInput").value.trim();
-    let realCaptcha = document.getElementById("captchaText").innerHTML;
-
-    if (captcha !== realCaptcha) {
-        alert("Captcha Incorrect!");
-        return;
-    }
-
-    let users = JSON.parse(localStorage.getItem("QuizzoneUsersDB")) || [];
-
-    let found = users.find(u => u.email === email && u.password === pass);
-
-    if (!found) {
-        alert("Invalid Email or Password!");
-        return;
-    }
-
-    localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(found));
-    window.location.href = "Dashboard.htm";
-}
-
-// ------------------------ FORGOT PASSWORD ------------------------
-function forgotPassword() {
-    let email = prompt("Enter your registered Email:");
-    let fname = prompt("Enter Father's Name:");
-
-    let users = JSON.parse(localStorage.getItem("QuizzoneUsersDB")) || [];
-
-    let found = users.find(u => 
-        u.email === email &&
-        u.fatherName === fname 
-    );
-
-    if (found) {
-        alert("Recovery Successful! Your Password is: " + found.password);
-    } else {
-        alert("No user matched the entered details!");
-    }
-}
-
-</script>
 
 </body>
 </html>

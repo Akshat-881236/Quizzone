@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone | Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* --------------------------------------------------
+   GLOBAL STYLES — CLEAN, MODERN, RESPONSIVE
+-------------------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to right, #007bff, #00d4ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 380px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    animation: fadeIn 0.7s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: scale(0.95);}
+    to {opacity:1; transform: scale(1);}
+}
+
+.logo {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.tagline {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #005fcc;
+}
+
+/* FORGOT PASSWORD LINK */
+.forgot {
+    text-align: right;
+    font-size: 13px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+/* NEW USER LINK */
+.new-user {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.new-user span {
+    color: #007bff;
+    cursor: pointer;
+}
+
+/* CAPTCHA BOX */
+.captcha-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.captcha {
+    padding: 8px 20px;
+    background: #333;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* MEDIA QUERIES */
+@media(max-width: 600px) {
+    .wrapper { width: 320px; }
+    .logo { font-size: 28px; }
+}
+@media(min-width: 1000px) {
+    .wrapper { width: 420px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="logo">Quizzone</div>
+    <div class="tagline">"Where Knowledge Meets Mastery"</div>
+
+    <h3 style="text-align:center;">Login</h3>
+
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+
+    <div class="captcha-box">
+        <div class="captcha" id="captchaText">---</div>
+        <button style="width:35%;padding:6px;background:#00c2ff;" onclick="generateCaptcha()">↻</button>
+    </div>
+
+    <input type="text" id="captchaInput" placeholder="Enter Captcha">
+
+    <button onclick="login()">Login</button>
+
+    <div class="forgot" onclick="forgotPassword()">Forgot Password?</div>
+
+    <div class="new-user">
+        New to Quizzone?
+        <span onclick="window.location.href='SignUp.htm'">Create Account</span>
+    </div>
+
+</div>
+
+
+<script>
+// ------------------------ CAPTCHA ------------------------
+function generateCaptcha() {
+    let text = Math.random().toString(36).substring(2, 8).toUpperCase();
+    document.getElementById("captchaText").innerHTML = text;
+    return text;
+}
+generateCaptcha();
+
+// ------------------------ LOGIN FUNCTION ------------------------
+function login() {
+    let email = document.getElementById("loginEmail").value.trim();
+    let pass = document.getElementById("loginPassword").value.trim();
+    let captcha = document.getElementById("captchaInput").value.trim();
+    let realCaptcha = document.getElementById("captchaText").innerHTML;
+
+    if (captcha !== realCaptcha) {
+        alert("Captcha Incorrect!");
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("QuizzoneUsersDB")) || [];
+
+    let found = users.find(u => u.email === email && u.password === pass);
+
+    if (!found) {
+        alert("Invalid Email or Password!");
+        return;
+    }
+
+    localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(found));
+    window.location.href = "Dashboard.htm";
+}
+
+// ------------------------ FORGOT PASSWORD ------------------------
+function forgotPassword() {
+    let email = prompt("Enter your registered Email:");
+    let fname = prompt("Enter Father's Name:");
+
+    let users = JSON.parse(localStorage.getItem("QuizzoneUsersDB")) || [];
+
+    let found = users.find(u => 
+        u.email === email &&
+        u.fatherName === fname 
+    );
+
+    if (found) {
+        alert("Recovery Successful! Your Password is: " + found.password);
+    } else {
+        alert("No user matched the entered details!");
+    }
+}
+
+</script>
+
+</body>
+</html>

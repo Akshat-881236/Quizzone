@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Competency Test – Set A</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GLOBAL LOADER -->
+<script src="../../../Global/loader.js"></script>
+
+<style>
+body{
+    margin:0;
+    background:#eef3ff;
+    font-family:"Segoe UI", Arial;
+}
+
+.test-box{
+    width:92%;
+    max-width:900px;
+    background:white;
+    margin:90px auto;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.15);
+}
+
+h2{ color:#007bff; }
+
+.question{
+    background:#f4f8ff;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:18px;
+}
+
+.option{
+    background:#eef3ff;
+    padding:10px;
+    border-radius:8px;
+    margin:7px 0;
+    cursor:pointer;
+}
+.option:hover{ background:#d9e7ff; }
+
+#timerBar{
+    width:100%;
+    height:8px;
+    background:#ccc;
+    border-radius:6px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+#timerFill{
+    background:#ff3b30;
+    height:100%;
+    width:100%;
+    transition:linear;
+}
+button{
+    padding:14px 20px;
+    border:none;
+    background:#007bff;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{ background:#005fcc; }
+
+</style>
+</head>
+<script src="/Quizzone/Global/loader.js"></script>
+<body>
+
+<div class="test-box">
+    <h2>Competency Test — Set A</h2>
+    <div id="timerBar"><div id="timerFill"></div></div>
+    <div id="testArea"></div>
+    <button onclick="submitTest()">Submit Test</button>
+</div>
+
+<script>
+// -------------------- QUESTIONS --------------------
+const questions = [
+    { q:"Which data structure works on FIFO?", opt:["Stack","Queue","Tree","Graph"], ans:1, diff:"easy" },
+    { q:"Speed of light is approximately:", opt:["3x10^5 m/s","3x10^8 m/s","5x10^6 m/s","3x10^3 m/s"], ans:1, diff:"medium" },
+    { q:"Who discovered Zero?", opt:["Babylon","Aryabhatta","Newton","Euler"], ans:1, diff:"easy" },
+    { q:"Time complexity of quicksort (avg)?", opt:["O(n)","O(n log n)","O(n^2)","O(log n)"], ans:1, diff:"hard" },
+];
+
+questions.sort(()=>Math.random()-0.5); // shuffle
+
+let index = 0;
+let score = 0;
+let answers = {};
+let totalTime = 90; // seconds
+let timer = totalTime;
+
+// -------------------- TIMER --------------------
+let timerInterval = setInterval(()=>{
+    timer--;
+    let percent = (timer/totalTime)*100;
+    document.getElementById("timerFill").style.width = percent+"%";
+
+    if(timer<=0){
+        clearInterval(timerInterval);
+        submitTest();
+    }
+},1000);
+
+// -------------------- RENDER --------------------
+function renderQuestion(){
+    if(index >= questions.length){
+        submitTest();
+        return;
+    }
+    let q = questions[index];
+    let html = `
+        <div class="question">
+            <b>Q${index+1}. ${q.q}</b>
+            ${q.opt.map((o,i)=>`
+                <div class='option' onclick='selectOpt(${i})'>${o}</div>
+            `).join("")}
+        </div>
+    `;
+    document.getElementById("testArea").innerHTML = html;
+}
+renderQuestion();
+
+// -------------------- SELECT OPTION --------------------
+function selectOpt(i){
+    answers[index] = i;
+    index++;
+    renderQuestion();
+}
+
+// -------------------- SUBMIT TEST --------------------
+function submitTest(){
+    clearInterval(timerInterval);
+
+    // scoring with difficulty
+    questions.forEach((q,i)=>{
+        let a = answers[i];
+        if(a === q.ans){
+            if(q.diff==="easy") score+=4;
+            if(q.diff==="medium") score+=6;
+            if(q.diff==="hard") score+=8;
+        }
+    });
+
+    // update user progress
+    let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+    if(user){
+        user.progress.compTests = (user.progress.compTests||0) + 1;
+
+        localStorage.setItem("ActiveQuizzoneUser",JSON.stringify(user));
+
+        let all = JSON.parse(localStorage.getItem("QuizzoneUsersDB"));
+        let idx = all.findIndex(x=>x.email===user.email);
+        all[idx]=user;
+        localStorage.setItem("QuizzoneUsersDB",JSON.stringify(all));
+    }
+
+    document.getElementById("testArea").innerHTML = `
+        <h2>Test Completed 🎉</h2>
+        <p>Your Score: <b>${score}</b></p>
+    `;
+}
+
+</script>
+</body>
+</html>

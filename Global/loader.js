@@ -17,7 +17,7 @@ function goHome(){ window.location.href = "/Quizzone/Home/index.htm"; }
 function goDashboard(){ window.location.href = "/Quizzone/Home/Dashboard.htm"; }
 function goDisciplines(){ window.location.href = "/Quizzone/Disciplines/index.htm"; }
 function goCompetency(){ window.location.href = "../Competency Quizes Set/index.html"; }
-function goSettings(){ window.location.href = "../Home/Settings.html"; }
+function goSettings(){ window.location.href = "/Home/Setting.htm"; }
 
 function logout(){
     localStorage.removeItem("ActiveQuizzoneUser");

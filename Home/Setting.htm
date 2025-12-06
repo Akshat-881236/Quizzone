@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone | Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { margin:0; font-family:"Segoe UI",Arial; background:#eef3ff; }
+
+.settings-box {
+    width:90%; max-width:900px;
+    margin:60px auto; background:white; padding:25px;
+    border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+h2 { color:#007bff; }
+
+input {
+    width:100%; padding:12px;
+    margin:8px 0; border-radius:8px;
+    border:1px solid #aaa;
+}
+
+button {
+    padding:12px 18px; background:#007bff; border:none;
+    color:white; font-size:16px; border-radius:8px;
+    cursor:pointer; margin-top:10px;
+}
+button:hover { background:#005fcc; }
+
+.section-title {
+    margin-top:30px; font-size:20px; color:#005fcc;
+}
+</style>
+</head>
+<body>
+
+<!-- GLOBAL HEADER + FOOTER -->
+<script src="/Quizzone/Global/loader.js"></script>
+
+<div class="settings-box">
+
+    <h2>Account Settings</h2>
+
+    <!-- EDIT PROFILE SECTION -->
+    <div class="section-title">Edit Profile</div>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="text" id="fatherName" placeholder="Father Name">
+    <input type="date" id="dob">
+    <input type="email" id="email" placeholder="Email (Locked)" disabled>
+    <input type="text" id="contact" placeholder="Contact Number">
+    <input type="text" id="address" placeholder="Address">
+
+    <button onclick="updateProfile()">Update Profile</button>
+
+    <!-- CHANGE PASSWORD SECTION -->
+    <div class="section-title">Change Password</div>
+
+    <input type="password" id="oldPass" placeholder="Old Password">
+    <input type="password" id="newPass" placeholder="New Password">
+    <input type="password" id="confirmPass" placeholder="Confirm New Password">
+
+    <button onclick="changePassword()">Change Password</button>
+
+</div>
+
+<script>
+// LOAD USER DATA
+let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+if(!user){ alert("Please login first!"); window.location.href="index.html"; }
+
+document.getElementById("username").value = user.username;
+document.getElementById("fatherName").value = user.fatherName;
+document.getElementById("dob").value = user.dob;
+document.getElementById("email").value = user.email;
+document.getElementById("contact").value = user.contact;
+document.getElementById("address").value = user.address;
+
+// UPDATE PROFILE
+function updateProfile(){
+    user.username = document.getElementById("username").value.trim();
+    user.fatherName = document.getElementById("fatherName").value.trim();
+    user.dob = document.getElementById("dob").value;
+    user.contact = document.getElementById("contact").value.trim();
+    user.address = document.getElementById("address").value.trim();
+
+    localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(user));
+
+    let all = JSON.parse(localStorage.getItem("QuizzoneUsersDB"));
+    let idx = all.findIndex(x => x.email === user.email);
+    all[idx] = user;
+    localStorage.setItem("QuizzoneUsersDB", JSON.stringify(all));
+
+    alert("Profile Updated Successfully!");
+}
+
+// CHANGE PASSWORD
+function changePassword(){
+    let oldPass = document.getElementById("oldPass").value;
+    let newPass = document.getElementById("newPass").value;
+    let confirmPass = document.getElementById("confirmPass").value;
+
+    if(oldPass !== user.password){
+        alert("Old password incorrect!");
+        return;
+    }
+    if(newPass !== confirmPass){
+        alert("New password mismatch!");
+        return;
+    }
+
+    user.password = newPass;
+
+    localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(user));
+
+    let all = JSON.parse(localStorage.getItem("QuizzoneUsersDB"));
+    let idx = all.findIndex(x => x.email === user.email);
+    all[idx] = user;
+    localStorage.setItem("QuizzoneUsersDB", JSON.stringify(all));
+
+    alert("Password Updated Successfully!");
+}
+</script>
+
+</body>
+</html>

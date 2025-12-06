@@ -2,105 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quizzone | Progress</title>
+<title>Quizzone | Progress Analytics</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 body{
-    margin:0; font-family:"Segoe UI",Arial;
+    margin:0;
     background:#eef3ff;
+    font-family:"Segoe UI",Arial;
 }
 
-.progress-box{
-    width:90%; max-width:900px;
-    margin:60px auto; background:white;
-    padding:25px; border-radius:14px;
+/* BOX */
+.progress-container{
+    width:90%;
+    max-width:1100px;
+    margin:70px auto;
+    background:white;
+    padding:25px;
+    border-radius:14px;
     box-shadow:0 4px 20px rgba(0,0,0,0.2);
 }
 
-h2 { color:#007bff; }
-
-.stat-block{
-    margin-top:25px;
-    padding:15px; background:#f4f8ff;
-    border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1);
+/* CHART BLOCK */
+.chart-block{
+    margin:30px 0;
+    padding:20px;
+    background:#f4f8ff;
+    border-radius:14px;
 }
 
-.bar{
-    width:100%; height:14px; background:#ddd;
-    border-radius:10px; margin-top:6px;
-}
-.fill{
-    height:100%; width:0%; background:#007bff;
-    border-radius:10px; transition:0.6s;
-}
-
-.score-item{
-    padding:12px; background:#eef7ff;
-    border-radius:10px; margin:10px 0;
-}
+h2{ color:#007bff; }
+h3{ color:#005fcc; }
+canvas { width:100% !important; max-height:350px; }
 </style>
 </head>
 <body>
 
-<!-- GLOBAL HEADER + FOOTER -->
+<!-- GLOBAL NAVBAR + FOOTER -->
 <script src="/Quizzone/Global/loader.js"></script>
 
-<div class="progress-box">
+<div class="progress-container">
+    <h2>Your Progress Insights</h2>
 
-    <h2>Your Learning Progress</h2>
-
-    <!-- BLOG PROGRESS -->
-    <div class="stat-block">
+    <div class="chart-block">
         <h3>Blogs Completed</h3>
-        <p id="blogText"></p>
-        <div class="bar"><div class="fill" id="blogFill"></div></div>
+        <canvas id="blogChart"></canvas>
     </div>
 
-    <!-- COMPETENCY TESTS -->
-    <div class="stat-block">
-        <h3>Competency Tests Completed</h3>
-        <p id="compText"></p>
-        <div class="bar"><div class="fill" id="compFill"></div></div>
+    <div class="chart-block">
+        <h3>Competency Tests Status</h3>
+        <canvas id="compChart"></canvas>
     </div>
 
-    <!-- QUIZ SCORES -->
-    <div class="stat-block">
-        <h3>Quiz Scores</h3>
-        <div id="scoreList"></div>
+    <div class="chart-block">
+        <h3>Quiz Score Timeline</h3>
+        <canvas id="scoreChart"></canvas>
     </div>
-
 </div>
 
 <script>
+// LOAD USER
 let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
-if(!user){ alert("Please login first!"); window.location.href="index.html"; }
+if(!user){ alert("Please login first."); window.location.href="index.html"; }
 
-// BLOG PROGRESS
+// FALLBACKS
 let blogs = user.progress.blogs || 0;
-document.getElementById("blogText").innerText = blogs + " Topics Read";
-document.getElementById("blogFill").style.width = Math.min(blogs*20, 100) + "%";
-
-// COMPETENCY TESTS
 let comp = user.progress.compTests || 0;
-document.getElementById("compText").innerText = comp + " Tests Done";
-document.getElementById("compFill").style.width = Math.min(comp*20, 100) + "%";
-
-// QUIZ SCORES
-let scoreBox = document.getElementById("scoreList");
 let scores = user.scores || {};
+let quizLabels = Object.keys(scores);
+let quizValues = Object.values(scores);
 
-if(Object.keys(scores).length === 0){
-    scoreBox.innerHTML = "<p>No quizzes attempted yet.</p>";
-} else {
-    for(let t in scores){
-        scoreBox.innerHTML += `
-            <div class="score-item">
-                <b>${t.replace(/_/g," → ")}</b><br>
-                Score: ${scores[t]}
-            </div>`;
+// ------------------------- BLOG CHART -------------------------
+new Chart(document.getElementById("blogChart"), {
+    type: "bar",
+    data: {
+        labels: ["Blogs Read"],
+        datasets: [{
+            label: "Completed",
+            data: [blogs],
+            backgroundColor: "#007bff"
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
     }
-}
+});
+
+// ------------------------- COMPETENCY PIE CHART -------------------------
+new Chart(document.getElementById("compChart"), {
+    type: "pie",
+    data: {
+        labels: ["Completed", "Remaining"],
+        datasets: [{
+            data: [comp, Math.max(10 - comp, 0)], 
+            backgroundColor: ["#28a745", "#ffc107"]
+        }]
+    }
+});
+
+// ------------------------- QUIZ SCORE LINE CHART -------------------------
+new Chart(document.getElementById("scoreChart"), {
+    type: "line",
+    data: {
+        labels: quizLabels.length ? quizLabels : ["No Quizzes Yet"],
+        datasets: [{
+            label: "Quiz Scores",
+            data: quizValues.length ? quizValues : [0],
+            borderColor: "#ff5733",
+            fill: false,
+            tension: 0.3
+        }]
+    }
+});
 </script>
 
 </body>

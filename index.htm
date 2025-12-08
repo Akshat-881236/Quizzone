@@ -2,8 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quizzone — Learn. Practice. Master.</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ================== BASIC META ================== -->
+<title>Quizzone — Learn, Practice & Master Knowledge</title>
+<meta name="title" content="Quizzone — The Universal Knowledge Testing Platform">
+<meta name="description" content="Quizzone is a modern quiz platform featuring MCQ quizzes across various domains: General Knowledge, Science, Social Science, Coding, Languages, AI, Machine Learning, Programming, IT, Technology, CBT, Culture & Arts, and more. Test your knowledge, upgrade your skills, and track your progress with powerful analytics.">
+<meta name="keywords" content="Quizzone, Quiz Platform, MCQ, GK, Mathematics, Science, Coding, AI Quiz, ML Quiz, Competitive Exams, Aptitude, Learning System, KOS, Test Platform, Skills Evaluation, Online Quiz">
+<meta name="author" content="Akshat Prasad">
+<meta name="license" content="MIT LICENSE">
+<meta name="page" content="Homepage">
+<meta name="copyright" content="© 2025 Quizzone">
+
+<!-- ================== OPEN GRAPH (Facebook, LinkedIn) ================== -->
+<meta property="og:title" content="Quizzone — Your Knowledge Testing Zone">
+<meta property="og:description" content="Attempt quizzes from 20+ disciplines including AI, ML, Coding, Maths, GK, Science, Social Science & more. Track progress with analytics.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akshat-881236.github.io/Quizzone/">
+
+<!-- ================== TWITTER META ================== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quizzone — Learn & Master Anything">
+<meta name="twitter:description" content="Challenge yourself with quizzes from AI, ML, Programming, GK, and 20+ subjects. Join the next-generation learning revolution.">
+
+<!-- ================== EXTRA SEO TAGS ================== -->
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#007bff">
+<meta name="application-name" content="Quizzone">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="language" content="English">
+<meta name="revisit-after" content="7 days">
+
+<!-- ================== PERFORMANCE / SECURITY ================== -->
+<meta http-equiv="Cache-control" content="public">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ================== ICONS ================== -->
+<link rel="icon" href="favicon.ico">
 
 <style>
 body{
@@ -38,7 +73,6 @@ body{
     100%{ transform:translateY(-40px) rotate(20deg);}
 }
 
-/* Main Container */
 .hero{
     position:relative;
     width:90%;
@@ -65,7 +99,6 @@ body{
     100%{opacity:1; transform:translateY(0);}
 }
 
-/* Glass Buttons */
 .btn-box{
     margin-top:40px;
 }
@@ -86,324 +119,242 @@ body{
     background:rgba(255,255,255,0.9);
 }
 
-/* Responsive */
 @media(max-width:700px){
     .hero h1{ font-size:32px; }
     .hero p{ font-size:16px; }
 }
 
-/* Corrected Media Query */
-@media (min-width:544px) and (max-width:672px) {
+@media (max-width:400px){
 
     body{
-        margin:0;
-        overflow-x:hidden;
-        font-family:"Segoe UI",Arial;
-        background: linear-gradient(130deg,#7db9ff,#b8e0ff,#d4f2ff);
-        background-size: 400% 400%;
-        animation: bgMove 12s infinite alternate ease-in-out;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(140deg,#b1ffe0,#d2fff1,#ecfffa);
+        animation: bgMint 10s infinite alternate;
     }
-    @keyframes bgMove{
-        0%{background-position:0% 50%;}
-        100%{background-position:100% 50%;}
-    }
-
-    /* Floating Shapes */
-    .shape{
-        position:absolute;
-        width:90px;       /* Smaller for this breakpoint */
-        height:90px;
-        background:rgba(255,255,255,0.25);
-        border-radius:25px;
-        filter:blur(2px);
-        animation: float 10s infinite ease-in-out alternate;
-    }
-    .shape:nth-child(1){ top:10%; left:5%; animation-duration:12s; }
-    .shape:nth-child(2){ top:30%; right:5%; animation-duration:15s; }
-    .shape:nth-child(3){ bottom:10%; left:20%; animation-duration:14s; }
-
-    @keyframes float{
-        0%{ transform:translateY(0px) rotate(0deg);}
-        100%{ transform:translateY(-40px) rotate(20deg);}
-    }
-
-    /* Main Container */
-    .hero{
-        position:relative;
-        width:95%;
-        margin:100px auto;
-        text-align:center;
-        color:#003f80;
-    }
-
-    .hero h1{
-        font-size:32px;  /* Reduced size for medium screens */
-        animation: fadeInSlide 1.2s ease-out;
-    }
-
-    .hero p{
-        font-size:18px;
-        margin-top:10px;
-        opacity:0.8;
-        animation: fadeInSlide 1.5s ease-out;
-    }
-
-    @keyframes fadeInSlide{
-        0%{opacity:0; transform:translateY(20px);}
-        100%{opacity:1; transform:translateY(0);}
-    }
-
-    /* Glass Buttons */
-    .btn-box{
-        margin-top:30px;
-    }
-    .btn{
-        padding:12px 20px;
-        margin:8px;
-        font-size:16px;
-        border-radius:10px;
-        backdrop-filter: blur(8px);
-        background:rgba(255,255,255,0.4);
-        border:1px solid rgba(255,255,255,0.5);
-        display:inline-block;
-        color:#003f80;
-        transition:0.3s;
-    }
-    .btn:hover{
-        background:rgba(255,255,255,0.9);
-    }
-}
-
-@media (max-width:543px){
-
-    body{
-        font-family:"Poppins", sans-serif;
-        background: radial-gradient(circle at top,#ffb5d9,#ffd59e,#fff8b5);
-        background-size: 200% 200%;
-        animation:candyBG 12s infinite alternate ease-in-out;
-    }
-    @keyframes candyBG{
-        0%{filter:hue-rotate(0deg);}
-        100%{filter:hue-rotate(20deg);}
-    }
-
-    /* Circular Bouncy Shapes */
-    .shape{
-        width:65px;
-        height:65px;
-        border-radius:50%;
-        background:rgba(255,255,255,0.45);
-        animation:bubble 3.5s infinite ease-in-out;
-        filter:blur(1px);
-    }
-    @keyframes bubble{
-        0%{transform:translateY(0);}
-        50%{transform:translateY(-18px);}
-        100%{transform:translateY(0);}
-    }
-
-    .hero h1{
-        font-size:26px;
-        color:#8e004b;
-        text-shadow:0 0 5px #ffe1ef;
-        animation: fadeInSlide 1.2s ease-out;
-    }
-
-    .hero p{
-        font-size:15px;
-        color:#a5005f;
-        text-align: center;
-        margin-top:12px;
-        opacity:0.8;
-        animation: fadeInSlide 1.5s ease-out;
-    }
-
-    .btn{
-        font-size:14px;
-        background:#fff3fa;
-        color:#c40064;
-        border-radius:50px;
-        padding:10px 20px;
-    }
-}
-
-@media (min-width:544px) and (max-width:672px){
-
-    body{
-        font-family:"Segoe UI";
-        background:linear-gradient(130deg,#7db9ff,#b8e0ff,#d4f2ff);
-        background-size:350% 350%;
-        animation:skyBG 16s infinite alternate ease-in-out;
-    }
-    @keyframes skyBG{
-        0%{background-position:0% 50%;}
-        100%{background-position:100% 50%;}
-    }
-
-    /* Frosted Square Shapes */
-    .shape{
-        width:90px;
-        height:90px;
-        border-radius:22px;
-        background:rgba(255,255,255,0.35);
-        backdrop-filter:blur(6px);
-        animation:skyFloat 7s infinite alternate ease-in-out;
-    }
-    @keyframes skyFloat{
-        0%{transform:translateY(0) rotate(0);}
-        100%{transform:translateY(-40px) rotate(12deg);}
-    }
-
-    .hero h1{
-        font-size:32px;
-        color:#003f80;
-        animation: fadeInSlide 1.2s ease-out;
-    }
-    .hero p{
-        font-size:18px;
-        color:#004f99;
-        text-align: center;
-        margin-top:12px;
-        opacity:0.8;
-        animation: fadeInSlide 1.5s ease-out;
-    }
-
-    .btn{
-        font-size:16px;
-        background:rgba(255,255,255,0.45);
-        color:#003f80;
-        border-radius:12px;
-        padding:12px 22px;
-    }
-}
-
-@media (min-width:673px) and (max-width:992px){
-
-    body{
-        font-family:"Montserrat", sans-serif;
-        background:linear-gradient(120deg,#7e5cff,#38e2c9,#b1ff8a);
-        background-size:250% 250%;
-        animation:auroraBG 18s infinite alternate;
-    }
-    @keyframes auroraBG{
+    @keyframes bgMint {
         0%{background-position:0% 0%;}
         100%{background-position:100% 100%;}
     }
 
-    /* Morphing Blob Shapes */
-    .shape{
-        width:150px;
-        height:150px;
-        background:rgba(255,255,255,0.28);
-        border-radius:55% 45% 65% 50% / 60% 55% 45% 70%;
-        filter:blur(3px);
-        animation:blobMorph 10s infinite alternate ease-in-out;
-    }
-    @keyframes blobMorph{
-        0%{border-radius:55% 45% 65% 50% / 60% 55% 45% 70%;}
-        100%{border-radius:45% 60% 55% 70% / 50% 65% 75% 60%;}
-    }
+    .hero h1{ font-size:26px; color:#00604e; }
+    .hero p{ font-size:14px; color:#004a3a; }
 
-    .hero h1{
-        font-size:48px;
-        color:#310068;
-        text-shadow:0 0 10px rgba(0,0,0,0.15);
-        animation: fadeInSlide 1.2s ease-out;
+    .shape{
+        background:rgba(255,255,255,0.35);
+        animation: floatMint 8s infinite ease-in-out alternate;
     }
-    .hero p{
-        font-size:22px;
-        color:#24004f;
-        width:80%;
-        text-align: center;
-        margin-top:12px;
-        opacity:0.8;
-        animation: fadeInSlide 1.5s ease-out;
+    @keyframes floatMint{
+        0%{ transform:translateY(0px) scale(1); }
+        100%{ transform:translateY(-20px) scale(1.04); }
     }
 
     .btn{
-        font-size:20px;
-        padding:16px 32px;
-        border-radius:18px;
-        background:rgba(255,255,255,0.25);
-        backdrop-filter:blur(10px);
-        color:#1e005e;
-        font-weight:600;
+        color:#004a3a;
+        background:rgba(255,255,255,0.5);
+    }
+    .btn:hover{
+        background:white;
     }
 }
 
-@media (min-width:993px){
+@media (min-width:401px) and (max-width:600px){
 
     body{
-        font-family:"Inter", sans-serif;
-        background:linear-gradient(115deg,#ffffff,#f8f8f8,#eeeeee);
+        font-family: "Quicksand", sans-serif;
+        background: linear-gradient(130deg,#ffc3a0,#ffafbd,#ffc3a0);
+        animation: bgSunset 12s infinite alternate ease-in-out;
+    }
+    @keyframes bgSunset{
+        0%{background-position:0% 50%;}
+        100%{background-position:100% 50%;}
     }
 
-    /* Elegant Line Shapes */
+    .hero h1{ font-size:32px; color:#7c1f32; }
+    .hero p{ font-size:16px; color:#7c1f32; }
+
     .shape{
-        width:180px;
-        height:4px;
-        background:linear-gradient(90deg,#d4af37,#f4e9c7,#d4af37);
-        border-radius:3px;
-        animation:lineSlide 14s infinite alternate ease-in-out;
+        background:rgba(255,255,255,0.45);
+        animation: floatSunset 11s infinite ease-in-out alternate;
     }
-    @keyframes lineSlide{
-        0%{transform:translateX(-40px);}
-        100%{transform:translateX(40px);}
-    }
-
-    .hero h1{
-        font-size:58px;
-        font-weight:800;
-        color:#222;
-        letter-spacing:1px;
-        animation: fadeInSlide 1.2s ease-out;
-    }
-
-    .hero p{
-        font-size:26px;
-        color:#444;
-        text-align: center;
-        margin-top:12px;
-        opacity:0.8;
-        animation: fadeInSlide 1.5s ease-out;
+    @keyframes floatSunset{
+        0%{ transform:translateY(0px) rotate(0deg); }
+        100%{ transform:translateY(-25px) rotate(10deg); }
     }
 
     .btn{
-        font-size:20px;
-        padding:18px 40px;
-        border-radius:40px;
-        background:white;
-        border:1px solid #ccc;
-        color:#222;
+        color:#7c1f32;
+        background:rgba(255,255,255,0.35);
     }
-    .btn:hover{
-        border-color:#d4af37;
-        color:#d4af37;
-        box-shadow:0 0 10px #d4af3755;
+    .btn:hover{ background:white; }
+}
+
+@media (min-width:601px) and (max-width:900px){
+
+    body{
+        font-family: "Roboto", sans-serif;
+        background: radial-gradient(circle at top,#001f4f,#003f7f,#005f9f);
+        animation: bgNeon 15s infinite alternate ease-in-out;
     }
+    @keyframes bgNeon{
+        0%{filter:brightness(1);}
+        100%{filter:brightness(1.25);}
+    }
+
+    .hero h1{ font-size:40px; color:#76cfff; text-shadow:0 0 12px #009dff; }
+    .hero p{ font-size:18px; color:#bfe8ff; }
+
+    .shape{
+        background:rgba(0,140,255,0.25);
+        animation: glowFloat 9s infinite alternate;
+    }
+    @keyframes glowFloat{
+        0%{ transform:translateY(0px) scale(1);}
+        100%{ transform:translateY(-40px) scale(1.1);}
+    }
+
+    .btn{
+        color:white;
+        background:rgba(0,160,255,0.25);
+        border-color:rgba(0,110,220,0.4);
+    }
+    .btn:hover{ background:rgba(0,160,255,0.9); }
+}
+
+@media (min-width:901px) and (max-width:1200px){
+
+    body{
+        font-family: "Merriweather", serif;
+        background: linear-gradient(140deg,#5d3fd3,#8a4fff,#b185ff);
+        animation: bgRoyal 14s infinite alternate;
+    }
+    @keyframes bgRoyal{
+        0%{background-position:0% 60%;}
+        100%{background-position:100% 40%;}
+    }
+
+    .hero h1{ font-size:52px; color:#f4e8ff; }
+    .hero p{ font-size:22px; color:#f9ecff; }
+
+    .shape{
+        background:rgba(255,255,255,0.15);
+        animation: royalFloat 12s infinite ease-in-out alternate;
+    }
+    @keyframes royalFloat{
+        0%{ transform:translateY(0px) rotate(0deg);}
+        100%{ transform:translateY(-50px) rotate(25deg);}
+    }
+
+    .btn{
+        background:rgba(255,255,255,0.35);
+        color:#2c155c;
+    }
+    .btn:hover{ background:white; }
+}
+
+@media (min-width:1201px) and (max-width:1600px){
+
+    body{
+        font-family: "Nunito", sans-serif;
+        background: linear-gradient(135deg,#b9e8ff,#dff6ff,#ffffff);
+        animation: bgIce 16s infinite alternate ease-in-out;
+    }
+    @keyframes bgIce{
+        0%{background-position:0% 0%;}
+        100%{background-position:100% 100%;}
+    }
+
+    .hero h1{ font-size:60px; color:#004a70; }
+    .hero p{ font-size:24px; color:#003249; }
+
+    .shape{
+        background:rgba(255,255,255,0.5);
+        animation: iceFloat 13s infinite alternate ease-in-out;
+    }
+    @keyframes iceFloat{
+        0%{ transform:translateY(0px) scale(1);}
+        100%{ transform:translateY(-60px) scale(1.12);}
+    }
+
+    .btn{
+        background:rgba(255,255,255,0.45);
+        color:#003249;
+    }
+    .btn:hover{ background:white; }
+}
+
+@media (min-width:1601px){
+
+    body{
+        font-family: "Orbitron", sans-serif;
+        background: linear-gradient(135deg,#020024,#090979,#00d4ff);
+        animation: bgCosmic 20s infinite alternate ease-in-out;
+    }
+    @keyframes bgCosmic{
+        0%{filter:saturate(0.8);}
+        100%{filter:saturate(1.4);}
+    }
+
+    .hero h1{ font-size:72px; color:#c8f5ff; text-shadow:0 0 20px #00d4ff; }
+    .hero p{ font-size:26px; color:#e0f9ff; }
+
+    .shape{
+        background:rgba(255,255,255,0.18);
+        animation: cosmicFloat 16s infinite alternate ease-in-out;
+    }
+    @keyframes cosmicFloat{
+        0%{ transform:translateY(0px) rotate(0deg) scale(1); }
+        100%{ transform:translateY(-80px) rotate(35deg) scale(1.2); }
+    }
+
+    .btn{
+        background:rgba(255,255,255,0.25);
+        color:#c8f5ff;
+        text-shadow:0 0 10px #00d4ff;
+    }
+    .btn:hover{ background:rgba(255,255,255,0.9); color:#003399; }
 }
 
 </style>
-<meta name="google-site-verification" content="Kp1gscirNuecI5_9R4LDkE5ql4w4zt0NmneiPktuMu4" />
 </head>
 <meta name="google-site-verification" content="Kp1gscirNuecI5_9R4LDkE5ql4w4zt0NmneiPktuMu4" />
 <body>
 
-<!-- Floating Shapes -->
+<!-- Background Floating Shapes -->
 <div class="shape"></div>
 <div class="shape"></div>
 <div class="shape"></div>
 
 <div class="hero">
-    <h1>Welcome to <b>Quizzone</b></h1>
-    <p>Your personalized learning platform for Blogs, Quizzes, Competency Tests & Career Skills.</p>
+    <h1 id="mainTitle">Welcome to <b>Quizzone</b></h1>
+    <p id="mainTagline">Your personalized learning platform for Blogs, Quizzes & Competency Tests.</p>
 
-    <div class="btn-box">
-        <a href="/Quizzone/Home/SignIn.htm" class="btn"n>Sign In</a>
-        <a href="/Quizzone/Home/SignUp.htm" class="btn">Create Account</a>
-        <a href="/Quizzone/Disciplines/index.htm" class="btn">Explore Disciplines</a>
+    <div class="btn-box" id="ctaButtons">
+        <!-- Buttons will appear based on login status -->
     </div>
 </div>
+
+<script>
+// --------------------- LOGIN CHECK & PERSONAL GREETING ---------------------
+let activeUser = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+
+if(activeUser){
+    document.getElementById("mainTitle").innerHTML = `Welcome Back, <b>${activeUser.username}</b>`;
+    document.getElementById("mainTagline").innerHTML = `Continue your learning journey with Quizzone!`;
+
+    document.getElementById("ctaButtons").innerHTML = `
+        <a href="/Quizzone/Home/Dashboard.htm" class="btn">Go to Dashboard</a>
+        <a href="/Quizzone/Disciplines/index.htm" class="btn">Explore Disciplines</a>
+        <a href="/Quizzone/Home/Progress.htm" class="btn">View Progress</a>
+    `;
+}
+else{
+    document.getElementById("ctaButtons").innerHTML = `
+        <a href="/Quizzone/Home/SignIn.htm" class="btn">Sign In</a>
+        <a href="/Quizzone/Home/SignUp.htm" class="btn">Create Account</a>
+        <a href="/Quizzone/Disciplines/index.htm" class="btn">Explore Disciplines</a>
+    `;
+}
+</script>
 
 </body>
 </html>

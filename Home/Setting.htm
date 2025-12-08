@@ -78,7 +78,7 @@ button:hover{ background:#005fcc; }
 <script>
 // LOAD USER
 let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
-if(!user){ alert("Please login first."); window.location.href="index.html"; }
+if(!user){ alert("Please login first."); window.location.href="/Quizzone/Home/SignIn.htm"; }
 
 document.getElementById("photoPrev").src = user.photo;
 document.getElementById("username").value = user.username;

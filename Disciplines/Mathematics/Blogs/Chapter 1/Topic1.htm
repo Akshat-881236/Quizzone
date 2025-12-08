@@ -81,6 +81,17 @@ button{
 </div>
 
 <script>
+
+    /* -----------------------------------------------
+   CHECK LOGIN STATUS
+-------------------------------------------------- */
+let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+
+if (!user) {
+    alert("Please login first!");
+    window.location.href = "/Quizzone/Home/SignIn.htm";
+}
+
 function markAsRead(){
     let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
     if(!user){ alert("Login Required!"); return; }

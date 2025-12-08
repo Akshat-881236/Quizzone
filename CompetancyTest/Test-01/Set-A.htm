@@ -81,6 +81,16 @@ button:hover{ background:#005fcc; }
 </div>
 
 <script>
+/* -----------------------------------------------
+   CHECK LOGIN STATUS
+-------------------------------------------------- */
+let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+
+if (!user) {
+    alert("Please login first!");
+    window.location.href = "/Quizzone/Home/SignIn.htm";
+}
+
 // -------------------- QUESTIONS --------------------
 const questions = [
     { q:"Which data structure works on FIFO?", opt:["Stack","Queue","Tree","Graph"], ans:1, diff:"easy" },

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone — Learn. Practice. Master.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+    margin:0;
+    overflow-x:hidden;
+    font-family:"Segoe UI",Arial;
+    background: linear-gradient(130deg,#7db9ff,#b8e0ff,#d4f2ff);
+    background-size: 400% 400%;
+    animation: bgMove 12s infinite alternate ease-in-out;
+}
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    100%{background-position:100% 50%;}
+}
+
+/* Floating Shapes */
+.shape{
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:rgba(255,255,255,0.25);
+    border-radius:25px;
+    filter:blur(2px);
+    animation: float 10s infinite ease-in-out alternate;
+}
+.shape:nth-child(1){ top:10%; left:5%; animation-duration:12s; }
+.shape:nth-child(2){ top:30%; right:5%; animation-duration:15s; }
+.shape:nth-child(3){ bottom:10%; left:20%; animation-duration:14s; }
+
+@keyframes float{
+    0%{ transform:translateY(0px) rotate(0deg);}
+    100%{ transform:translateY(-40px) rotate(20deg);}
+}
+
+/* Main Container */
+.hero{
+    position:relative;
+    width:90%;
+    max-width:1200px;
+    margin:140px auto;
+    text-align:center;
+    color:#003f80;
+}
+
+.hero h1{
+    font-size:48px;
+    animation: fadeInSlide 1.2s ease-out;
+}
+
+.hero p{
+    font-size:20px;
+    margin-top:12px;
+    opacity:0.8;
+    animation: fadeInSlide 1.5s ease-out;
+}
+
+@keyframes fadeInSlide{
+    0%{opacity:0; transform:translateY(20px);}
+    100%{opacity:1; transform:translateY(0);}
+}
+
+/* Glass Buttons */
+.btn-box{
+    margin-top:40px;
+}
+.btn{
+    text-decoration:none;
+    padding:14px 28px;
+    margin:10px;
+    font-size:18px;
+    border-radius:12px;
+    backdrop-filter: blur(8px);
+    background:rgba(255,255,255,0.4);
+    border:1px solid rgba(255,255,255,0.5);
+    display:inline-block;
+    color:#003f80;
+    transition:0.3s;
+}
+.btn:hover{
+    background:rgba(255,255,255,0.9);
+}
+
+/* Responsive */
+@media(max-width:700px){
+    .hero h1{ font-size:32px; }
+    .hero p{ font-size:16px; }
+}
+
+/* Corrected Media Query */
+@media (min-width:544px) and (max-width:672px) {
+
+    body{
+        margin:0;
+        overflow-x:hidden;
+        font-family:"Segoe UI",Arial;
+        background: linear-gradient(130deg,#7db9ff,#b8e0ff,#d4f2ff);
+        background-size: 400% 400%;
+        animation: bgMove 12s infinite alternate ease-in-out;
+    }
+    @keyframes bgMove{
+        0%{background-position:0% 50%;}
+        100%{background-position:100% 50%;}
+    }
+
+    /* Floating Shapes */
+    .shape{
+        position:absolute;
+        width:90px;       /* Smaller for this breakpoint */
+        height:90px;
+        background:rgba(255,255,255,0.25);
+        border-radius:25px;
+        filter:blur(2px);
+        animation: float 10s infinite ease-in-out alternate;
+    }
+    .shape:nth-child(1){ top:10%; left:5%; animation-duration:12s; }
+    .shape:nth-child(2){ top:30%; right:5%; animation-duration:15s; }
+    .shape:nth-child(3){ bottom:10%; left:20%; animation-duration:14s; }
+
+    @keyframes float{
+        0%{ transform:translateY(0px) rotate(0deg);}
+        100%{ transform:translateY(-40px) rotate(20deg);}
+    }
+
+    /* Main Container */
+    .hero{
+        position:relative;
+        width:95%;
+        margin:100px auto;
+        text-align:center;
+        color:#003f80;
+    }
+
+    .hero h1{
+        font-size:32px;  /* Reduced size for medium screens */
+        animation: fadeInSlide 1.2s ease-out;
+    }
+
+    .hero p{
+        font-size:18px;
+        margin-top:10px;
+        opacity:0.8;
+        animation: fadeInSlide 1.5s ease-out;
+    }
+
+    @keyframes fadeInSlide{
+        0%{opacity:0; transform:translateY(20px);}
+        100%{opacity:1; transform:translateY(0);}
+    }
+
+    /* Glass Buttons */
+    .btn-box{
+        margin-top:30px;
+    }
+    .btn{
+        padding:12px 20px;
+        margin:8px;
+        font-size:16px;
+        border-radius:10px;
+        backdrop-filter: blur(8px);
+        background:rgba(255,255,255,0.4);
+        border:1px solid rgba(255,255,255,0.5);
+        display:inline-block;
+        color:#003f80;
+        transition:0.3s;
+    }
+    .btn:hover{
+        background:rgba(255,255,255,0.9);
+    }
+}
+
+@media (max-width:543px){
+
+    body{
+        font-family:"Poppins", sans-serif;
+        background: radial-gradient(circle at top,#ffb5d9,#ffd59e,#fff8b5);
+        background-size: 200% 200%;
+        animation:candyBG 12s infinite alternate ease-in-out;
+    }
+    @keyframes candyBG{
+        0%{filter:hue-rotate(0deg);}
+        100%{filter:hue-rotate(20deg);}
+    }
+
+    /* Circular Bouncy Shapes */
+    .shape{
+        width:65px;
+        height:65px;
+        border-radius:50%;
+        background:rgba(255,255,255,0.45);
+        animation:bubble 3.5s infinite ease-in-out;
+        filter:blur(1px);
+    }
+    @keyframes bubble{
+        0%{transform:translateY(0);}
+        50%{transform:translateY(-18px);}
+        100%{transform:translateY(0);}
+    }
+
+    .hero h1{
+        font-size:26px;
+        color:#8e004b;
+        text-shadow:0 0 5px #ffe1ef;
+        animation: fadeInSlide 1.2s ease-out;
+    }
+
+    .hero p{
+        font-size:15px;
+        color:#a5005f;
+        text-align: center;
+        margin-top:12px;
+        opacity:0.8;
+        animation: fadeInSlide 1.5s ease-out;
+    }
+
+    .btn{
+        font-size:14px;
+        background:#fff3fa;
+        color:#c40064;
+        border-radius:50px;
+        padding:10px 20px;
+    }
+}
+
+@media (min-width:544px) and (max-width:672px){
+
+    body{
+        font-family:"Segoe UI";
+        background:linear-gradient(130deg,#7db9ff,#b8e0ff,#d4f2ff);
+        background-size:350% 350%;
+        animation:skyBG 16s infinite alternate ease-in-out;
+    }
+    @keyframes skyBG{
+        0%{background-position:0% 50%;}
+        100%{background-position:100% 50%;}
+    }
+
+    /* Frosted Square Shapes */
+    .shape{
+        width:90px;
+        height:90px;
+        border-radius:22px;
+        background:rgba(255,255,255,0.35);
+        backdrop-filter:blur(6px);
+        animation:skyFloat 7s infinite alternate ease-in-out;
+    }
+    @keyframes skyFloat{
+        0%{transform:translateY(0) rotate(0);}
+        100%{transform:translateY(-40px) rotate(12deg);}
+    }
+
+    .hero h1{
+        font-size:32px;
+        color:#003f80;
+        animation: fadeInSlide 1.2s ease-out;
+    }
+    .hero p{
+        font-size:18px;
+        color:#004f99;
+        text-align: center;
+        margin-top:12px;
+        opacity:0.8;
+        animation: fadeInSlide 1.5s ease-out;
+    }
+
+    .btn{
+        font-size:16px;
+        background:rgba(255,255,255,0.45);
+        color:#003f80;
+        border-radius:12px;
+        padding:12px 22px;
+    }
+}
+
+@media (min-width:673px) and (max-width:992px){
+
+    body{
+        font-family:"Montserrat", sans-serif;
+        background:linear-gradient(120deg,#7e5cff,#38e2c9,#b1ff8a);
+        background-size:250% 250%;
+        animation:auroraBG 18s infinite alternate;
+    }
+    @keyframes auroraBG{
+        0%{background-position:0% 0%;}
+        100%{background-position:100% 100%;}
+    }
+
+    /* Morphing Blob Shapes */
+    .shape{
+        width:150px;
+        height:150px;
+        background:rgba(255,255,255,0.28);
+        border-radius:55% 45% 65% 50% / 60% 55% 45% 70%;
+        filter:blur(3px);
+        animation:blobMorph 10s infinite alternate ease-in-out;
+    }
+    @keyframes blobMorph{
+        0%{border-radius:55% 45% 65% 50% / 60% 55% 45% 70%;}
+        100%{border-radius:45% 60% 55% 70% / 50% 65% 75% 60%;}
+    }
+
+    .hero h1{
+        font-size:48px;
+        color:#310068;
+        text-shadow:0 0 10px rgba(0,0,0,0.15);
+        animation: fadeInSlide 1.2s ease-out;
+    }
+    .hero p{
+        font-size:22px;
+        color:#24004f;
+        width:80%;
+        text-align: center;
+        margin-top:12px;
+        opacity:0.8;
+        animation: fadeInSlide 1.5s ease-out;
+    }
+
+    .btn{
+        font-size:20px;
+        padding:16px 32px;
+        border-radius:18px;
+        background:rgba(255,255,255,0.25);
+        backdrop-filter:blur(10px);
+        color:#1e005e;
+        font-weight:600;
+    }
+}
+
+@media (min-width:993px){
+
+    body{
+        font-family:"Inter", sans-serif;
+        background:linear-gradient(115deg,#ffffff,#f8f8f8,#eeeeee);
+    }
+
+    /* Elegant Line Shapes */
+    .shape{
+        width:180px;
+        height:4px;
+        background:linear-gradient(90deg,#d4af37,#f4e9c7,#d4af37);
+        border-radius:3px;
+        animation:lineSlide 14s infinite alternate ease-in-out;
+    }
+    @keyframes lineSlide{
+        0%{transform:translateX(-40px);}
+        100%{transform:translateX(40px);}
+    }
+
+    .hero h1{
+        font-size:58px;
+        font-weight:800;
+        color:#222;
+        letter-spacing:1px;
+        animation: fadeInSlide 1.2s ease-out;
+    }
+
+    .hero p{
+        font-size:26px;
+        color:#444;
+        text-align: center;
+        margin-top:12px;
+        opacity:0.8;
+        animation: fadeInSlide 1.5s ease-out;
+    }
+
+    .btn{
+        font-size:20px;
+        padding:18px 40px;
+        border-radius:40px;
+        background:white;
+        border:1px solid #ccc;
+        color:#222;
+    }
+    .btn:hover{
+        border-color:#d4af37;
+        color:#d4af37;
+        box-shadow:0 0 10px #d4af3755;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Floating Shapes -->
+<div class="shape"></div>
+<div class="shape"></div>
+<div class="shape"></div>
+
+<div class="hero">
+    <h1>Welcome to <b>Quizzone</b></h1>
+    <p>Your personalized learning platform for Blogs, Quizzes, Competency Tests & Career Skills.</p>
+
+    <div class="btn-box">
+        <a href="/Quizzone/Home/SignIn.htm" class="btn"n>Sign In</a>
+        <a href="/Quizzone/Home/SignUp.htm" class="btn">Create Account</a>
+        <a href="/Quizzone/Disciplines/index.htm" class="btn">Explore Disciplines</a>
+    </div>
+</div>
+
+</body>
+</html>

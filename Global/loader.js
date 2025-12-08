@@ -16,10 +16,10 @@ fetch("/Quizzone/Global/footer.htm")
 function goHome(){ window.location.href = "/Quizzone/Home/index.htm"; }
 function goDashboard(){ window.location.href = "/Quizzone/Home/Dashboard.htm"; }
 function goDisciplines(){ window.location.href = "/Quizzone/Disciplines/index.htm"; }
-function goCompetency(){ window.location.href = "../Competency Quizes Set/index.html"; }
-function goSettings(){ window.location.href = "/Home/Setting.htm"; }
+function goCompetency(){ window.location.href = "/Quizzone/CompetancyTest/index.htm"; }
+function goSettings(){ window.location.href = "/Quizzone/Home/Setting.htm"; }
 
 function logout(){
     localStorage.removeItem("ActiveQuizzoneUser");
-    window.location.href = "/Quizzone/Home/index.htm";
+    window.location.href = "/Quizzone/Home/SignIn.htm";
 }

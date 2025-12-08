@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone | Competency Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    background:#f5f7fa;
+    font-family: "Segoe UI", Arial;
+}
+
+.header{
+    background:#007bff;
+    color:white;
+    padding:15px 25px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    padding:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:22px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-6px);
+}
+.card h3{
+    margin:0;
+    color:#007bff;
+    text-align:center;
+}
+.card p{
+    margin:0;
+    color:#007bff;
+    text-align:center;
+}
+</style>
+</head>
+<script src="/Quizzone/Global/loader.js"></script>
+<body>
+
+<div class="header">Select Your Competency Test</div>
+
+<div class="container">
+
+    <div class="card" onclick="gotoT1A()">
+        <h3>All in One</h3>
+        <p>Test - 01 / Set - A</p>
+    </div>
+
+    <div class="card"><h3>Science</h3></div>
+    <div class="card"><h3>Coding</h3></div>
+    <div class="card"><h3>Aptitude</h3></div>
+    <div class="card"><h3>CBT</h3></div>
+    <div class="card"><h3>Social Science</h3></div>
+
+</div>
+
+<script>
+/* -----------------------------------------------
+   CHECK LOGIN STATUS
+-------------------------------------------------- */
+let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+
+if (!user) {
+    alert("Please login first!");
+    window.location.href = "/Quizzone/Home/SignIn.htm";
+}
+
+function gotoT1A(){
+    window.location.href = "/Quizzone/CompetancyTest/Test-01/Set-A.htm";
+}
+</script>
+
+</body>
+</html>

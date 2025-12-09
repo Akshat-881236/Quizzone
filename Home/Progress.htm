@@ -1,124 +1,656 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Quizzone | Progress Analytics</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quizzone — Detailed Progress Analytics</title>
 
-<!-- Chart.js CDN -->
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body{
-    margin:0;
-    background:#eef3ff;
-    font-family:"Segoe UI",Arial;
+:root{
+  --primary:#007bff; --accent:#005fcc; --muted:#eef3ff; --card:#fff; --success:#28a745;
+  --danger:#dc3545; --text:#223;
+  --maxScore:100; /* change if your quiz max differs */
 }
 
-/* BOX */
-.progress-container{
-    width:90%;
-    max-width:1100px;
-    margin:70px auto;
-    background:white;
-    padding:25px;
-    border-radius:14px;
-    box-shadow:0 4px 20px rgba(0,0,0,0.2);
+/* ------------------ Base ------------------ */
+body{ margin:0; font-family: "Segoe UI", Arial; background:var(--muted); color:var(--text); }
+.container{ width:94%; max-width:1280px; margin:90px auto; }
+
+/* Sections */
+.section{ background:var(--card); border-radius:12px; padding:18px; box-shadow:0 6px 22px rgba(0,0,0,0.08); margin-bottom:18px; }
+.header-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.title{ color:var(--primary); margin:0; font-size:20px; font-weight:700; }
+.subtitle{ color:var(--accent); margin:0; font-weight:600; }
+
+/* grid for large screens */
+.grid{
+  display:flex; gap:14px;
+}
+/* left list / right detail panels */
+.left-panel{ flex:0 0 320px; min-width:260px; }
+.right-panel{ flex:1 1 auto; }
+
+/* Discipline list */
+.disc-list{ list-style:none; padding:0; margin:8px 0; }
+.disc-item{ padding:10px; border-radius:8px; background:#f6f9ff; margin-bottom:8px; cursor:pointer; }
+.disc-item.active{ box-shadow:0 4px 14px rgba(0,123,255,0.12); border-left:4px solid var(--primary); }
+
+/* Chapter card */
+.chapter-card{ background:#fbfdff;padding:12px;border-radius:8px;margin-bottom:10px; }
+.chapter-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+
+/* TABLE */
+.table{
+  width:100%;
+  border-collapse: collapse;
+  margin-top:12px;
+  font-size:14px;
+}
+.table th, .table td{ padding:10px 8px; border-bottom:1px solid #eee; text-align:left; vertical-align:middle; }
+.table th{ background:#f4f8ff; color:var(--accent); font-weight:700; }
+
+/* history pill */
+.pill{ display:inline-block; padding:6px 8px; background:#eef6ff; border-radius:8px; margin-right:6px; font-size:13px; }
+
+/* small controls */
+.controls{ display:flex; gap:8px; flex-wrap:wrap; }
+.btn{ padding:8px 12px; border-radius:8px; border:none; cursor:pointer; background:var(--primary); color:white; }
+.btn.alt{ background:var(--success); }
+.btn.ghost{ background:transparent; color:var(--primary); border:1px solid rgba(0,123,255,0.12); }
+
+/* charts area */
+.charts{ display:flex; gap:14px; flex-wrap:wrap; margin-top:12px; }
+.chart-card{ background:#f4f8ff; padding:12px; border-radius:10px; flex:1 1 320px; min-width:280px; }
+
+/* responsive display rules:
+   inline-block on large screens (display side-by-side),
+   stacked on small screens */
+.inline-block { display:inline-block; vertical-align:top; }
+.stack { display:block; }
+
+/* attempt history list */
+.attempt-list{ margin-top:8px; }
+
+/* labels */
+.label { font-weight:700; color:var(--accent); }
+
+/* small note */
+.note { font-size:13px; color:#666; margin-top:6px; }
+
+/* ================== MEDIA GROUPS ==================
+   6 groups:
+   - tiny-phone (<=320)
+   - small-phone (321-480)
+   - tablet-small (481-768)
+   - tablet-large (769-1024)
+   - laptop (1025-1365)
+   - desktop (>=1366)
+==================================================*/
+
+/* default - laptop/desktop as inline */
+.left-panel, .right-panel { display:inline-block; vertical-align:top; }
+.left-panel{ width:320px; }
+.right-panel{ width: calc(100% - 340px); }
+
+/* tiny-phone */
+@media (max-width:320px){
+  body{ font-size:13px; }
+  .container{ width:96%; margin:20px auto; }
+  .left-panel, .right-panel{ display:block; width:100%; }
+  .charts{ flex-direction:column; }
 }
 
-/* CHART BLOCK */
-.chart-block{
-    margin:30px 0;
-    padding:20px;
-    background:#f4f8ff;
-    border-radius:14px;
+/* small-phone */
+@media (min-width:321px) and (max-width:480px){
+  .container{ width:96%; margin:30px auto; }
+  .left-panel, .right-panel{ display:block; width:100%; }
 }
 
-h2{ color:#007bff; }
-h3{ color:#005fcc; }
-canvas { width:100% !important; max-height:350px; }
+/* tablet-small */
+@media (min-width:481px) and (max-width:768px){
+  .container{ width:95%; }
+  .left-panel, .right-panel{ display:block; width:100%; }
+}
+
+/* tablet-large */
+@media (min-width:769px) and (max-width:1024px){
+  .container{ width:94%; }
+  .left-panel{ width:280px; }
+  .right-panel{ width: calc(100% - 300px); }
+}
+
+/* laptop */
+@media (min-width:1025px) and (max-width:1365px){
+  .container{ width:92%; }
+  .left-panel{ width:320px; }
+  .right-panel{ width: calc(100% - 340px); }
+}
+
+/* desktop */
+@media (min-width:1366px){
+  .container{ width:88%; }
+}
+
+/* small tweaks */
+.details-toggle{ font-size:13px; color:var(--primary); cursor:pointer; }
+.empty{ color:#888; font-style:italic; }
 </style>
 </head>
 <body>
 
-<!-- GLOBAL NAVBAR + FOOTER -->
-<script src="/Quizzone/Global/loader.js"></script>
+<!-- global nav/footer loader -->
+<script src="../Global/loader.js"></script>
 
-<div class="progress-container">
-    <h2>Your Progress Insights</h2>
+<div class="container">
 
-    <div class="chart-block">
-        <h3>Blogs Completed</h3>
-        <canvas id="blogChart"></canvas>
+  <div class="section header-row">
+    <div>
+      <h1 class="title">Progress Analytics — Detailed View</h1>
+      <div class="subtitle">Drilldown: Discipline → Chapter → Topic → Attempts</div>
     </div>
 
-    <div class="chart-block">
-        <h3>Competency Tests Status</h3>
-        <canvas id="compChart"></canvas>
+    <div class="controls">
+      <button class="btn" onclick="refreshAll()">Refresh</button>
+      <button class="btn alt" onclick="expandAll()">Expand All</button>
+      <button class="btn ghost" onclick="downloadJSON()">Export JSON</button>
+    </div>
+  </div>
+
+  <div class="section grid">
+    <!-- LEFT: discipline list -->
+    <div class="left-panel section" id="leftPanel">
+      <h3 class="subtitle">Disciplines</h3>
+      <ul class="disc-list" id="discList"></ul>
+
+      <h3 class="subtitle" style="margin-top:12px;">Competency</h3>
+      <div id="competencySummary"></div>
     </div>
 
-    <div class="chart-block">
-        <h3>Quiz Score Timeline</h3>
-        <canvas id="scoreChart"></canvas>
+    <!-- RIGHT: details and charts -->
+    <div class="right-panel section" id="rightPanel">
+      <div id="detailsArea">
+        <p class="note">Select a discipline from the left to view detailed tables and charts.</p>
+      </div>
+
+      <div class="charts" id="chartsArea" style="margin-top:18px;">
+        <div class="chart-card" id="chartRadarCard">
+          <h4 class="label">Discipline Radar</h4>
+          <canvas id="radarChart"></canvas>
+        </div>
+
+        <div class="chart-card" id="chartDistributionCard">
+          <h4 class="label">Score Distribution (Selected Topic)</h4>
+          <canvas id="distChart"></canvas>
+        </div>
+
+        <div class="chart-card" id="chartTrendCard">
+          <h4 class="label">Attempt Timeline</h4>
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+
     </div>
+  </div>
+
 </div>
 
 <script>
-// LOAD USER
-let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
-if(!user){ alert("Please login first."); window.location.href="/Quizzone/Home/SignIn.htm"; }
+/* --------------------------
+  Utility & Normalization
+---------------------------*/
 
-// FALLBACKS
-let blogs = user.progress.blogs || 0;
-let comp = user.progress.compTests || 0;
-let scores = user.scores || {};
-let quizLabels = Object.keys(scores);
-let quizValues = Object.values(scores);
+/* simple abbreviation map (expand as needed) */
+const abbrMap = {
+  math: "Mathematics", sci: "Science", cs: "Computer Science", eng: "English", gk: "General Knowledge",
+  comp: "Competency"
+};
 
-// ------------------------- BLOG CHART -------------------------
-new Chart(document.getElementById("blogChart"), {
-    type: "bar",
-    data: {
-        labels: ["Blogs Read"],
-        datasets: [{
-            label: "Completed",
-            data: [blogs],
-            backgroundColor: "#007bff"
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true } }
+/* detect separators and parse key into object */
+function parseKey(key){
+  if(!key || typeof key !== 'string') return null;
+  let sep = key.includes('|') ? '|' : (key.includes('_') ? '_' : (key.includes(':') ? ':' : (key.includes('-') ? '-' : null)));
+  if(!sep){
+    // fallback: try camel case split - not ideal
+    return { discipline: "Unknown", chapter: "Unknown", topic: key };
+  }
+  const parts = key.split(sep).map(s => s.trim());
+  // heuristics:
+  // possible structures:
+  // 1) Discipline|Chapter|Topic
+  // 2) discipline_ch1_t1 (abbr)
+  // 3) discipline_ch1_topic1 etc.
+  if(parts.length >= 3){
+    let disc = parts[0];
+    if(disc.length <= 4 && abbrMap[disc.toLowerCase()]) disc = abbrMap[disc.toLowerCase()];
+    // normalize chapter label
+    let chapter = parts[1].replace(/^ch(?:apter)?/i, m=>m); // keep
+    let topic = parts.slice(2).join(sep);
+    return { discipline: disc, chapter: normalizeChapter(parts[1]), topic: normalizeTopic(topic) };
+  }
+  // if only two parts: treat as chapter and topic
+  if(parts.length === 2){
+    return { discipline: "Unknown", chapter: normalizeChapter(parts[0]), topic: normalizeTopic(parts[1]) };
+  }
+  return { discipline: "Unknown", chapter: "Unknown", topic: parts[0] };
+}
+
+function normalizeChapter(raw){
+  if(!raw) return "Chapter1";
+  let r = String(raw).replace(/^ch(?:apter)?[_\-]?/i, "Chapter").replace(/^c(\d+)$/i, "Chapter$1");
+  return r;
+}
+function normalizeTopic(raw){
+  if(!raw) return "Topic1";
+  let r = String(raw).replace(/^t(?:opic)?[_\-]?/i, "Topic").replace(/^t(\d+)$/i, "Topic$1");
+  return r;
+}
+
+/* normalize various stored attempt formats into an array of attempt objects:
+  attempt = { score: Number, timestamp: ISOString|null, timeSpent: Number|null, meta: {} }
+  supported raw types:
+   - number => one attempt
+   - array => elements can be numbers or objects
+   - object => may contain .attempts array or .score/timeSpent/timestamp
+*/
+function normalizeAttempts(raw){
+  const out = [];
+  if(raw == null) return out;
+  if(typeof raw === 'number'){
+    out.push({ score: raw, timestamp: null, timeSpent: null, meta: {} });
+    return out;
+  }
+  if(Array.isArray(raw)){
+    raw.forEach(entry=>{
+      if(typeof entry === 'number') out.push({ score: entry, timestamp: null, timeSpent: null, meta:{} });
+      else if(typeof entry === 'object'){
+        out.push({
+          score: Number(entry.score || entry.value || 0),
+          timestamp: entry.timestamp || entry.time || entry.t || null,
+          timeSpent: Number(entry.timeSpent || entry.duration || 0) || null,
+          meta: entry.meta || {}
+        });
+      }
+    });
+    return out;
+  }
+  if(typeof raw === 'object'){
+    // object may be {score:.., timestamp:..} or { attempts: [...] }
+    if(raw.attempts && Array.isArray(raw.attempts)){
+      return normalizeAttempts(raw.attempts);
     }
-});
+    // single object attempt
+    return [{
+      score: Number(raw.score || raw.value || 0),
+      timestamp: raw.timestamp || raw.time || null,
+      timeSpent: Number(raw.timeSpent || raw.duration || 0) || null,
+      meta: raw.meta || {}
+    }];
+  }
+  // fallback: push as text
+  return [{ score: 0, timestamp: null, timeSpent: null, meta: { raw } }];
+}
 
-// ------------------------- COMPETENCY PIE CHART -------------------------
-new Chart(document.getElementById("compChart"), {
-    type: "pie",
-    data: {
-        labels: ["Completed", "Remaining"],
-        datasets: [{
-            data: [comp, Math.max(10 - comp, 0)], 
-            backgroundColor: ["#28a745", "#ffc107"]
-        }]
-    }
-});
+/* format date nicely */
+function fmtDate(ts){
+  if(!ts) return "-";
+  try{ const d = new Date(ts); if(isNaN(d)) return String(ts); return d.toLocaleString(); } catch(e){ return String(ts); }
+}
 
-// ------------------------- QUIZ SCORE LINE CHART -------------------------
-new Chart(document.getElementById("scoreChart"), {
-    type: "line",
-    data: {
-        labels: quizLabels.length ? quizLabels : ["No Quizzes Yet"],
-        datasets: [{
-            label: "Quiz Scores",
-            data: quizValues.length ? quizValues : [0],
-            borderColor: "#ff5733",
-            fill: false,
-            tension: 0.3
-        }]
+/* compute average and percentage */
+function computeStats(attempts){
+  if(!attempts || attempts.length === 0) return { avg:0, percent:0, attempts:0 };
+  const scores = attempts.map(a=>Number(a.score||0));
+  const sum = scores.reduce((s,x)=>s+x,0);
+  const avg = sum / scores.length;
+  const percent = (avg / Number(getComputedStyle(document.documentElement).getPropertyValue('--maxScore') || 100)) * 100;
+  return { avg: Math.round(avg*10)/10, percent: Math.round(percent*10)/10, attempts: attempts.length };
+}
+
+/* --------------------------
+  Load user data from localStorage
+---------------------------*/
+function loadUser(){
+  const active = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
+  if(!active){
+    alert("Please login first.");
+    // redirect if desired:
+    // window.location.href = "index.html";
+    return null;
+  }
+  // deep clone
+  const user = JSON.parse(JSON.stringify(active));
+  // normalize scores into a nested tree
+  const raw = user.scores || {};
+  const model = {}; // model[discipline].chapters[chapter].topics[topic] = { attempts: [...], stats: {} }
+  Object.keys(raw).forEach(k=>{
+    const parsed = parseKey(k) || { discipline:"Unknown", chapter:"Unknown", topic:k };
+    const disc = parsed.discipline || "Unknown";
+    const chap = parsed.chapter || "Chapter1";
+    const topic = parsed.topic || "Topic1";
+    const attempts = normalizeAttempts(raw[k]);
+
+    model[disc] = model[disc] || { chapters: {} };
+    model[disc].chapters[chap] = model[disc].chapters[chap] || { topics: {} };
+    // If topic already exists (multiple keys mapping same), merge attempts
+    if(!model[disc].chapters[chap].topics[topic]){
+      model[disc].chapters[chap].topics[topic] = { attempts: [] };
     }
-});
+    model[disc].chapters[chap].topics[topic].attempts = model[disc].chapters[chap].topics[topic].attempts.concat(attempts);
+  });
+
+  // sort attempt history per topic descending by timestamp if available, else keep insertion order
+  Object.keys(model).forEach(d=>{
+    Object.keys(model[d].chapters).forEach(ch=>{
+      Object.keys(model[d].chapters[ch].topics).forEach(t=>{
+        const arr = model[d].chapters[ch].topics[t].attempts;
+        arr.sort((a,b)=>{
+          const ta = a.timestamp? new Date(a.timestamp).getTime():0;
+          const tb = b.timestamp? new Date(b.timestamp).getTime():0;
+          return tb - ta;
+        });
+        model[d].chapters[ch].topics[t].stats = computeStats(arr);
+      });
+    });
+  });
+
+  // also prepare competency records if present in progress or scores named comp/competency
+  const competency = [];
+  // check user.progress.compTests count
+  if(user.progress && user.progress.compTests){
+    competency.push({ title: "Competency Tests Completed", count: user.progress.compTests });
+  }
+  // look for 'comp' keys in scores
+  Object.keys(raw).forEach(k=>{
+    if(/comp/i.test(k) || /competency/i.test(k)){
+      const parsed = parseKey(k);
+      competency.push({ key:k, parsed, attempts: normalizeAttempts(raw[k]), stats: computeStats(normalizeAttempts(raw[k])) });
+    }
+  });
+
+  return { user, model, competency };
+}
+
+/* --------------------------
+  UI Rendering
+---------------------------*/
+
+let GLOBAL = { model:null, user:null };
+
+/* left panel list of disciplines */
+function renderLeftPanel(model){
+  const ul = document.getElementById('discList');
+  ul.innerHTML = '';
+  const discs = Object.keys(model).sort();
+  if(discs.length === 0){
+    ul.innerHTML = `<div class="empty">No disciplines found in records.</div>`;
+    return;
+  }
+  discs.forEach((d,i)=>{
+    const li = document.createElement('li');
+    li.className = 'disc-item' + (i===0? ' active':'');
+    li.textContent = d + ' ';
+    li.onclick = ()=>{ document.querySelectorAll('.disc-item').forEach(x=>x.classList.remove('active')); li.classList.add('active'); renderRightPanel(d); };
+    ul.appendChild(li);
+  });
+  // render first by default
+  renderRightPanel(discs[0]);
+}
+
+/* right panel: details for a discipline */
+function renderRightPanel(dName){
+  const right = document.getElementById('detailsArea');
+  right.innerHTML = `<h3 class="subtitle">${dName} — Detail Breakdown</h3>`;
+  const disc = GLOBAL.model[dName];
+  if(!disc){ right.innerHTML += `<p class="empty">No records for this discipline.</p>`; return; }
+
+  // for each chapter, create table
+  Object.keys(disc.chapters).sort().forEach(chName=>{
+    const ch = disc.chapters[chName];
+    const chDiv = document.createElement('div');
+    chDiv.className = 'chapter-card';
+    chDiv.innerHTML = `
+      <div class="chapter-head">
+        <div>
+          <b>${chName}</b> <span class="muted">• Topics: ${Object.keys(ch.topics).length}</span>
+          <div class="note">Average Score: ${avgChapter(ch).avg} • Completion est: ${Math.round(avgChapter(ch).percent || 0)}%</div>
+        </div>
+        <div>
+          <span class="details-toggle" onclick="toggleTable('${escapeId(dName)}','${escapeId(chName)}')">Toggle Table</span>
+        </div>
+      </div>
+      <div id="table_${escapeId(dName)}_${escapeId(chName)}" style="margin-top:12px;">
+        ${generateTableHTML(dName, chName)}
+      </div>
+    `;
+    right.appendChild(chDiv);
+  });
+
+  // competency summary
+  renderCompetencySummary();
+
+  // render radar and overall charts
+  renderRadarChart();
+  // clear topic charts until a topic selected
+  clearTopicCharts();
+}
+
+/* helper: compute chapter average */
+function avgChapter(ch){
+  let totals=0, cnt=0;
+  Object.keys(ch.topics).forEach(t=>{
+    const s = ch.topics[t].stats;
+    totals += (s.avg * s.attempts);
+    cnt += s.attempts;
+  });
+  const avg = cnt? Math.round((totals/cnt)*10)/10 : 0;
+  const percent = (avg/Number(getComputedStyle(document.documentElement).getPropertyValue('--maxScore')||100))*100;
+  return { avg, percent };
+}
+
+/* generate HTML table for chapter */
+function generateTableHTML(dName, chName){
+  const ch = GLOBAL.model[dName].chapters[chName];
+  const topics = Object.keys(ch.topics).sort();
+  if(topics.length===0) return '<div class="empty">No topics yet.</div>';
+  let html = `<table class="table"><thead><tr><th>Topic</th><th>Avg Score</th><th>%</th><th>Attempts</th><th>History</th><th>Analyze</th></tr></thead><tbody>`;
+  topics.forEach(t=>{
+    const tp = ch.topics[t];
+    const s = tp.stats;
+    const hist = tp.attempts || [];
+    const histHtml = hist.slice(0,5).map(a=>`<span class="pill">${a.score}${a.timestamp? ' • '+fmtDate(a.timestamp):''}</span>`).join('');
+    html += `<tr>
+      <td>${t}</td>
+      <td>${s.avg}</td>
+      <td>${s.percent}%</td>
+      <td>${s.attempts}</td>
+      <td class="attempt-list">${histHtml}${hist.length>5? ' <span class="pill">+'+(hist.length-5)+' more</span>':''}</td>
+      <td><button class="btn ghost" onclick="analyzeTopic('${escapeForJS(dName)}','${escapeForJS(chName)}','${escapeForJS(t)}')">Analyze</button></td>
+    </tr>`;
+  });
+  html += `</tbody></table>`;
+  return html;
+}
+
+/* escape for id / html */
+function escapeId(s){ return s.replace(/[^\w\-]/g,'_'); }
+function escapeForJS(s){ return String(s).replace(/'/g,"\\'").replace(/"/g,'\\"'); }
+
+/* toggle table display */
+function toggleTable(dId, chId){
+  const el = document.getElementById(`table_${dId}_${chId}`);
+  if(!el) return;
+  el.style.display = (el.style.display === 'none') ? '' : 'none';
+}
+
+/* render competency summary on left */
+function renderCompetencySummary(){
+  const node = document.getElementById('competencySummary');
+  node.innerHTML = '';
+  const comp = GLOBAL.competency || [];
+  if(comp.length===0){ node.innerHTML = `<div class="empty">No competency records.</div>`; return; }
+  comp.forEach((c,i)=>{
+    const div = document.createElement('div');
+    div.className = 'chapter-card';
+    if(c.count !== undefined){
+      div.innerHTML = `<b>Comp Tests Done:</b> ${c.count}`;
+    } else if(c.parsed){
+      div.innerHTML = `<b>${c.key}</b><div class="note">Avg: ${c.stats.avg} • Attempts: ${c.stats.attempts}</div>
+        <div style="margin-top:8px;"><button class="btn ghost" onclick="analyzeCompetency('${escapeForJS(c.key)}')">Analyze</button></div>`;
+    }
+    node.appendChild(div);
+  });
+}
+
+/* analyze a topic: build charts from its attempts */
+let currentTopic = null;
+function analyzeTopic(dName, chName, tName){
+  currentTopic = { dName, chName, tName };
+  const attempts = GLOBAL.model[dName].chapters[chName].topics[tName].attempts;
+  // prepare data
+  const labels = attempts.map((a,i)=> a.timestamp? fmtDate(a.timestamp) : `Attempt ${i+1}`).reverse();
+  const values = attempts.map(a=>Number(a.score||0)).reverse();
+
+  // distribution: counts in ranges
+  const ranges = { '0-20':0,'21-40':0,'41-60':0,'61-80':0,'81-100':0 };
+  values.forEach(v=>{
+    if(v<=20) ranges['0-20']++;
+    else if(v<=40) ranges['21-40']++;
+    else if(v<=60) ranges['41-60']++;
+    else if(v<=80) ranges['61-80']++;
+    else ranges['81-100']++;
+  });
+
+  renderTrendChart(labels, values, `${dName} • ${chName} • ${tName}`);
+  renderDistributionChart(Object.keys(ranges), Object.values(ranges));
+}
+
+/* analyze competency key */
+function analyzeCompetency(key){
+  const raw = GLOBAL.rawScores[key];
+  const attempts = normalizeAttempts(raw);
+  const labels = attempts.map((a,i)=> a.timestamp? fmtDate(a.timestamp):`Attempt ${i+1}`).reverse();
+  const values = attempts.map(a=>Number(a.score||0)).reverse();
+  renderTrendChart(labels, values, `Competency • ${key}`);
+  // distribution
+  const ranges = { '0-20':0,'21-40':0,'41-60':0,'61-80':0,'81-100':0 };
+  values.forEach(v=>{
+    if(v<=20) ranges['0-20']++;
+    else if(v<=40) ranges['21-40']++;
+    else if(v<=60) ranges['41-60']++;
+    else if(v<=80) ranges['61-80']++;
+    else ranges['81-100']++;
+  });
+  renderDistributionChart(Object.keys(ranges), Object.values(ranges));
+}
+
+/* --------------------------
+  Charts (Chart.js)
+---------------------------*/
+let radarChart=null, trendChart=null, distChart=null;
+
+function renderRadarChart(){
+  const ctx = document.getElementById('radarChart');
+  if(!ctx) return;
+  const labels = Object.keys(GLOBAL.model || {});
+  const data = labels.map(d=>{
+    // compute discipline avg across chapters
+    const disc = GLOBAL.model[d];
+    let total=0, cnt=0;
+    Object.keys(disc.chapters).forEach(ch=>{
+      Object.keys(disc.chapters[ch].topics).forEach(t=>{
+        const s = disc.chapters[ch].topics[t].stats;
+        total += (s.avg * s.attempts);
+        cnt += s.attempts;
+      });
+    });
+    const avg = cnt? Math.round((total/cnt)*10)/10 : 0;
+    return avg;
+  });
+
+  if(radarChart) radarChart.destroy();
+  radarChart = new Chart(ctx, {
+    type:'radar',
+    data:{ labels, datasets:[{ label:'Avg Score per Discipline', data, backgroundColor:'rgba(0,123,255,0.15)', borderColor: 'rgba(0,123,255,1)' }] },
+    options:{ scales:{ r:{ suggestedMin:0, suggestedMax: Number(getComputedStyle(document.documentElement).getPropertyValue('--maxScore')||100) } } }
+  });
+}
+
+function renderTrendChart(labels, values, title='Attempt Timeline'){
+  const ctx = document.getElementById('trendChart');
+  if(trendChart) trendChart.destroy();
+  trendChart = new Chart(ctx, {
+    type:'line',
+    data:{ labels, datasets:[{ label:title, data: values, borderColor:'#ff5722', backgroundColor:'rgba(255,87,34,0.12)', fill:true, tension:0.3 }]},
+    options:{ responsive:true, scales:{ y:{ beginAtZero:true, suggestedMax:Number(getComputedStyle(document.documentElement).getPropertyValue('--maxScore')||100) } } }
+  });
+}
+
+function renderDistributionChart(labels, values){
+  const ctx = document.getElementById('distChart');
+  if(distChart) distChart.destroy();
+  distChart = new Chart(ctx, {
+    type:'pie',
+    data:{ labels, datasets:[{ data: values, backgroundColor:['#dc3545','#ff9f43','#ffc107','#28a745','#007bff'] }]},
+    options:{ responsive:true }
+  });
+}
+
+/* clear topic charts */
+function clearTopicCharts(){
+  if(trendChart) { trendChart.destroy(); trendChart=null; }
+  if(distChart) { distChart.destroy(); distChart=null; }
+  // show empty
+  const ctxTrend = document.getElementById('trendChart');
+  const ctxDist = document.getElementById('distChart');
+  if(ctxTrend) ctxTrend.getContext('2d').clearRect(0,0,ctxTrend.width, ctxTrend.height);
+  if(ctxDist) ctxDist.getContext('2d').clearRect(0,0,ctxDist.width, ctxDist.height);
+}
+
+/* --------------------------
+  Overall loader + render
+---------------------------*/
+function renderAll(){
+  const data = loadUser();
+  if(!data) return;
+  GLOBAL = { model: data.model, user: data.user, competency: data.competency, rawScores: data.user.scores || {} };
+  renderLeftPanel(GLOBAL.model);
+  renderRadarChart();
+  renderCompetencySummary();
+}
+
+/* --------------------------
+  Competency analyze helper
+---------------------------*/
+function renderCompetencySummary(){
+  renderCompetencySummary(); // no-op if not used
+}
+
+/* --------------------------
+  Helpers: Expand all / export / refresh
+---------------------------*/
+function expandAll(){
+  document.querySelectorAll('details').forEach(d=> d.open = true);
+}
+
+function downloadJSON(){
+  const blob = new Blob([JSON.stringify(GLOBAL.user, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${(GLOBAL.user && GLOBAL.user.username) || 'quizzone_user'}_progress.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+function refreshAll(){
+  renderAll();
+}
+
+/* INIT */
+renderAll();
+
 </script>
-
 </body>
 </html>

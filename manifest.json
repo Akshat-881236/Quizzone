@@ -1,0 +1,23 @@
+{
+  "name": "Quizzone - Learning & Quiz Suite",
+  "short_name": "Quizzone",
+  "start_url": "/Quizzone/index.htm",
+  "scope": "/Quizzone/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "description": "A complete learning and quiz platform covering GK, Science, Mathematics, Coding, AI, ML, CBT and many subjects.",
+  
+  "icons": [
+    {
+      "src": "/Quizzone/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Quizzone/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

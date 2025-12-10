@@ -315,8 +315,11 @@ body{
 }
 
 </style>
+<link rel="manifest" href="/Quizzone/manifest.json">
+<meta name="theme-color" content="#007bff">
 </head>
 <meta name="google-site-verification" content="Kp1gscirNuecI5_9R4LDkE5ql4w4zt0NmneiPktuMu4" />
+<script src="/Quizzone/Global/loader.js"></script>
 <body>
 
 <!-- Background Floating Shapes -->
@@ -325,7 +328,7 @@ body{
 <div class="shape"></div>
 
 <div class="hero">
-    <img src="/QuizzoneLogo.png" alt="Quizzone Logo">
+    <img src="/Quizzone/icons/QuizzoneLogo.png" alt="Quizzone Logo">
     <h1 id="mainTitle"><b>Quizzone</b></h1>
     <h1 id="mainTitle">Welcome to </b>Quizzone</b></h1>
     <p id="mainTagline">Your personalized learning platform for Blogs, Quizzes & Competency Tests.</p>
@@ -356,7 +359,14 @@ else{
         <a href="/Quizzone/Disciplines/index.htm" class="btn">Explore Disciplines</a>
     `;
 }
-</script>
 
+fetch(window.location.href)
+  .then(res => {
+    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
+  })
+  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
+
+</script>
+<script src="/Quizzone/pwa.js"></script>
 </body>
 </html>

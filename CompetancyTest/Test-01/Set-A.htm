@@ -157,6 +157,7 @@ function submitTest(){
             if(q.diff==="medium") score+=6;
             if(q.diff==="hard") score+=8;
         }
+        next();
     });
 
     // update user progress
@@ -176,7 +177,112 @@ function submitTest(){
         <h2>Test Completed 🎉</h2>
         <p>Your Score: <b>${score}</b></p>
     `;
+    next();
 }
+
+// Extract Topic number and Set name from URL
+function getCurrentInfo() {
+    const path = window.location.pathname;
+    const match = path.match(/Topic-(\d+)\/Set-([A-Z])\.html/);
+
+    if (!match) return null;
+
+    return {
+        topic: parseInt(match[1]),
+        set: match[2]
+    };
+}
+
+// Check if file exists
+function checkFile(topic, set) {
+    const url = `/Quizzone/CompetencyTest/Topic-${topic}/Set-${set}.html`;
+
+    return fetch(url, { method: "HEAD" })
+        .then(res => res.ok)
+        .catch(() => false);
+}
+
+// Navigate to a page
+function goTo(topic, set) {
+    window.location.href = `/Quizzone/CompetencyTest/Topic-${topic}/Set-${set}.html`;
+}
+
+// Directly open 404
+function go404() {
+    window.location.href = `/Quizzone/Errors/404.htm`;
+}
+
+// Helpers: next and previous Set letters
+function nextSetChar(c) {
+    return String.fromCharCode(c.charCodeAt(0) + 1);
+}
+function prevSetChar(c) {
+    return String.fromCharCode(c.charCodeAt(0) - 1);
+}
+
+
+// ---------------- NEXT BUTTON ----------------
+async function next() {
+    const info = getCurrentInfo();
+    if (!info) return go404();
+
+    let nextSet = nextSetChar(info.set);
+
+    // Step 1: Next Set in same Topic
+    if (await checkFile(info.topic, nextSet)) {
+        return goTo(info.topic, nextSet);
+    }
+
+    // Step 2: Move to next Topic → Set-A
+    let nextTopic = info.topic + 1;
+
+    if (await checkFile(nextTopic, "A")) {
+        return goTo(nextTopic, "A");
+    }
+
+    // Step 3: No more Topics → redirect to 404
+    go404();
+}
+
+
+// ---------------- PREVIOUS BUTTON ----------------
+async function previous() {
+    const info = getCurrentInfo();
+    if (!info) return go404();
+
+    let prevSet = prevSetChar(info.set);
+
+    // Step 1: Previous Set exists
+    if (prevSet >= "A" && await checkFile(info.topic, prevSet)) {
+        return goTo(info.topic, prevSet);
+    }
+
+    // Step 2: Move to previous Topic → last available Set
+    let prevTopic = info.topic - 1;
+
+    if (prevTopic < 1) {
+        return go404(); // No Topic before this
+    }
+
+    // Find last available Set (Z → A)
+    for (let c = "Z".charCodeAt(0); c >= "A".charCodeAt(0); c--) {
+        const s = String.fromCharCode(c);
+
+        if (await checkFile(prevTopic, s)) {
+            return goTo(prevTopic, s);
+        }
+    }
+
+    // Step 3: Previous Topic exists but has no Sets → 404
+    go404();
+}
+
+
+fetch(window.location.href)
+  .then(res => {
+    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
+  })
+  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
 
 </script>
 </body>

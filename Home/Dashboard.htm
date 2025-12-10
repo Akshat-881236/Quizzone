@@ -153,6 +153,8 @@ body {
 }
 
 </style>
+<link rel="manifest" href="/Quizzone/manifest.json">
+<meta name="theme-color" content="#007bff">
 </head>
 <script src="/Quizzone/Global/loader.js"></script>
 
@@ -289,7 +291,13 @@ function logout() {
     window.location.href = "index.htm";
 }
 
-</script>
+fetch(window.location.href)
+  .then(res => {
+    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
+  })
+  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
 
+</script>
+<script src="/Quizzone/pwa.js"></script>
 </body>
 </html>

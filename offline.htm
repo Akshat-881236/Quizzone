@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Offline | Quizzone</title>
+<style>
+body {
+    text-align:center;
+    padding:50px;
+    font-family:Arial;
+    background:#eef3ff;
+}
+.box {
+    background:white;
+    padding:30px;
+    border-radius:14px;
+    max-width:400px;
+    margin:auto;
+    box-shadow:0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+<div class="box">
+    <h2>You're Offline</h2>
+    <p>Please check your internet connection.</p>
+    <p>Quizzone works offline for previously visited pages.</p>
+</div>
+<script>
+   fetch(window.location.href)
+  .then(res => {
+    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
+  })
+  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
+
+</script>
+</body>
+</html>

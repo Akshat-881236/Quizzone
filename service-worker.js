@@ -8,6 +8,10 @@ const urlsToCache = [
   "/Quizzone/Home/SignUp.htm",
   "/Quizzone/Home/Setting.htm",
   "/Quizzone/Home/Progress.htm",
+  "/Quizzone/Global/footer.htm",
+  "/Quizzone/Global/navbar.htm",
+  "/Quizzone/Global/loader.js",
+  "/Quizzone/Global/seoMeta.js",
   "/Quizzone/Home/Dashboard.htm",
   "/Quizzone/Disciplines/index.htm",
   "/Quizzone/Disciplines/Mathematics/Blogs/Chapter%201/Topic1.htm",
@@ -17,7 +21,8 @@ const urlsToCache = [
   "/Quizzone/CompetancyTest/index.htm",
   "/Quizzone/CompetancyTest/Test-01/Set-A.htm",
   "/Quizzone/icons/icon-192.png",
-  "/Quizzone/icons/icon-512.png"
+  "/Quizzone/icons/icon-512.png",
+  "/Quizzone/icons/QuizzoneLogo.png"
 ];
 
 // INSTALL

@@ -41,6 +41,8 @@ button:hover{ background:#005fcc; }
     margin-bottom:12px;
 }
 </style>
+<link rel="manifest" href="/Quizzone/manifest.json">
+<meta name="theme-color" content="#007bff">
 </head>
 <body>
 
@@ -162,6 +164,6 @@ fetch(window.location.href)
   })
   .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
 </script>
-
+<script src="/Quizzone/pwa.js"></script>
 </body>
 </html>

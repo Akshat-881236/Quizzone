@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone | Owner Message PDF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PDF.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+
+<style>
+body {
+    margin: 0;
+    background: #eef3ff;
+    font-family: "Segoe UI", Arial;
+}
+.viewer {
+    max-width: 900px;
+    margin: 80px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.2);
+}
+h2 { color: #007bff; text-align:center; }
+.pageCanvas {
+    width: 100%;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.btn {
+    padding: 10px 18px;
+    margin-top: 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover { background: #005fcc; }
+
+.watermark-text {
+    color: rgba(0,0,0,0.12);
+    font-size: 40px;
+    transform: rotate(-30deg);
+    position: absolute;
+    pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<div class="viewer">
+    <h2>📄 Quizzone Owner Message</h2>
+
+    <div id="pdfContainer"></div>
+
+    <button class="btn" onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<script>
+// --------------------------- SETTINGS ----------------------------
+const url = "/Quizzone/Documentary/Quizzone_owner_message.pdf";
+
+// OPTIONAL Watermark (Enable or Disable)
+const ENABLE_TEXT_WATERMARK = true;
+const TEXT_WATERMARK = "QUIZZONE · OFFICIAL DOCUMENT";
+
+// OPTIONAL Image Watermark (Upload /Assets/watermark.png)
+const ENABLE_IMAGE_WATERMARK = false;
+const IMG_WATERMARK_URL = "/Quizzone/Assets/watermark.png";
+
+// --------------------------- LOAD PDF ----------------------------
+const container = document.getElementById("pdfContainer");
+
+pdfjsLib.getDocument(url).promise.then(pdf => {
+    let totalPages = pdf.numPages;
+
+    for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+
+        pdf.getPage(pageNum).then(page => {
+            let viewport = page.getViewport({ scale: 1.3 });
+
+            // create canvas for each page
+            let canvas = document.createElement("canvas");
+            canvas.className = "pageCanvas";
+
+            let ctx = canvas.getContext("2d");
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            container.appendChild(canvas);
+
+            page.render({
+                canvasContext: ctx,
+                viewport: viewport
+            }).promise.then(() => {
+
+                // ---------------- WATERMARK OVERLAY ----------------
+                if (ENABLE_TEXT_WATERMARK) {
+                    ctx.save();
+                    ctx.globalAlpha = 0.20;
+                    ctx.font = "40px Arial";
+                    ctx.fillStyle = "#000";
+                    ctx.translate(canvas.width/2, canvas.height/2);
+                    ctx.rotate(-Math.PI / 6);
+                    ctx.textAlign = "center";
+                    ctx.fillText(TEXT_WATERMARK, 0, 0);
+                    ctx.restore();
+                }
+
+                if (ENABLE_IMAGE_WATERMARK) {
+                    let img = new Image();
+                    img.src = IMG_WATERMARK_URL;
+                    img.onload = () => {
+                        ctx.save();
+                        ctx.globalAlpha = 0.20;
+                        let size = canvas.width * 0.4;
+                        ctx.drawImage(img, 
+                            canvas.width/2 - size/2, 
+                            canvas.height/2 - size/2, 
+                            size, size
+                        );
+                        ctx.restore();
+                    };
+                }
+            });
+
+        });
+    }
+});
+
+// --------------------------- DOWNLOAD ORIGINAL PDF ----------------------------
+function downloadPDF() {
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "Quizzone_owner_message.pdf";
+    a.click();
+}
+</script>
+
+</body>
+</html>

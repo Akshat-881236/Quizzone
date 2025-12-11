@@ -151,6 +151,33 @@
     });
   }
 
+  /* -------------------------------
+   SHOW OWNER PDF ONCE AFTER INSTALL / UPDATE
+--------------------------------*/
+const PDF_SHOWN_KEY = "quizzone_owner_message_seen";
+
+function showOwnerPDF() {
+    if (!localStorage.getItem(PDF_SHOWN_KEY)) {
+        window.location.href = "/Quizzone/Documentary/OwnerMessageViewer.html";
+        localStorage.setItem(PDF_SHOWN_KEY, "true");
+    }
+}
+
+/* Detect install event */
+window.addEventListener("appinstalled", () => {
+    showOwnerPDF();
+});
+
+/* Detect service worker update */
+navigator.serviceWorker?.addEventListener("controllerchange", () => {
+    showOwnerPDF();
+});
+
+/* Optional: Trigger on first dashboard visit */
+if (location.pathname.includes("Dashboard.html")) {
+    setTimeout(showOwnerPDF, 1500);
+}
+
   // Expose functions to window for usage
   window.QuizzonePWA = {
     subscribeToPush,

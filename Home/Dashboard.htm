@@ -206,6 +206,7 @@ body {
     <button onclick="goto('Competency')">Competency Tests</button>
     <button onclick="goto('Progress')">Progress Overview</button>
     <button onclick="goto('Settings')">Account Settings</button>
+    <button onclick="goto('AboutUs')">About Us</button>
      </div>
 
 </div>
@@ -271,11 +272,15 @@ function goto(page) {
             break;
 
         case "Progress":
-            window.location.href = "Progress.htm";
+            window.location.href = "/Progress.htm";
             break;
 
         case "Settings":
-            window.location.href = "Setting.htm";
+            window.location.href = "/Setting.htm";
+            break;
+
+        case "AboutUs":
+            window.location.href = "/Quizzone/Documentary/OwnerMessageViewer.htm";
             break;
 
         default:

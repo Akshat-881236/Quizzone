@@ -20,7 +20,9 @@ const ASSETS_TO_CACHE = [
   "/Quizzone/CompetancyTest/Test-01/Set-A.htm",
   "/Quizzone/icons/icon-192.png",
   "/Quizzone/icons/icon-512.png",
-  "/Quizzone/icons/QuizzoneLogo.png"
+  "/Quizzone/icons/QuizzoneLogo.png",
+  "/Quizzone/Documentary/OwnerMessageViewer.htm",
+  "/Quizzone/Documentary/Quizzone_Owner_Message.pdf"
   // Add other important shell files you want cached by default
 ];
 

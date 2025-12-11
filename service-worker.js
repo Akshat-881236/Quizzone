@@ -1,8 +1,6 @@
-const CACHE_NAME = "quizzone-cache-v1";
-
+const CACHE_NAME = 'quizzone-shell-v1';
 const OFFLINE_URL = "/Quizzone/offline.htm";
-
-const urlsToCache = [
+const ASSETS_TO_CACHE = [
   "/Quizzone/index.htm",
   "/Quizzone/Home/SignIn.htm",
   "/Quizzone/Home/SignUp.htm",
@@ -23,28 +21,98 @@ const urlsToCache = [
   "/Quizzone/icons/icon-192.png",
   "/Quizzone/icons/icon-512.png",
   "/Quizzone/icons/QuizzoneLogo.png"
+  // Add other important shell files you want cached by default
 ];
 
-// INSTALL
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
-  );
+// install
+self.addEventListener('install', (e) => {
   self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS_TO_CACHE))
+  );
 });
 
-// ACTIVATE
-self.addEventListener("activate", (event) => {
-  event.waitUntil(caches.keys().then((keys) =>
-    Promise.all(keys.map((key) => key !== CACHE_NAME && caches.delete(key)))
-  ));
+// activate
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.map(k => { if (k !== CACHE_NAME) return caches.delete(k); })
+    ))
+  );
   self.clients.claim();
 });
 
-// FETCH (Offline fallback)
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request)
-      .then((res) => res || caches.match(OFFLINE_URL)))
+// fetch
+self.addEventListener('fetch', (e) => {
+  // navigation requests -> prefer network, fallback to cache, then 404 page
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request).then(res => {
+        // optional: put in cache
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then(c => c.put(e.request, copy));
+        return res;
+      }).catch(() => caches.match(e.request).then(r => r || caches.match('/Quizzone/404.html')))
+    );
+    return;
+  }
+
+  // other requests: cache-first strategy
+  e.respondWith(
+    caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
+      // save responses for next time
+      const copy = res.clone();
+      caches.open(CACHE_NAME).then(cache => cache.put(e.request, copy));
+      return res;
+    })).catch(() => {
+      // fallback image for images (optional)
+      if (e.request.destination === 'image') {
+        return new Response('', { status: 404 });
+      }
+      return caches.match('/Quizzone/404.html');
+    })
   );
+});
+
+// PUSH event (client receives push — server required)
+self.addEventListener('push', (event) => {
+  let data = { title: 'Quizzone', body: 'New notification', url: '/Quizzone/index.html' };
+  try { data = event.data.json(); } catch (e) {}
+  const options = {
+    body: data.body,
+    icon: '/Quizzone/icons/icon-192.png',
+    data: { url: data.url || '/Quizzone/index.html' }
+  };
+  event.waitUntil(self.registration.showNotification(data.title, options));
+});
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+  const url = event.notification.data && event.notification.data.url ? event.notification.data.url : '/Quizzone/index.html';
+  event.waitUntil(clients.openWindow(url));
+});
+
+// Background Sync: flush queued attempts saved in IndexedDB/localStorage
+self.addEventListener('sync', function(event) {
+  if (event.tag === 'sync-offline-attempts') {
+    event.waitUntil(flushOfflineAttempts());
+  }
+});
+
+// helper: read queue from IndexedDB is recommended; here we try from clients via postMessage
+async function flushOfflineAttempts(){
+  // This service worker can't directly access localStorage; ideally attempts are stored in IndexedDB.
+  // We'll try to message clients to provide queued attempts for the worker to send.
+  const allClients = await clients.matchAll({ includeUncontrolled: true });
+  for (const client of allClients) {
+    client.postMessage({ type: 'REQUEST_OFFLINE_ATTEMPTS' });
+    // clients will respond with postMessage containing attempts which the SW can send to server.
+  }
+}
+
+self.addEventListener('message', event => {
+  // handle messages from pages (e.g. "UPDATE_AVAILABLE")
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });

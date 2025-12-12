@@ -89,7 +89,8 @@ canvas { width:100%; margin-bottom:20px; border-radius: 10px; border:1px solid #
         <label><input type="checkbox"> I accept tracking of progress metrics.</label><br>
         <label><input type="checkbox"> I understand the actions may be audited.</label><br><br>
 
-        <span><button id="installAppBtn" style="display:none; background:#007bff; color:rgb(76, 39, 39); padding:10px 18px; border-radius:10px; border:none; cursor:pointer;"> Install Quizzone App </button></span>
+        <span>
+            <button id="installAppBtn" style="display:none; background:#007bff; color:rgb(76, 39, 39); padding:10px 18px; border-radius:10px; border:none; cursor:pointer;"> Install Quizzone App </button></span>
     </div>
 
     <div class="progressBar"><div class="progressFill"></div></div>
@@ -175,9 +176,9 @@ document.querySelectorAll("#termsArea input").forEach(ch=>{
 function checkTermState(){
     let allChecked = [...document.querySelectorAll("#termsArea input")].every(c=>c.checked);
     if(allChecked){
-        document.getElementById("downloadBtn").style.display="inline-block";
+        document.getElementById("installAppBtn").style.display="inline-block";
     } else {
-        document.getElementById("downloadBtn").style.display="none";
+        document.getElementById("installAppBtn").style.display="none";
     }
 }
 

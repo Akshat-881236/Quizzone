@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzone | Download App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body {
+    margin: 0;
+    background: #eef3ff;
+    font-family: "Segoe UI", Arial;
+}
+.wrapper{
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+h2{ color:#007bff; text-align:center; }
+canvas { width:100%; margin-bottom:20px; border-radius: 10px; border:1px solid #ccc; }
+
+#timerBox{
+    font-size:22px;
+    font-weight:bold;
+    color:#d00;
+    text-align:center;
+    margin:20px 0;
+}
+
+#termsArea{
+    display:none;
+    margin-top:20px;
+}
+
+#downloadBtn{
+    display:none;
+    padding:12px 20px;
+    background:#007bff;
+    color:#fff;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+}
+#downloadBtn:hover{ background:#005fcc; }
+
+.progressBar{
+    width:100%;
+    background:#d5dcff;
+    height:10px;
+    margin-top:20px;
+    border-radius:8px;
+    overflow:hidden;
+    display:none;
+}
+.progressFill{
+    width:0%;
+    height:100%;
+    background:#007bff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <h2>📄 You Must Read This Document Before Downloading the App</h2>
+
+    <div id="timerBox">Reading Time Left: 180s</div>
+
+    <div id="pdfPages"></div>
+
+    <div id="termsArea">
+        <h3>✔ Agree to Proceed</h3>
+
+        <label><input type="checkbox"> I understand this document is official.</label><br>
+        <label><input type="checkbox"> I agree to provide accurate personal details.</label><br>
+        <label><input type="checkbox"> I accept Quizzone's privacy policy.</label><br>
+        <label><input type="checkbox"> I acknowledge academic integrity obligations.</label><br>
+        <label><input type="checkbox"> I agree not to misuse the platform.</label><br>
+        <label><input type="checkbox"> I accept tracking of progress metrics.</label><br>
+        <label><input type="checkbox"> I understand the actions may be audited.</label><br><br>
+
+        <span><button id="installAppBtn" style="display:none; background:#007bff; color:rgb(76, 39, 39); padding:10px 18px; border-radius:10px; border:none; cursor:pointer;"> Install Quizzone App </button></span>
+    </div>
+
+    <div class="progressBar"><div class="progressFill"></div></div>
+
+</div>
+
+<script>
+const pdfURL = "/Quizzone/Documentary/Quizzone_owner_message.pdf";
+
+// ------------------ USER OR GUEST ------------------
+let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser")) || {
+    username:"Guest User",
+    email:"guest@quizzone.com",
+    contact:"N/A"
+};
+
+// ------------------ LOAD PDF MULTI-PAGE ------------------
+pdfjsLib.getDocument(pdfURL).promise.then(async pdf => {
+    let totalPages = pdf.numPages;
+
+    for(let p=1; p<=totalPages; p++){
+        let page = await pdf.getPage(p);
+        let viewport = page.getViewport({ scale:1.3 });
+
+        let canvas = document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        document.getElementById("pdfPages").appendChild(canvas);
+
+        await page.render({ canvasContext:ctx, viewport }).promise;
+
+        drawWatermark(ctx, canvas, p);
+    }
+});
+
+// ------------------ DRAW WATERMARK ------------------
+function drawWatermark(ctx, canvas, pageNum){
+    ctx.save();
+    ctx.font = "bold 28px Segoe UI";
+    ctx.fillStyle = "rgba(0,0,255,0.15)";
+    ctx.translate(canvas.width/2,canvas.height/2);
+    ctx.rotate(-0.4);
+    ctx.textAlign="center";
+    ctx.fillText("Quizzone • Official Document",0,0);
+    ctx.restore();
+
+    ctx.font="bold 16px Segoe UI";
+    ctx.fillStyle="rgba(255,0,0,0.55)";
+    ctx.fillText(`User: ${user.username}`,20,40);
+    ctx.fillText(`Email: ${user.email}`,20,65);
+    ctx.fillText(`Contact: ${user.contact}`,20,90);
+
+    const code = pageNum.toString().padStart(3,"0");
+    ctx.fillStyle="rgba(0,0,0,0.6)";
+    ctx.font="bold 14px Segoe UI";
+    ctx.fillText(`©Quizzone-${user.email}-${code}`,20,canvas.height-25);
+}
+
+// ------------------ TIMER ------------------
+let timeLeft = 180;
+let timer = setInterval(()=>{
+    timeLeft--;
+    document.getElementById("timerBox").innerText = `Reading Time Left: ${timeLeft}s`;
+    if(timeLeft <= 0){
+        clearInterval(timer);
+        unlockTerms();
+    }
+},1000);
+
+function unlockTerms(){
+    document.getElementById("timerBox").innerHTML = "Reading Completed ✔";
+    document.getElementById("termsArea").style.display="block";
+    checkTermState();
+}
+
+document.querySelectorAll("#termsArea input").forEach(ch=>{
+    ch.onchange = checkTermState;
+});
+
+function checkTermState(){
+    let allChecked = [...document.querySelectorAll("#termsArea input")].every(c=>c.checked);
+    if(allChecked){
+        document.getElementById("downloadBtn").style.display="inline-block";
+    } else {
+        document.getElementById("downloadBtn").style.display="none";
+    }
+}
+
+// ------------------ DOWNLOAD FUNCTION ------------------
+async function startDownload(){
+    document.querySelector(".progressBar").style.display="block";
+
+    let pdf = new jspdf.jsPDF({ unit:'px', format:'a4' });
+
+    let canvases = document.querySelectorAll("#pdfPages canvas");
+
+    let idx = 0;
+    let total = canvases.length;
+
+    for(let canvas of canvases){
+        let img = canvas.toDataURL("image/png");
+        if(idx!==0) pdf.addPage();
+        pdf.addImage(img,"PNG",10,10,575,820);
+
+        idx++;
+        let percent = Math.round((idx/total)*100);
+        document.querySelector(".progressFill").style.width = percent+"%";
+    }
+
+    pdf.save("Quizzone_Install_Document.pdf");
+}
+</script>
+
+</body>
+</html>

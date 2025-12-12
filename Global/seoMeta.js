@@ -76,4 +76,10 @@
     // Set document title
     document.title = pageTitle;
 
+    fetch(window.location.href)
+  .then(res => {
+    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
+  })
+  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
+
 })();

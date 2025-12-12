@@ -6,6 +6,7 @@ const ASSETS_TO_CACHE = [
   "/Quizzone/Home/SignUp.htm",
   "/Quizzone/Home/Setting.htm",
   "/Quizzone/Home/Progress.htm",
+  "/Quizzone/Home/Download.htm",
   "/Quizzone/Global/footer.htm",
   "/Quizzone/Global/navbar.htm",
   "/Quizzone/Global/loader.js",
@@ -117,4 +118,8 @@ self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
+});
+
+self.addEventListener("message", event => {
+  if (event.data.action === "skipWaiting") self.skipWaiting();
 });

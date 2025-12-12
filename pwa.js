@@ -193,8 +193,31 @@ if ("serviceWorker" in navigator) {
 
 // Redirect to custom 404 page
 fetch(window.location.href).then(resp => {
-    if (!resp.ok) window.location.href = "/Quizzone/404/404.html";
+    if (!resp.ok) window.location.href = "/Quizzone/Errors/404.html";
 });
+
+let newWorker;
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/Quizzone/pwa-sw.js')
+    .then(reg => {
+      reg.addEventListener('updatefound', () => {
+        newWorker = reg.installing;
+
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdatePopup(); // Trigger your UI to notify user
+          }
+        });
+      });
+    });
+}
+
+function updateApp() {
+  if (newWorker) newWorker.postMessage({ action: 'skipWaiting' });
+  window.location.reload();
+}
+
 
 // Install Button Enable
 let installPrompt;

@@ -272,11 +272,11 @@ function goto(page) {
             break;
 
         case "Progress":
-            window.location.href = "/Progress.htm";
+            window.location.href = "/Quizzone/Home/Progress.htm";
             break;
 
         case "Settings":
-            window.location.href = "/Setting.htm";
+            window.location.href = "/Quizzone/Home/Setting.htm";
             break;
 
         case "AboutUs":
@@ -293,7 +293,7 @@ function goto(page) {
 -------------------------------------------------- */
 function logout() {
     localStorage.removeItem("ActiveQuizzoneUser");
-    window.location.href = "index.htm";
+    window.location.href = "/Quizzone/Home/SignIn.htm";
 }
 
 fetch(window.location.href)

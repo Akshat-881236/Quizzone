@@ -18,6 +18,7 @@ function goDashboard(){ window.location.href = "/Quizzone/Home/Dashboard.htm"; }
 function goDisciplines(){ window.location.href = "/Quizzone/Disciplines/index.htm"; }
 function goCompetency(){ window.location.href = "/Quizzone/CompetancyTest/index.htm"; }
 function goSettings(){ window.location.href = "/Quizzone/Home/Setting.htm"; }
+function goDownload(){ window.location.href = "/Quizzone/Home/Download.htm"; }
 
 function logout(){
     localStorage.removeItem("ActiveQuizzoneUser");
@@ -29,3 +30,7 @@ fetch(window.location.href)
     if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
   })
   .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
+
+  function showUpdatePopup() {
+  document.getElementById("updatePopup").style.display = "block";
+}

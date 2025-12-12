@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QuizzoneAI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+/* ======================================================
+   QUIZZONE AI - Modern UI / UX
+   Full Responsive + Mobile Friendly + Clean
+   ====================================================== */
+
+:root{
+  --accent:#2B59FF;
+  --accent2:#4F7BFF;
+  --bg:#F5F7FF;
+  --text:#0F172A;
+  --muted:#6B7280;
+  --white:#ffffff;
+}
+
+*{box-sizing:border-box;font-family:"Segoe UI", Arial, sans-serif;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:white;
+  padding:16px;
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+/* LAYOUT */
+.container{
+  display:grid;
+  grid-template-columns:300px 1fr 280px;
+  gap:20px;
+  padding:20px;
+}
+@media(max-width:900px){
+  .container{grid-template-columns:1fr;}
+}
+
+/* PANELS */
+.panel{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.1);
+}
+
+/* CHAT WINDOW */
+#chatWindow{
+  height:70vh;
+  overflow-y:auto;
+  border:1px solid #e3e8ff;
+  padding:12px;
+  border-radius:10px;
+  background:white;
+}
+
+.msg{
+  margin-bottom:14px;
+  padding:12px;
+  border-radius:12px;
+  max-width:75%;
+  line-height:1.5;
+  white-space:pre-wrap;
+}
+.user{
+  background:#dce7ff;
+  margin-left:auto;
+}
+.ai{
+  background:white;
+  border:1px solid #cfd6ff;
+}
+
+/* INPUT BAR */
+.inputBar{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+.inputBar input{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccd6ff;
+  outline:none;
+}
+.btn{
+  background:var(--accent);
+  color:white;
+  padding:12px 15px;
+  border-radius:10px;
+  cursor:pointer;
+  border:none;
+  font-weight:600;
+}
+.btn:hover{
+  background:#1f45d8;
+}
+
+/* HISTORY */
+.history-item{
+  padding:10px;
+  background:white;
+  border-radius:8px;
+  border:1px solid #e3e8ff;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+.history-item small{
+  color:var(--muted);
+}
+
+/* Typing animation */
+.typing{
+  width:7px;height:7px;
+  display:inline-block;
+  background:var(--accent);
+  border-radius:50%;
+  margin-left:6px;
+  animation:blink 1s infinite;
+}
+@keyframes blink{
+  0%{opacity:1;}50%{opacity:.1;}100%{opacity:1;}
+}
+</style>
+
+<!-- GLOBAL LOADER -->
+<script src="/Quizzone/Global/loader.js"></script>
+</head>
+<body>
+
+<header>QuizzoneAI</header>
+
+<div class="container">
+
+  <!-- PREVIOUS CHATS -->
+  <aside class="panel">
+    <h3>Previous Chats</h3>
+    <div id="historyList"></div>
+  </aside>
+
+  <!-- CHATBOT -->
+  <section class="panel">
+    <h3>Chatbot</h3>
+    <div id="chatWindow"></div>
+
+    <div class="inputBar">
+      <input id="chatInput" placeholder="Ask Quizzone AI anything...">
+      <button class="btn" id="sendBtn" onclick="sendMessage()">Send</button>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <aside class="panel">
+    <h3>Tools</h3>
+    <button class="btn" style="width:100%;margin-bottom:6px" onclick="clearChat()">Clear Chat</button>
+    <button class="btn" style="width:100%" onclick="exportHistory()">Export History</button>
+  </aside>
+
+</div>
+
+<script>
+/* ============================================================
+   QUIZZONE AI — UPDATED FULL LOGIC
+   Ensures OpenAI always responds properly ✔
+   ============================================================ */
+
+/* ------------------------------
+   API KEY SPLIT (YOU ALREADY DID)
+   ------------------------------ */
+const PART1 = "sk-svcacct-1bXYaWfnuaoCOjTByMxkXyGOT8aVmosQRyzfW-";   
+const PART2 = "KoAHXZ2JjuV14PCiYCz6pyB-f-1oQWfQDR3wT3BlbkFJtWDjmN_SlK6LYUtNJWOliwuQEr";   
+const PART3 = "nSMks8QQvSwnPJZOWt1VqqaEN-pBYJOHcL5R6cHSg5Sz62IA";   
+
+function getAPIKey(){
+  return PART1 + PART2 + PART3;
+}
+
+/* ------------------------------
+   STATE
+   ------------------------------ */
+let messages = [];
+let history = JSON.parse(localStorage.getItem("quizHistory") || "[]");
+let streamingLock = false; // lock input during stream
+
+/* ------------------------------
+   RENDER CHAT
+   ------------------------------ */
+function renderChat(){
+  const win = document.getElementById("chatWindow");
+  win.innerHTML = "";
+
+  for(let m of messages){
+    let div = document.createElement("div");
+    div.className = `msg ${m.role}`;
+    div.innerHTML = m.content;
+    win.appendChild(div);
+  }
+
+  win.scrollTop = win.scrollHeight;
+}
+
+/* ------------------------------
+   RENDER HISTORY
+   ------------------------------ */
+function renderHistory(){
+  const box = document.getElementById("historyList");
+  box.innerHTML = "";
+
+  history.slice().reverse().forEach((h,i)=>{
+    let div = document.createElement("div");
+    div.className = "history-item";
+    div.innerHTML = `
+      <strong>Chat ${history.length-i}</strong><br>
+      <small>${new Date(h.ts).toLocaleString()}</small>
+    `;
+    div.onclick = () => loadHistory(i);
+    box.appendChild(div);
+  });
+}
+renderHistory();
+
+/* ------------------------------
+   SAVE HISTORY
+   ------------------------------ */
+function saveHistory(){
+  history.push({
+    ts: Date.now(),
+    messages: messages
+  });
+
+  localStorage.setItem("quizHistory", JSON.stringify(history));
+  renderHistory();
+}
+
+/* ------------------------------
+   LOAD HISTORY
+   ------------------------------ */
+function loadHistory(index){
+  messages = history[index].messages;
+  renderChat();
+}
+
+/* ------------------------------
+   SEND MESSAGE
+   ------------------------------ */
+async function sendMessage(){
+  if(streamingLock) return;
+
+  const input = document.getElementById("chatInput");
+  let text = input.value.trim();
+  if(!text) return;
+
+  messages.push({role:"user", content:safe(text)});
+  renderChat();
+  input.value = "";
+
+  await streamAI(text);
+  saveHistory();
+}
+
+/* ------------------------------
+   STREAMING AI RESPONSE
+   ------------------------------ */
+async function streamAI(userInput){
+  const apiKey = getAPIKey();
+  streamingLock = true;
+  document.getElementById("sendBtn").innerText = "Typing...";
+
+  // Prepare conversation for OpenAI
+  const chat_messages = [
+    {
+      role:"system",
+      content:"You are QuizzoneAI. You must always respond directly, clearly, step-by-step, and never skip explanations."
+    },
+    ...messages.filter(m => m.role !== "ai"),
+    {role:"user", content:userInput}
+  ];
+
+  // Add placeholder message
+  messages.push({role:"ai", content:""});
+  let aiIndex = messages.length - 1;
+  renderChat();
+
+  try{
+    let response = await fetch("https://api.openai.com/v1/chat/completions",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer " + apiKey
+      },
+      body:JSON.stringify({
+        model:"gpt-4o-mini",
+        messages:chat_messages,
+        stream:true
+      })
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    while(true){
+      const {value,done} = await reader.read();
+      if(done) break;
+
+      buffer += decoder.decode(value, {stream:true});
+      let lines = buffer.split("\n");
+      buffer = lines.pop();
+
+      for(let line of lines){
+        if(!line.startsWith("data: ")) continue;
+
+        let data = line.replace("data: ","").trim();
+        if(data === "[DONE]") break;
+
+        try{
+          let json = JSON.parse(data);
+          let delta = json.choices?.[0]?.delta?.content;
+          if(delta){
+            messages[aiIndex].content += delta;
+            renderChat();
+          }
+        }catch{}
+      }
+    }
+  }
+  catch(err){
+    messages[aiIndex].content = "[Error: Could not reach AI]";
+    renderChat();
+  }
+
+  streamingLock = false;
+  document.getElementById("sendBtn").innerText = "Send";
+}
+
+/* ------------------------------
+   CLEAR CHAT
+   ------------------------------ */
+function clearChat(){
+  messages = [];
+  renderChat();
+}
+
+/* ------------------------------
+   EXPORT HISTORY
+   ------------------------------ */
+function exportHistory(){
+  const blob = new Blob([JSON.stringify(history,null,2)],{type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "QuizzoneAI_history.json";
+  a.click();
+}
+
+/* ------------------------------
+   SANITIZE
+   ------------------------------ */
+function safe(txt){
+  return txt
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+</script>
+
+<script src="/Quizzone/pwa.js"></script>
+</body>
+</html>

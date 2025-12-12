@@ -1,5 +1,4 @@
 const CACHE_NAME = 'quizzone-shell-v1';
-const OFFLINE_URL = "/Quizzone/offline.htm";
 const ASSETS_TO_CACHE = [
   "/Quizzone/index.htm",
   "/Quizzone/Home/SignIn.htm",
@@ -7,6 +6,7 @@ const ASSETS_TO_CACHE = [
   "/Quizzone/Home/Setting.htm",
   "/Quizzone/Home/Progress.htm",
   "/Quizzone/Home/Download.htm",
+  "/Quizzone/Home/QuizzoneAI.htm",
   "/Quizzone/Global/footer.htm",
   "/Quizzone/Global/navbar.htm",
   "/Quizzone/Global/loader.js",
@@ -79,19 +79,19 @@ self.addEventListener('fetch', (e) => {
 
 // PUSH event (client receives push — server required)
 self.addEventListener('push', (event) => {
-  let data = { title: 'Quizzone', body: 'New notification', url: '/Quizzone/index.html' };
+  let data = { title: 'Quizzone', body: 'New notification', url: '/Quizzone/Home/index.html' };
   try { data = event.data.json(); } catch (e) {}
   const options = {
     body: data.body,
-    icon: '/Quizzone/icons/icon-192.png',
-    data: { url: data.url || '/Quizzone/index.html' }
+    icon: '/Quizzone/Assets/icons/icon-192.png',
+    data: { url: data.url || '/Quizzone/Home/index.html' }
   };
   event.waitUntil(self.registration.showNotification(data.title, options));
 });
 
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
-  const url = event.notification.data && event.notification.data.url ? event.notification.data.url : '/Quizzone/index.html';
+  const url = event.notification.data && event.notification.data.url ? event.notification.data.url : '/Quizzone/Home/index.html';
   event.waitUntil(clients.openWindow(url));
 });
 
@@ -118,8 +118,4 @@ self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
-});
-
-self.addEventListener("message", event => {
-  if (event.data.action === "skipWaiting") self.skipWaiting();
 });

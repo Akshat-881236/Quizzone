@@ -1,6 +1,6 @@
 // pwa.js — register SW, handle install prompt, update popup, push subscription, offline sync queue
 (function(){
-  const swPath = '/Quizzone/sw.js';
+  const swPath = '/Quizzone/service-worker.js';
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register(swPath).then(reg => {
       console.log('SW registered', reg);
@@ -151,33 +151,6 @@
     });
   }
 
-  /* -------------------------------
-   SHOW OWNER PDF ONCE AFTER INSTALL / UPDATE
---------------------------------*/
-const PDF_SHOWN_KEY = "quizzone_owner_message_seen";
-
-function showOwnerPDF() {
-    if (!localStorage.getItem(PDF_SHOWN_KEY)) {
-        window.location.href = "/Quizzone/Documentary/OwnerMessageViewer.html";
-        localStorage.setItem(PDF_SHOWN_KEY, "true");
-    }
-}
-
-/* Detect install event */
-window.addEventListener("appinstalled", () => {
-    showOwnerPDF();
-});
-
-/* Detect service worker update */
-navigator.serviceWorker?.addEventListener("controllerchange", () => {
-    showOwnerPDF();
-});
-
-/* Optional: Trigger on first dashboard visit */
-if (location.pathname.includes("Dashboard.html")) {
-    setTimeout(showOwnerPDF, 1500);
-}
-
   // Expose functions to window for usage
   window.QuizzonePWA = {
     subscribeToPush,
@@ -185,51 +158,3 @@ if (location.pathname.includes("Dashboard.html")) {
     attemptFlushQueue
   };
 })();
-
-// Register Service Worker
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/Quizzone/service-worker.js");
-}
-
-// Redirect to custom 404 page
-fetch(window.location.href).then(resp => {
-    if (!resp.ok) window.location.href = "/Quizzone/Errors/404.html";
-});
-
-let newWorker;
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/Quizzone/pwa-sw.js')
-    .then(reg => {
-      reg.addEventListener('updatefound', () => {
-        newWorker = reg.installing;
-
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            showUpdatePopup(); // Trigger your UI to notify user
-          }
-        });
-      });
-    });
-}
-
-function updateApp() {
-  if (newWorker) newWorker.postMessage({ action: 'skipWaiting' });
-  window.location.reload();
-}
-
-
-// Install Button Enable
-let installPrompt;
-window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    installPrompt = e;
-
-    let btn = document.getElementById("installAppBtn");
-    if (btn) btn.style.display = "inline-block";
-
-    btn.onclick = () => {
-        installPrompt.prompt();
-        installPrompt.userChoice.then(() => installPrompt = null);
-    };
-});

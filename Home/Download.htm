@@ -64,6 +64,8 @@ canvas { width:100%; margin-bottom:20px; border-radius: 10px; border:1px solid #
     background:#007bff;
 }
 </style>
+<link rel="manifest" href="/Quizzone/manifest.json">
+<meta name="theme-color" content="#007bff">
 </head>
 
 <body>
@@ -95,7 +97,7 @@ canvas { width:100%; margin-bottom:20px; border-radius: 10px; border:1px solid #
 </div>
 
 <script>
-const pdfURL = "/Quizzone/Documentary/Quizzone_owner_message.pdf";
+const pdfURL = "/Quizzone/Documentary/Quizzone_Owner_Message.pdf";
 
 // ------------------ USER OR GUEST ------------------
 let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser")) || {
@@ -203,6 +205,6 @@ async function startDownload(){
     pdf.save("Quizzone_Install_Document.pdf");
 }
 </script>
-
+<script src="/Quizzone/pwa.js"></script>
 </body>
 </html>

@@ -166,6 +166,36 @@ iframe{
 let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
 if(!user) location.href="/Quizzone/Home/SignIn.htm";
 
+/* ------------------------------------
+   MY WEBSITES / PROJECT KNOWLEDGE BASE
+------------------------------------- */
+const MY_SITES = [
+  {
+    name: "Quizzone Platform",
+    url: "/Quizzone/index.htm",
+    tags: ["quizzone", "quiz", "learning", "platform"],
+    description: "Quizzone is a multi-discipline learning and assessment platform with blogs, quizzes, competency tests, analytics, PWA support and offline mode."
+  },
+  {
+    name: "QuizzoneAI",
+    url: "/Quizzone/Home/QuizzoneAI.htm",
+    tags: ["ai", "chatbot", "assistant"],
+    description: "QuizzoneAI is an advanced AI assistant with code execution, preview system, offline chat history and SPA-based UI."
+  },
+  {
+    name: "Dashboard",
+    url: "/Quizzone/Home/Dashboard.htm",
+    tags: ["dashboard", "progress", "analytics"],
+    description: "Personal dashboard showing blog progress, quiz scores, competency records and charts."
+  },
+  {
+    name: "Portfolio",
+    url: "https://akshat-881236.github.io/Portfolio-881236/",
+    tags: ["portfolio", "profile", "about"],
+    description: "Personal developer portfolio showcasing projects, skills and achievements."
+  }
+];
+
 /* OFFLINE */
 if(!navigator.onLine){
   document.getElementById("offlineBanner").innerHTML =
@@ -195,6 +225,48 @@ function renderChat(){
   });
   w.scrollTop=w.scrollHeight;
 }
+
+/* ------------------------------------
+   NLP INTENT DETECTION
+------------------------------------- */
+function detectLocalIntent(query){
+  query = query.toLowerCase();
+
+  const intentKeywords = [
+    "my website", "my sites", "my projects",
+    "show quizzone", "open quizzone",
+    "my portfolio", "my dashboard",
+    "my ai", "quizzone ai"
+  ];
+
+  return intentKeywords.some(k => query.includes(k));
+}
+
+/* ------------------------------------
+   LOCAL AI RESPONSE (NO OPENAI)
+------------------------------------- */
+function generateLocalAIResponse(query){
+  let matched = MY_SITES.filter(site =>
+    site.tags.some(tag => query.toLowerCase().includes(tag))
+  );
+
+  if(matched.length === 0) matched = MY_SITES;
+
+  let html = `<b>Here are your relevant platforms:</b><br><br>`;
+
+  matched.forEach(site => {
+    html += `
+      <div class="codeBox">
+        <b>${site.name}</b><br>
+        <small>${site.description}</small><br><br>
+        🔗 <a href="#" onclick="openPreview('${site.url}')">${site.url}</a>
+      </div>
+    `;
+  });
+
+  return html;
+}
+
 
 /* PARSE MESSAGE */
 function parseMessage(txt){
@@ -245,6 +317,24 @@ renderHistory();
 
 /* SEND MESSAGE */
 async function sendMessage(){
+  let t = chatInput.value.trim();
+  if(!t) return;
+
+  messages.push({role:"user",content:t});
+  renderChat();
+  chatInput.value="";
+
+  /* ---- LOCAL NLP CHECK ---- */
+  if(detectLocalIntent(t)){
+    messages.push({
+      role:"ai",
+      content: generateLocalAIResponse(t)
+    });
+    renderChat();
+    save();
+    return; // ⛔ STOP OpenAI call
+  }
+
   if(streaming) return;
   const input=document.getElementById("chatInput");
   const text=input.value.trim();

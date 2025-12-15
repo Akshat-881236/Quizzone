@@ -206,6 +206,7 @@ body {
     <button onclick="goto('Competency')">Competency Tests</button>
     <button onclick="goto('Progress')">Progress Overview</button>
     <button onclick="goto('Settings')">Account Settings</button>
+    <button onclick="goto('Chat with AI')">Chat with AI</button>
     <button onclick="goto('AboutUs')">About Us</button>
      </div>
 
@@ -277,6 +278,10 @@ function goto(page) {
 
         case "Settings":
             window.location.href = "/Quizzone/Home/Setting.htm";
+            break;
+
+        case "Chat with AI":
+            window.location.href = "/Quizzone/Home/QuizzoneAI.htm";
             break;
 
         case "AboutUs":

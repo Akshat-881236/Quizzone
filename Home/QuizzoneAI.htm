@@ -13,33 +13,25 @@
   --text:#0F172A;
   --muted:#6B7280;
 }
-
 *{box-sizing:border-box;font-family:"Segoe UI",Arial}
 body{margin:0;background:var(--bg);color:var(--text)}
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:#fff;
-  padding:14px;
-  text-align:center;
-  font-size:22px;
-  font-weight:700;
+  color:#fff;padding:14px;
+  text-align:center;font-size:22px;font-weight:700;
   position:sticky;top:0;z-index:10;
 }
 
-/* LAYOUT */
 .container{
   display:grid;
-  grid-template-columns:280px 1fr 300px;
-  gap:18px;
-  padding:18px;
+  grid-template-columns:260px 1fr 320px;
+  gap:16px;padding:16px;
 }
 @media(max-width:900px){
   .container{grid-template-columns:1fr}
 }
 
-/* PANELS */
 .panel{
   background:#fff;
   padding:14px;
@@ -47,105 +39,92 @@ header{
   box-shadow:0 4px 14px rgba(0,0,0,.1);
 }
 
-/* SIDEBAR */
-#historyList{max-height:65vh;overflow-y:auto}
+/* HISTORY */
+.history-item{
+  background:#f1f4ff;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+}
+.history-actions button{
+  background:none;border:none;cursor:pointer;
+}
 
 /* CHAT */
 #chatWindow{
-  height:65vh;
-  overflow-y:auto;
+  height:60vh;overflow-y:auto;
   border:1px solid #e3e8ff;
-  padding:12px;
-  border-radius:10px;
+  padding:10px;border-radius:10px;
 }
 .msg{
   margin-bottom:14px;
-  padding:12px;
-  border-radius:12px;
-  max-width:80%;
+  padding:10px;border-radius:12px;
+  max-width:80%;position:relative;
   white-space:pre-wrap;
 }
 .user{background:#dce7ff;margin-left:auto}
 .ai{background:#fff;border:1px solid #cfd6ff}
 
-/* INPUT */
-.inputBar{display:flex;gap:10px;margin-top:10px}
-input{
-  flex:1;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #ccd6ff;
+.msg-tools{
+  position:absolute;top:-8px;right:6px;
+  display:flex;gap:5px;
 }
+.msg-tools button{
+  font-size:11px;border:none;
+  background:#eef2ff;cursor:pointer;
+}
+
+.inputBar{display:flex;gap:8px;margin-top:8px}
+input{flex:1;padding:10px;border-radius:10px;border:1px solid #ccd6ff}
 .btn{
-  background:var(--accent);
-  color:#fff;
-  padding:12px 14px;
-  border-radius:10px;
-  border:none;
+  background:var(--accent);color:#fff;
+  padding:10px;border:none;border-radius:10px;
   cursor:pointer;
 }
-.btn:hover{background:#1f45d8}
 
-/* CODE CONTAINER */
+/* CODE */
 .codeBox{
-  background:#0f172a;
-  color:#e5e7eb;
-  padding:12px;
-  border-radius:10px;
-  margin-top:10px;
-  position:relative;
-  font-family:monospace;
+  background:#0f172a;color:#e5e7eb;
+  padding:12px;border-radius:10px;
+  margin-top:10px;position:relative;
 }
 .codeTools{
-  position:absolute;
-  top:6px;
-  right:6px;
+  position:absolute;top:6px;right:6px;
 }
 .codeTools button{
-  font-size:11px;
-  margin-left:4px;
-  cursor:pointer;
+  font-size:11px;margin-left:4px;cursor:pointer;
 }
 
 /* PREVIEW */
 iframe{
-  width:100%;
-  height:60vh;
-  border:1px solid #ccd6ff;
-  border-radius:10px;
-}
-
-/* OFFLINE */
-.offline{
-  background:#ffebee;
-  color:#b71c1c;
-  padding:6px;
-  text-align:center;
-  font-size:13px;
-  border-radius:8px;
-  margin-bottom:6px;
+  width:100%;height:60vh;
+  border:1px solid #ccd6ff;border-radius:10px;
 }
 </style>
-
 <script src="/Quizzone/Global/loader.js"></script>
 </head>
 
 <body>
-
 <header>QuizzoneAI</header>
 
 <div class="container">
 
-<!-- SIDEBAR -->
+<!-- HISTORY -->
 <aside class="panel">
-  <h3>History</h3>
-  <div id="offlineBanner"></div>
+  <h3>Chats</h3>
+  <button class="btn" onclick="newChat()">+ New Chat</button>
   <div id="historyList"></div>
 </aside>
 
 <!-- CHAT -->
 <section class="panel">
   <h3>Chat</h3>
+
+  <div id="intro"></div>
+
   <div id="chatWindow"></div>
   <div class="inputBar">
     <input id="chatInput" placeholder="Ask Quizzone AI...">
@@ -162,200 +141,187 @@ iframe{
 </div>
 
 <script>
-/* LOGIN */
-let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
-if(!user) location.href="/Quizzone/Home/SignIn.htm";
-
-/* ------------------------------------
-   MY WEBSITES / PROJECT KNOWLEDGE BASE
-------------------------------------- */
-const MY_SITES = [
-  {
-    name: "Quizzone Platform",
-    url: "/Quizzone/index.htm",
-    tags: ["quizzone", "quiz", "learning", "platform"],
-    description: "Quizzone is a multi-discipline learning and assessment platform with blogs, quizzes, competency tests, analytics, PWA support and offline mode."
-  },
-  {
-    name: "QuizzoneAI",
-    url: "/Quizzone/Home/QuizzoneAI.htm",
-    tags: ["ai", "chatbot", "assistant"],
-    description: "QuizzoneAI is an advanced AI assistant with code execution, preview system, offline chat history and SPA-based UI."
-  },
-  {
-    name: "Dashboard",
-    url: "/Quizzone/Home/Dashboard.htm",
-    tags: ["dashboard", "progress", "analytics"],
-    description: "Personal dashboard showing blog progress, quiz scores, competency records and charts."
-  },
-  {
-    name: "Portfolio",
-    url: "https://akshat-881236.github.io/Portfolio-881236/",
-    tags: ["portfolio", "profile", "about"],
-    description: "Personal developer portfolio showcasing projects, skills and achievements."
-  }
-];
-
-/* OFFLINE */
-if(!navigator.onLine){
-  document.getElementById("offlineBanner").innerHTML =
-    '<div class="offline">Offline Mode Active</div>';
-}
-
-/* API KEY (UNCHANGED) */
+/* ===============================
+   API KEY (UNCHANGED)
+================================ */
 const PART1="sk-svcacct-1bXYaWfnuaoCOjTByMxkXyGOT8aVmosQRyzfW-";
 const PART2="KoAHXZ2JjuV14PCiYCz6pyB-f-1oQWfQDR3wT3BlbkFJtWDjmN_SlK6LYUtNJWOliwuQEr";
 const PART3="nSMks8QQvSwnPJZOWt1VqqaEN-pBYJOHcL5R6cHSg5Sz62IA";
 const getAPIKey=()=>PART1+PART2+PART3;
 
-/* STATE */
+/* ===============================
+   STATE
+================================ */
+let chats=JSON.parse(localStorage.getItem("quizChats")||"[]");
+let activeChat=null;
 let messages=[];
-let history=JSON.parse(localStorage.getItem("quizHistory")||"[]");
 let streaming=false;
+const codeVersions={};
 
-/* RENDER CHAT */
+/* ===============================
+   INTRO PROMPTS
+================================ */
+const introQ=[
+ "Explain step by step",
+ "Generate MCQs",
+ "Create revision notes",
+ "Give real-world example",
+ "Make a quiz"
+];
+const introDiv=document.getElementById("intro");
+introQ.forEach(q=>{
+  const b=document.createElement("button");
+  b.className="btn";b.innerText=q;
+  b.onclick=()=>chatInput.value=q;
+  introDiv.appendChild(b);
+});
+
+/* ===============================
+   CHAT HISTORY
+================================ */
+function saveChats(){
+  localStorage.setItem("quizChats",JSON.stringify(chats));
+  renderHistory();
+}
+function newChat(){
+  const title=prompt("Chat title?");
+  if(!title) return;
+  const pass=prompt("Password (optional)");
+  const chat={
+    id:"c"+Date.now(),
+    title,
+    pass:pass?btoa(pass):null,
+    messages:[]
+  };
+  chats.push(chat);
+  saveChats();
+}
+function renderHistory(){
+  const h=document.getElementById("historyList");
+  h.innerHTML="";
+  chats.forEach(c=>{
+    const d=document.createElement("div");
+    d.className="history-item";
+    d.innerHTML=`
+      <span>${c.title}</span>
+      <div class="history-actions">
+        <button onclick="renameChat('${c.id}')">✏</button>
+        <button onclick="exportChat('${c.id}')">📤</button>
+        <button onclick="deleteChat('${c.id}')">🗑</button>
+      </div>`;
+    d.onclick=()=>openChat(c.id);
+    h.appendChild(d);
+  });
+}
+function openChat(id){
+  const c=chats.find(x=>x.id===id);
+  if(c.pass){
+    const p=prompt("Password?");
+    if(btoa(p)!==c.pass) return alert("Wrong password");
+  }
+  activeChat=c;
+  messages=c.messages;
+  renderChat();
+}
+function renameChat(id){
+  const c=chats.find(x=>x.id===id);
+  const n=prompt("New title",c.title);
+  if(n){c.title=n;saveChats();}
+}
+function deleteChat(id){
+  chats=chats.filter(x=>x.id!==id);
+  saveChats();
+}
+function exportChat(id){
+  const c=chats.find(x=>x.id===id);
+  const blob=new Blob([JSON.stringify(c,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=c.title+".json";a.click();
+}
+renderHistory();
+
+/* ===============================
+   CHAT RENDER
+================================ */
 function renderChat(){
   const w=document.getElementById("chatWindow");
   w.innerHTML="";
-  messages.forEach(m=>{
+  messages.forEach((m,i)=>{
     const d=document.createElement("div");
     d.className="msg "+m.role;
-    d.innerHTML=parseMessage(m.content);
+    d.innerHTML=`
+      ${parseMessage(m.content)}
+      <div class="msg-tools">
+        <button onclick="copyMsg(${i})">📋</button>
+        <button onclick="regenMsg(${i})">♻</button>
+        <button onclick="delMsg(${i})">🗑</button>
+      </div>`;
     w.appendChild(d);
   });
   w.scrollTop=w.scrollHeight;
 }
+function copyMsg(i){navigator.clipboard.writeText(messages[i].content);}
+function delMsg(i){messages.splice(i,1);renderChat();}
+function regenMsg(i){chatInput.value=messages[i-1]?.content||"";}
 
-/* ------------------------------------
-   NLP INTENT DETECTION
-------------------------------------- */
-function detectLocalIntent(query){
-  query = query.toLowerCase();
-
-  const intentKeywords = [
-    "my website", "my sites", "my projects",
-    "show quizzone", "open quizzone",
-    "my portfolio", "my dashboard",
-    "my ai", "quizzone ai"
-  ];
-
-  return intentKeywords.some(k => query.includes(k));
+/* ===============================
+   CODE BOX
+================================ */
+function parseMessage(t){
+  return t.replace(/```([\s\S]*?)```/g,(m,c)=>renderCode(c));
 }
-
-/* ------------------------------------
-   LOCAL AI RESPONSE (NO OPENAI)
-------------------------------------- */
-function generateLocalAIResponse(query){
-  let matched = MY_SITES.filter(site =>
-    site.tags.some(tag => query.toLowerCase().includes(tag))
-  );
-
-  if(matched.length === 0) matched = MY_SITES;
-
-  let html = `<b>Here are your relevant platforms:</b><br><br>`;
-
-  matched.forEach(site => {
-    html += `
-      <div class="codeBox">
-        <b>${site.name}</b><br>
-        <small>${site.description}</small><br><br>
-        🔗 <a href="#" onclick="openPreview('${site.url}')">${site.url}</a>
-      </div>
-    `;
-  });
-
-  return html;
-}
-
-
-/* PARSE MESSAGE */
-function parseMessage(txt){
-  return txt.replace(/```([\s\S]*?)```/g,(m,c)=>renderCode(c));
-}
-
-/* CODE BOX */
 function renderCode(code){
-  const id="c"+Math.random().toString(36).slice(2);
+  const id="code"+Date.now();
+  codeVersions[id]=[code];
   return `
 <div class="codeBox" id="${id}">
   <div class="codeTools">
     <button onclick="copyCode('${id}')">📋</button>
     <button onclick="runCode('${id}')">▶</button>
     <button onclick="editCode('${id}')">✏</button>
+    <button onclick="prevCode('${id}')">⏪</button>
   </div>
 <pre>${code.replace(/</g,"&lt;")}</pre>
 </div>`;
 }
 function copyCode(id){
   navigator.clipboard.writeText(
-    document.querySelector(`#${id} pre`).innerText
+    document.querySelector("#"+id+" pre").innerText
   );
 }
 function runCode(id){
-  document.getElementById("previewFrame").srcdoc =
-    document.querySelector(`#${id} pre`).innerText;
+  previewFrame.srcdoc=
+    document.querySelector("#"+id+" pre").innerText;
 }
 function editCode(id){
-  const pre=document.querySelector(`#${id} pre`);
-  pre.contentEditable=true;
-  pre.focus();
+  const p=document.querySelector("#"+id+" pre");
+  codeVersions[id].push(p.innerText);
+  p.contentEditable=true;p.focus();
+}
+function prevCode(id){
+  if(codeVersions[id].length>1){
+    codeVersions[id].pop();
+    document.querySelector("#"+id+" pre").innerText=
+      codeVersions[id][codeVersions[id].length-1];
+  }
 }
 
-/* HISTORY */
-function renderHistory(){
-  const h=document.getElementById("historyList");
-  h.innerHTML="";
-  history.slice().reverse().forEach((c,i)=>{
-    const d=document.createElement("div");
-    d.className="history-item";
-    d.innerText="Chat "+(history.length-i);
-    d.onclick=()=>{messages=c.messages;renderChat();}
-    h.appendChild(d);
-  });
-}
-renderHistory();
-
-/* SEND MESSAGE */
+/* ===============================
+   SEND MESSAGE
+================================ */
 async function sendMessage(){
-  let t = chatInput.value.trim();
-  if(!t) return;
+  if(!activeChat) return alert("Create or open a chat first");
+  const t=chatInput.value.trim();
+  if(!t||streaming) return;
 
   messages.push({role:"user",content:t});
-  renderChat();
-  chatInput.value="";
+  chatInput.value="";renderChat();
 
-  /* ---- LOCAL NLP CHECK ---- */
-  if(detectLocalIntent(t)){
-    messages.push({
-      role:"ai",
-      content: generateLocalAIResponse(t)
-    });
-    renderChat();
-    save();
-    return; // ⛔ STOP OpenAI call
-  }
+  const ai={role:"ai",content:""};
+  messages.push(ai);renderChat();
 
-  if(streaming) return;
-  const input=document.getElementById("chatInput");
-  const text=input.value.trim();
-  if(!text) return;
-
-  messages.push({role:"user",content:text});
-  input.value="";
-  renderChat();
-
-  if(!navigator.onLine){
-    messages.push({role:"ai",content:"⚠ Offline. Message saved."});
-    save();
-    return;
-  }
-
-  streaming=true;
-  document.getElementById("sendBtn").innerText="Typing…";
-
-  messages.push({role:"ai",content:""});
-  const aiIndex=messages.length-1;
-  renderChat();
+  streaming=true;sendBtn.innerText="Typing…";
 
   try{
     const res=await fetch("https://api.openai.com/v1/chat/completions",{
@@ -366,55 +332,20 @@ async function sendMessage(){
       },
       body:JSON.stringify({
         model:"gpt-4o-mini",
-        messages:[
-          {role:"system",content:"You are QuizzoneAI. Answer clearly with steps."},
-          ...messages.filter(m=>m.role!=="ai")
-        ],
-        stream:true
+        messages:messages.filter(m=>m.role!=="ai")
       })
     });
-
-    const reader=res.body.getReader();
-    const decoder=new TextDecoder();
-
-    while(true){
-      const {value,done}=await reader.read();
-      if(done) break;
-
-      const chunk=decoder.decode(value);
-      chunk.split("\n").forEach(line=>{
-        if(!line.startsWith("data:")) return;
-        const data=line.replace("data:","").trim();
-        if(data==="[DONE]") return;
-        try{
-          const json=JSON.parse(data);
-          const delta=json.choices?.[0]?.delta?.content;
-          if(delta){
-            messages[aiIndex].content+=delta;
-            renderChat();
-          }
-        }catch{}
-      });
-    }
-  }
-  catch{
-    messages[aiIndex].content="⚠ Error reaching AI.";
-    renderChat();
+    const j=await res.json();
+    ai.content=j.choices[0].message.content;
+  }catch{
+    ai.content="⚠ Error";
   }
 
-  streaming=false;
-  document.getElementById("sendBtn").innerText="Send";
-  save();
-}
-
-/* SAVE */
-function save(){
-  history.push({ts:Date.now(),messages:[...messages]});
-  localStorage.setItem("quizHistory",JSON.stringify(history));
-  renderHistory();
+  streaming=false;sendBtn.innerText="Send";
+  activeChat.messages=messages;
+  saveChats();renderChat();
 }
 </script>
-
 <script src="/Quizzone/pwa.js"></script>
 </body>
 </html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QuizzoneAI Workspace</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+/* ================= THEME ================= */
+:root{
+  --bg:#f4f7fb;
+  --panel:#ffffff;
+  --panel-soft:#f1f5ff;
+  --accent:#2563eb;
+  --accent-soft:#dbeafe;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e5e7eb;
+}
+[data-theme="dark"]{
+  --bg:#020617;
+  --panel:#0f172a;
+  --panel-soft:#020617;
+  --accent:#38bdf8;
+  --accent-soft:#0c4a6e;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --border:#1e293b;
+}
+
+*{box-sizing:border-box;font-family:"Segoe UI",Arial}
+body{
+  margin:0;
+  height:100vh;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ================= APP LAYOUT ================= */
+.app{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  height:100%;
+}
+
+/* ================= SIDEBAR ================= */
+aside.sidebar{
+  display:flex;
+  flex-direction:column;
+  background:var(--panel);
+  border-right:1px solid var(--border);
+}
+
+.sidebar header{
+  padding:18px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+}
+
+.sidebar header img{
+  width:48px;height:48px;border-radius:14px;
+}
+.sidebar header div{
+  display:flex;
+  flex-direction:column;
+}
+.sidebar header span{
+  font-size:12px;color:var(--muted);
+}
+
+.sidebar nav{
+  padding:14px;
+  flex:1;
+  overflow:auto;
+}
+
+.sidebar section{
+  margin-bottom:20px;
+}
+.sidebar section h4{
+  font-size:12px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.chat-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.chat-item{
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.chat-item span{
+  font-size:13px;
+}
+.chat-item.active,
+.chat-item:hover{
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+
+.sidebar footer{
+  padding:14px;
+  border-top:1px solid var(--border);
+}
+.sidebar footer button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:var(--accent);
+  color:white;
+}
+
+/* ================= MAIN ================= */
+main.main{
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= TOP BAR ================= */
+header.topbar{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+}
+
+.topbar .left,
+.topbar .right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.topbar input{
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+}
+
+/* ================= CHAT AREA ================= */
+section.chat-wrapper{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.cloud{
+  padding:8px 20px;
+  font-size:12px;
+  color:var(--muted);
+  display:none;
+}
+
+.chat-area{
+  flex:1;
+  padding:22px;
+  overflow-y:auto;
+}
+
+article.message{
+  max-width:75%;
+  margin-bottom:18px;
+  display:flex;
+  flex-direction:column;
+}
+article.message.user{margin-left:auto;align-items:flex-end}
+
+.message .meta{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+
+.message .bubble{
+  background:var(--panel);
+  padding:14px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+.user .bubble{
+  background:var(--accent);
+  color:white;
+}
+
+.message .tools{
+  margin-top:6px;
+}
+.message .tools i{
+  font-size:13px;
+  margin-right:8px;
+  cursor:pointer;
+  opacity:.6;
+}
+.message .tools i:hover{opacity:1}
+
+/* ================= CODE CONTAINER ================= */
+.code-container{
+  margin-top:10px;
+  background:#020617;
+  color:#e5e7eb;
+  border-radius:12px;
+  padding:10px;
+  font-family:monospace;
+  font-size:13px;
+}
+.code-header{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:#94a3b8;
+}
+.code-actions i{
+  margin-left:10px;
+  cursor:pointer;
+}
+.code-body{
+  white-space:pre;
+  overflow-x:auto;
+  outline:none;
+}
+
+/* ================= INPUT ================= */
+footer.input-box{
+  padding:14px;
+  border-top:1px solid var(--border);
+  display:flex;
+  gap:12px;
+  background:var(--panel);
+}
+footer.input-box input{
+  flex:1;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+footer.input-box button{
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:white;
+}
+
+/* ================= PREVIEW ================= */
+.preview-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;
+}
+.preview-box{
+  width:80%;height:80%;
+  background:white;border-radius:14px;
+}
+.preview-box iframe{width:100%;height:100%;border:none}
+</style>
+</head>
+
+<body data-theme="light">
+
+<div class="app">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+
+<header>
+  <img src="/Quizzone/icons/icon-192.png">
+  <div>
+    <strong id="uname"></strong>
+    <span>Active User</span>
+  </div>
+</header>
+
+<nav>
+  <section>
+    <h4>Chats</h4>
+    <div class="chat-list" id="chatList"></div>
+  </section>
+
+  <section>
+    <h4>Actions</h4>
+    <div class="chat-item" onclick="newChat()">
+      <span>New Chat</span>
+      <i class="bi bi-plus-circle"></i>
+    </div>
+  </section>
+</nav>
+
+<footer>
+  <button onclick="toggleTheme()">
+    <i class="bi bi-moon"></i> Toggle Theme
+  </button>
+</footer>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+
+<header class="topbar">
+  <div class="left">
+    <strong>QuizzoneAI</strong>
+    <span class="badge">Workspace</span>
+  </div>
+  <div class="right">
+    <input placeholder="Search…" />
+    <i class="bi bi-trash" onclick="clearChat()"></i>
+  </div>
+</header>
+
+<section class="chat-wrapper">
+
+<div class="cloud" id="cloud">
+  <i class="bi bi-cloud"></i> QuizzoneAI is thinking…
+</div>
+
+<div class="chat-area" id="chatArea"></div>
+
+</section>
+
+<footer class="input-box">
+  <input id="input" placeholder="Ask QuizzoneAI…" />
+  <button onclick="send()"><i class="bi bi-send"></i></button>
+</footer>
+
+</main>
+</div>
+<script>
+/* =====================================================
+   USER
+===================================================== */
+const user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser")) || {
+  username: "Guest"
+};
+document.getElementById("uname").innerText = user.username;
+
+/* =====================================================
+   STORAGE KEYS
+===================================================== */
+const STORAGE_KEY = "QUIZZONE_AI_STATE";
+
+/* =====================================================
+   STATE
+===================================================== */
+let state = loadState();
+let activeChatId = state.activeChatId;
+let chats = state.chats;
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+function genId(len){
+  return Array.from({length:len},()=>Math.floor(Math.random()*10)).join("");
+}
+function now(){
+  return new Date().toISOString();
+}
+
+/* =====================================================
+   LOAD / SAVE
+===================================================== */
+function loadState(){
+  let s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(!s){
+    const id = genId(10);
+    s = {
+      activeChatId: id,
+      chats: {
+        [id]: createChat(id, true)
+      }
+    };
+    saveState(s);
+  }
+  return s;
+}
+
+function saveState(customState){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(customState || state));
+}
+
+/* =====================================================
+   CHAT FACTORY
+===================================================== */
+function createChat(id, withWelcome=false){
+  const chat = {
+    id,
+    title: "New Chat",
+    created: now(),
+    messages:[]
+  };
+  if(withWelcome){
+    chat.messages.push({
+      id: genId(24),
+      role: "ai",
+      content: welcomeMessage(),
+      time: now()
+    });
+  }
+  return chat;
+}
+
+/* =====================================================
+   WELCOME MESSAGE (ONCE)
+===================================================== */
+function getGreeting(){
+  const h=new Date().getHours();
+  if(h<12) return "Good morning";
+  if(h<17) return "Good afternoon";
+  if(h<21) return "Good evening";
+  return "Good night";
+}
+
+function welcomeMessage(){
+  return `
+<b>${getGreeting()}, ${user.username} 👋</b><br><br>
+I am <b>QuizzoneAI</b>, your learning assistant.<br>
+Ask me about concepts, quizzes, or code.
+`;
+}
+
+/* =====================================================
+   KNOWLEDGE BASE
+===================================================== */
+const KB = [
+  {k:["what is"],v:"<b>QuizzoneAI</b> helps you learn faster."},
+  {k:["code"],v:`<pre>Code : - &lt;h1&gt; Hello QuizzoneAI &lt;/h1&gt; <br> Output : <h1>Hello QuizzoneAI</h1></pre>`}
+];
+
+/* =====================================================
+   CHAT OPERATIONS
+===================================================== */
+function newChat(){
+  const id = genId(10);
+  chats[id] = createChat(id, true);
+  activeChatId = id;
+  state.activeChatId = id;
+  saveState();
+  renderChatList();
+  renderMessages();
+}
+
+function clearChat(){
+  chats[activeChatId].messages = [];
+  saveState();
+  renderMessages();
+}
+
+function deleteMessage(msgId){
+  chats[activeChatId].messages =
+    chats[activeChatId].messages.filter(m=>m.id!==msgId);
+  saveState();
+  renderMessages();
+}
+
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
+function send(){
+  const input = document.getElementById("input");
+  const text = input.value.trim();
+  if(!text) return;
+  input.value="";
+
+  chats[activeChatId].messages.push({
+    id: genId(24),
+    role:"user",
+    content:text,
+    time: now()
+  });
+
+  saveState();
+  renderMessages();
+  aiRespond(text);
+}
+
+/* =====================================================
+   AI RESPONSE (STREAMING)
+===================================================== */
+function aiRespond(query){
+  showCloud(true);
+
+  let response="I am learning.";
+  for(let d of KB){
+    if(d.k.some(x=>query.toLowerCase().includes(x))){
+      response=d.v;
+      break;
+    }
+  }
+
+  const msg = {
+    id: genId(24),
+    role:"ai",
+    content:"",
+    time: now()
+  };
+  chats[activeChatId].messages.push(msg);
+
+  let i=0;
+  const timer=setInterval(()=>{
+    msg.content += response[i++] || "";
+    renderMessages();
+    if(i>=response.length){
+      clearInterval(timer);
+      showCloud(false);
+      saveState();
+    }
+  },18);
+}
+
+/* =====================================================
+   RENDER CHAT LIST
+===================================================== */
+function renderChatList(){
+  const list=document.getElementById("chatList");
+  list.innerHTML="";
+  Object.values(chats).forEach(c=>{
+    const d=document.createElement("div");
+    d.className="chat-item"+(c.id===activeChatId?" active":"");
+    d.innerHTML=`<span>${c.title}</span>`;
+    d.onclick=()=>{
+      activeChatId=c.id;
+      state.activeChatId=c.id;
+      saveState();
+      renderChatList();
+      renderMessages();
+    };
+    list.appendChild(d);
+  });
+}
+
+/* =====================================================
+   RENDER MESSAGES
+===================================================== */
+function renderMessages(){
+  const area=document.getElementById("chatArea");
+  area.innerHTML="";
+  chats[activeChatId].messages.forEach(m=>{
+    const a=document.createElement("article");
+    a.className="message "+m.role;
+    a.innerHTML=`
+      <div class="meta">${m.role==="user"?user.username:"QuizzoneAI"}</div>
+      <div class="bubble">${processContent(m.content)}</div>
+      <div class="tools">
+        <i class="bi bi-trash" onclick="deleteMessage('${m.id}')"></i>
+      </div>
+    `;
+    area.appendChild(a);
+  });
+  area.scrollTop=area.scrollHeight;
+}
+
+/* =====================================================
+   CONTENT PROCESSOR (CODE)
+===================================================== */
+function processContent(raw){
+  if(raw.includes("<pre>")){
+    const c=raw.replace(/<\/?pre>/g,"");
+    return `<div class="code-container"><div class="code-body">${c}</div></div>`;
+  }
+  return raw;
+}
+
+/* =====================================================
+   CLOUD STATE
+===================================================== */
+function showCloud(v){
+  document.getElementById("cloud").style.display=v?"block":"none";
+}
+
+/* =====================================================
+   INIT
+===================================================== */
+renderChatList();
+renderMessages();
+
+document.getElementById("input")
+  .addEventListener("keydown",e=>{
+    if(e.key==="Enter") send();
+  });
+</script>
+</body>
+</html>

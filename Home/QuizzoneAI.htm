@@ -2035,7 +2035,7 @@ function handleCommand(text){
   }
 
   // OPEN PROGRESS DASHBOARD
-  if(cmd === "open progress" | | cmd === "open progress dashboard" || cmd === "go to progress dashboard" || cmd === "go to progress" || cmd === "progress dashboard"){
+  if(cmd === "open progress" || cmd === "open progress dashboard" || cmd === "go to progress dashboard" || cmd === "go to progress" || cmd === "progress dashboard"){
     systemMessage("Opening Progress Dashboard…");
     window.location.href = "/Quizzone/Home/Progress.htm";
     return true;

@@ -2028,28 +2028,28 @@ function handleCommand(text){
   }
 
   // OPEN COMPETENCY TESTS
-  if(cmd === "open competency tests"){
+  if(cmd === "open competency tests" || cmd === "competency test" || cmd === "Go to Competency Tests"){
     systemMessage("Opening Competency Tests…");
     window.location.href = "/Quizzone/CompetancyTest/index.htm";
     return true;
   }
 
   // OPEN PROGRESS DASHBOARD
-  if(cmd === "open progress"){
+  if(cmd === "open progress" | | cmd === "open progress dashboard" || cmd === "go to progress dashboard" || cmd === "go to progress" || cmd === "progress dashboard"){
     systemMessage("Opening Progress Dashboard…");
     window.location.href = "/Quizzone/Home/Progress.htm";
     return true;
   }
 
   // OPEN SETTINGS
-  if(cmd === "open settings"){
+  if(cmd === "open settings" || cmd === "go to settings" || cmd === "settings" || cmd === "open account settings" || cmd === "account settings"){
     systemMessage("Opening Account Settings…");
     window.location.href = "/Quizzone/Home/Setting.htm";
     return true;
   }
 
   // OPEN ABOUT QUIZZONE
-  if(cmd === "open about quizzone"){
+  if(cmd === "open about quizzone" || cmd === "about quizzone" || cmd === "go to about quizzone" || cmd === "about"){
     systemMessage("Opening About Quizzone…");
     window.location.href = "/Quizzone/Documentary/OwnerMessageViewer.htm";
     return true;
@@ -2058,28 +2058,28 @@ function handleCommand(text){
   /* ================= OWNER / CREATOR LINKS ================= */
 
   // OPEN CREATOR PORTFOLIO
-  if(cmd === "open owner portfolio"){
+  if(cmd === "open owner portfolio" || cmd === "open creator portfolio" || cmd === "creator portfolio" || cmd === "owner portfolio"){
     systemMessage("Opening creator portfolio…");
     window.open("https://akshat-881236.github.io/Portfolio-881236/", "_blank");
     return true;
   }
 
   // OPEN GITHUB
-  if(cmd === "open github"){
+  if(cmd === "open github" || cmd === "open github profile" || cmd === "github profile" || cmd === "github" || cmd === "open owner github" || cmd === "open creator github"){
     systemMessage("Opening GitHub profile…");
     window.open("https://github.com/Akshat-881236", "_blank");
     return true;
   }
 
   // OPEN LINKEDIN
-  if(cmd === "open linkedin"){
+  if(cmd === "open linkedin" || cmd === "open linkedin profile" || cmd === "linkedin profile" || cmd === "linkedin" || cmd === "open owner linkedin" || cmd === "open creator linkedin"){
     systemMessage("Opening LinkedIn profile…");
     window.open("https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=akshat-prasad-b53936379", "_blank");
     return true;
   }
 
   // OPEN EMAIL CLIENT
-  if(cmd === "contact owner" || cmd === "email owner"){
+  if(cmd === "contact owner" || cmd === "email owner" || cmd === "contact creator" || cmd === "email creator" || cmd === "open email client"){
     systemMessage("Opening email client…");
     window.location.href = "mailto:akshatpsd2005@gmail.com";
     return true;
@@ -2088,14 +2088,14 @@ function handleCommand(text){
   /* ================= OTHER PROJECTS ================= */
 
   // OPEN QUIZZONE PROJECT REPO
-  if(cmd === "open quizzone project"){
+  if(cmd === "open quizzone project" || cmd === "open quizzone repository" || cmd === "quizzone project" || cmd === "quizzone repository"){
     systemMessage("Opening Quizzone Project Repository…");
     window.open("https://github.com/Akshat-881236/Quizzone", "_blank");
     return true;
   }
 
   // OPEN LEARNING CLUB
-  if(cmd === "open learning club"){
+  if(cmd === "open learning club" || cmd === "learning club" || cmd === "open learning club project"){
     systemMessage("Opening Learning Club…");
     window.open("https://akshat-881236.github.io/LearningClub-Key-of-Success-Learning-Point/", "_blank");
     return true;

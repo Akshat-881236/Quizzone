@@ -2014,14 +2014,14 @@ function handleCommand(text){
     /* ================= QUIZZONE INTERNAL LINKS ================= */
 
   // OPEN QUIZZONE HOME
-  if(cmd === "open quizzone home"){
+  if(cmd === "open quizzone home" || cmd === "go to quizzone home" || cmd === "quizzone home" || cmd === "open home" || cmd === "go to home" || cmd === "home" || cmd === "Open Home" || cmd === "Open Quizzone Home"){
     systemMessage("Opening Quizzone Home…");
     window.location.href = "/Quizzone/index.htm";
     return true;
   }
 
   // OPEN DISCIPLINES
-  if(cmd === "open disciplines"){
+  if(cmd === "open disciplines" || cmd === "go to disciplines" || cmd === "disciplines" || cmd === "open subjects" || cmd === "go to subjects" || cmd === "subjects" || cmd === "open courses" || cmd === "go to courses" || cmd === "courses" || cmd === "open learning material" || cmd === "go to learning material" || cmd === "learning material" || cmd === "open syllabus" || cmd === "go to syllabus" || cmd === "syllabus" || cmd === "Open Courses" || cmd === "Open Subjects" || cmd === "Open Disciplines"){
     systemMessage("Opening Disciplines…");
     window.location.href = "/Quizzone/Disciplines/index.htm";
     return true;
@@ -2065,7 +2065,7 @@ function handleCommand(text){
   }
 
   // OPEN GITHUB
-  if(cmd === "open github" || cmd === "open github profile" || cmd === "github profile" || cmd === "github" || cmd === "open owner github" || cmd === "open creator github"){
+  if(cmd === "open github" || cmd === "open github profile" || cmd === "github profile" || cmd === "github" || cmd === "open owner github" || cmd === "open creator github" || cmd === "Akshat Prasad GitHub" || cmd === "open Akshat Prasad GitHub" || cmd === "open Akshat-881236 GitHub"){
     systemMessage("Opening GitHub profile…");
     window.open("https://github.com/Akshat-881236", "_blank");
     return true;
@@ -2102,12 +2102,267 @@ function handleCommand(text){
   }
 
   // OPEN ALL PROJECTS PAGE
-  if(cmd === "open all projects"){
+  if(cmd === "open all projects" || cmd === "all projects" || cmd === "open projects page" || cmd === "projects page" || cmd === "open owner projects" || cmd === "open creator projects" || cmd === "Tell me about your other projects" || cmd === "show me your other projects" || cmd === "show all projects"){
     systemMessage("Opening all projects…");
     window.open("https://github.com/Akshat-881236", "_blank");
     return true;
   }
 
+  // COMMAND TRIGGER GOOGLE SEARCH
+  if(cmd.startsWith("search google for") || cmd.startsWith("google search for") || cmd.startsWith("search on google for") || cmd.startsWith("search in google for") || cmd.startsWith("Search Google for") || cmd.startsWith("Google search for") || cmd.startsWith("Search on Google for") || cmd.startsWith("Search in Google for") || cmd.startsWith("search google about") || cmd.startsWith("google search about") || cmd.startsWith("search on google about") || cmd.startsWith("search in google about") || cmd.startsWith("Search Google about") || cmd.startsWith("Google search about") || cmd.startsWith("Search on Google about") || cmd.startsWith("Search in Google about")){
+    const query = text.split("for").pop()?.trim() ||
+                  text.split("about").pop()?.trim();
+    if(query){
+      systemMessage(`Searching Google for "${query}"...`);
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+    }
+  }
+
+  // COMMAND TRIGGER YOUTUBE SEARCH
+  if(cmd.startsWith("search youtube for") || cmd.startsWith("youtube search for") || cmd.startsWith("search on youtube for") || cmd.startsWith("search in youtube for") || cmd.startsWith("Search YouTube for") || cmd.startsWith("YouTube search for") || cmd.startsWith("Search on YouTube for") || cmd.startsWith("Search in YouTube for") || cmd.startsWith("search youtube about") || cmd.startsWith("youtube search about") || cmd.startsWith("search on youtube about") || cmd.startsWith("search in youtube about") || cmd.startsWith("Search YouTube about") || cmd.startsWith("YouTube search about") || cmd.startsWith("Search on YouTube about") || cmd.startsWith("Search in YouTube about")){
+    const query = text.split("for").pop()?.trim() ||
+                  text.split("about").pop()?.trim();
+    if(query){
+      systemMessage(`Searching YouTube for "${query}"...`);
+      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, "_blank");
+    }
+  }
+
+  // COMMAND TRIGGER WIKIPEDIA SEARCH
+  if(cmd.startsWith("search wikipedia for") || cmd.startsWith("wikipedia search for") || cmd.startsWith("search on wikipedia for") || cmd.startsWith("search in wikipedia for") || cmd.startsWith("Search Wikipedia for") || cmd.startsWith("Wikipedia search for") || cmd.startsWith("Search on Wikipedia for") || cmd.startsWith("Search in Wikipedia for") || cmd.startsWith("search wikipedia about") || cmd.startsWith("wikipedia search about") || cmd.startsWith("search on wikipedia about") || cmd.startsWith("search in wikipedia about") || cmd.startsWith("Search Wikipedia about") || cmd.startsWith("Wikipedia search about") || cmd.startsWith("Search on Wikipedia about") || cmd.startsWith("Search in Wikipedia about")){
+    const query = text.split("for").pop()?.trim() ||
+                  text.split("about").pop()?.trim();
+    if(query){
+      systemMessage(`Searching Wikipedia for "${query}"...`);
+      window.open(`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`, "_blank");
+    }
+  }
+
+  // COMMAND TRIGGER DUCKDUCKGO SEARCH
+  if(cmd.startsWith("search duckduckgo for") || cmd.startsWith("duckduckgo search for") || cmd.startsWith("search on duckduckgo for") || cmd.startsWith("search in duckduckgo for") || cmd.startsWith("Search DuckDuckGo for") || cmd.startsWith("DuckDuckGo search for") || cmd.startsWith("Search on DuckDuckGo for") || cmd.startsWith("Search in DuckDuckGo for") || cmd.startsWith("search duckduckgo about") || cmd.startsWith("duckduckgo search about") || cmd.startsWith("search on duckduckgo about") || cmd.startsWith("search in duckduckgo about") || cmd.startsWith("Search DuckDuckGo about") || cmd.startsWith("DuckDuckGo search about") || cmd.startsWith("Search on DuckDuckGo about") || cmd.startsWith("Search in DuckDuckGo about")){
+    const query = text.split("for").pop()?.trim() ||
+                  text.split("about").pop()?.trim();
+    if(query){
+      systemMessage(`Searching DuckDuckGo for "${query}"...`);
+      window.open(`https://duckduckgo.com/?q=${encodeURIComponent(query)}`, "_blank");
+    }
+  }
+
+  // COMMAND TRIGGER BING SEARCH
+  if(cmd.startsWith("search bing for") || cmd.startsWith("bing search for") || cmd.startsWith("search on bing for") || cmd.startsWith("search in bing for") || cmd.startsWith("Search Bing for") || cmd.startsWith("Bing search for") || cmd.startsWith("Search on Bing for") || cmd.startsWith("Search in Bing for") || cmd.startsWith("search bing about") || cmd.startsWith("bing search about") || cmd.startsWith("search on bing about") || cmd.startsWith("search in bing about") || cmd.startsWith("Search Bing about") || cmd.startsWith("Bing search about") || cmd.startsWith("Search on Bing about") || cmd.startsWith("Search in Bing about")){
+    const query = text.split("for").pop()?.trim() ||
+                  text.split("about").pop()?.trim();
+    if(query){
+      systemMessage(`Searching Bing for "${query}"...`);
+      window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, "_blank");
+    }
+  }
+
+  // LINKEDIN SEARCH
+  if(cmd.startsWith("search linkedin for") || cmd.startsWith("linkedin search for") || cmd.startsWith("search on linkedin for") || cmd.startsWith("search in linkedin for") || cmd.startsWith("Search LinkedIn for") || cmd.startsWith("LinkedIn search for") || cmd.startsWith("Search on LinkedIn for") || cmd.startsWith("Search in LinkedIn for") || cmd.startsWith("search linkedin about") || cmd.startsWith("linkedin search about") || cmd.startsWith("search on linkedin about") || cmd.startsWith("search in linkedin about") || cmd.startsWith("Search LinkedIn about") || cmd.startsWith("LinkedIn search about") || cmd.startsWith("Search on LinkedIn about") || cmd.startsWith("Search in LinkedIn about")){
+    const query = text.split("for").pop()?.trim() ||
+                  text.split("about").pop()?.trim();
+    if(query){
+      systemMessage(`Searching LinkedIn for "${query}"...`);
+      window.open(`https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(query)}`, "_blank");
+    }
+  }
+
+  // SEARCH OWNER PORTFOLIO ON GOOGLE
+  if(cmd === "search owner portfolio on google" || cmd === "search creator portfolio on google" || cmd === "search portfolio on google" || cmd === "google search owner portfolio" || cmd === "google search creator portfolio" || cmd === "google search portfolio" || cmd === "Search Owner Portfolio on Google" || cmd === "Search Creator Portfolio on Google" || cmd === "Search Portfolio on Google" || cmd === "Google Search Owner Portfolio" || cmd === "Google Search Creator Portfolio" || cmd === "Google Search Portfolio" || cmd === "Find Owner Portfolio on Google" || cmd === "Find Creator Portfolio on Google" || cmd === "Find Portfolio on Google" || cmd === "QuizzoneAI, search owner portfolio on Google" || cmd === "QuizzoneAI, search creator portfolio on Google" || cmd === "QuizzoneAI, search portfolio on Google" || cmd === "Hey QuizzoneAI, search owner portfolio on Google" || cmd === "Hey QuizzoneAI, search creator portfolio on Google" || cmd === "Hey QuizzoneAI, search portfolio on Google" || cmd === "Can you search owner portfolio on Google" || cmd === "Can you search creator portfolio on Google" || cmd === "Can you search portfolio on Google"){
+    const query = "Akshat Prasad Portfolio";
+    systemMessage(`<h1>I'm QuizzoneAI created by Akshat Prasad.</h1> Searching Google for "${query}"...`);
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+    return true;
+  }
+
+    // COMMAND TO CREATE A CUSTOM RESPONSE
+  if(cmd.startsWith("teach ai that") || cmd.startsWith("quizzoneai, learn that") || cmd.startsWith("hey quizzoneai, learn that") || cmd.startsWith("you should know that")){
+    const parts = text.split("that").pop()?.trim().split("is");
+    if(parts && parts.length === 2){
+      const key = parts[0].trim().toLowerCase();
+      const value = parts[1].trim();
+      if(key && value){
+        KB.push({
+          k: [key],
+          type: "custom",
+          tags: ["user-taught"],
+          v: value
+        });
+        systemMessage(`Got it! I've learned that "${key}" is "${value}".`);
+      } else {
+        systemMessage("Please provide both a key and a value.");
+      }
+    } else {
+      systemMessage("Please use the format: teach AI that [key] is [value].");
+    }
+    return true;
+  }
+
+  // EXECUTION BOX REQUEST IN WHICH WE CAN RUN ALL ABOVE COMMANDS WRT BOILERPLATE COMMANDS
+  if(cmd === "execute all commands" || cmd === "run all commands" || cmd === "execute all" || cmd === "run all" || cmd === "open execution box" || cmd === "show execution box" || cmd === "activate execution box" || cmd === "launch execution box" || cmd === "Execute All Commands" || cmd === "Run All Commands" || cmd === "Open Execution Box" || cmd === "Show Execution Box" || cmd === "Activate Execution Box" || cmd === "Launch Execution Box" || cmd === "Can you open execution box" || cmd === "Can you show execution box" || cmd === "Can you activate execution box" || cmd === "Can you launch execution box" || cmd === "Hey QuizzoneAI, open execution box" || cmd === "Hey QuizzoneAI, show execution box" || cmd === "Hey QuizzoneAI, activate execution box" || cmd === "Hey QuizzoneAI, launch execution box"){
+    systemMessage(`
+      <b>Execution Box Activated</b><br>
+      You can now run all available commands including boilerplate commands.
+      Just type your command in the code container below and click on "Run Button".
+      <pre contenteditable="true" id="execBox" style="min-height:80px;
+            border:1px solid #ccc;padding:8px;
+            border-radius:8px;outline:none;
+            font-family:Segoe UI,monospace;
+            box-shadow:0 0 5px rgba(0,0,0,0.1);
+            margin-top:8px;"> 
+// Example Command:
+clear chat
+new chat
+rename chat = My New Chat
+delete chat
+list chats
+pin chat
+unpin chat
+archive chat
+restore chat
+last message
+delete last message
+count messages
+search message = keyword
+toggle theme
+dark mode
+light mode
+clear input
+scroll bottom
+help commands
+add banner
+clear chat html
+add footer note = This is a footer note.
+replace header title = New Title
+add info card
+inject css = .message.user { background: #e0f7fa; }
+apply soft ui
+reset styles
+highlight user messages
+highlight ai messages
+reset message styles
+collapse sidebar
+expand sidebar
+hide input
+show input
+logout
+next chat
+// Execute more commands seperated by comas ","
+// Click on Edit Button to Edit Commands & then Click on Run Button to Execute.
+      </pre>
+      <button onclick="
+        const cmds = document.getElementById('execBox').innerText.split('\\n');
+        cmds.forEach(c => {
+          document.getElementById('input').value = c;
+          send();
+        });
+      " style="margin-top:8px;padding:8px 12px;
+               background:#2563eb;color:white;
+               border:none;border-radius:6px;
+               cursor:pointer;">
+        Run Commands
+      </button>
+    `);
+    return true;
+  }
+
+  // COMMAND TO RETRIEVE CURRENT CHAT ID
+  if(cmd === "what is my current chat id" || cmd === "current chat id" || cmd === "show current chat id" || cmd === "display current chat id" || cmd === "give me current chat id" || cmd === "tell me my current chat id" || cmd === "Can you tell me my current chat id" || cmd === "Hey QuizzoneAI, what is my current chat id" || cmd === "Hey QuizzoneAI, current chat id" || cmd === "Hey QuizzoneAI, show current chat id" || cmd === "Hey QuizzoneAI, display current chat id" || cmd === "Hey QuizzoneAI, give me current chat id"){
+    systemMessage(`Your current chat ID is: <b>${activeChatId}</b>`);
+    return true;
+  }
+
+  // COMMAND TO IMPORT ALL CHATS DATA IN WELL STYLE DISPLAY SHOWING CHAT IDS & TITLES AND ALL MESSAGES WITH ROLES & CONTENTS ALONG WITH TIMESTAMPS & IDS
+  if(cmd === "export all chats data" || cmd === "get all chats data" || cmd === "show all chats data" || cmd === "display all chats data" || cmd === "give me all chats data" || cmd === "Can you give me all chats data" || cmd === "Hey QuizzoneAI, export all chats data" || cmd === "Hey QuizzoneAI, get all chats data" || cmd === "Hey QuizzoneAI, show all chats data" || cmd === "Hey QuizzoneAI, display all chats data" || cmd === "Hey QuizzoneAI, give me all chats data" || cmd === "Please export all chats data" || cmd === "Please get all chats data" || cmd === "Please show all chats data" || cmd === "Please display all chats data" || cmd === "Please give me all chats data" || cmd === "Kindly export all chats data" || cmd === "Kindly get all chats data" || cmd === "Kindly show all chats data" || cmd === "Kindly display all chats data" || cmd === "Kindly give me all chats data" || cmd === "Could you export all chats data" || cmd === "Could you get all chats data" || cmd === "Could you show all chats data" || cmd === "Could you display all chats data" || cmd === "Could you give me all chats data" || cmd === "I would like to export all chats data" || cmd === "I would like to get all chats data" || cmd === "I would like to show all chats data" || cmd === "I would like to display all chats data" || cmd === "I would like to have all chats data" || cmd === "I want to export all chats data" || cmd === "I want to get all chats data" || cmd === "I want to show all chats data" || cmd === "I want to display all chats data" || cmd === "I want to have all chats data" || cmd === "Export Chats" || cmd === "Get Chats" || cmd === "Show Chats" || cmd === "Display Chats" || cmd === "Give me Chats" || cmd === "Please Export Chats" || cmd === "Please Get Chats" || cmd === "Please Show Chats" || cmd === "Please Display Chats" || cmd === "Please Give me Chats" || cmd === "Kindly Export Chats" || cmd === "Kindly Get Chats" || cmd === "Kindly Show Chats" || cmd === "Kindly Display Chats" || cmd === "Kindly Give me Chats" || cmd === "Could you Export Chats" || cmd === "Could you Get Chats" || cmd === "Could you Show Chats" || cmd === "Could you Display Chats" || cmd === "Could you Give me Chats" || cmd === "I would like to Export Chats" || cmd === "I would like to Get Chats" || cmd === "I would like to Show Chats" || cmd === "I would like to Display Chats" || cmd === "I would like to Have Chats" || cmd === "I want to Export Chats" || cmd === "I want to Get Chats" || cmd === "I want to Show Chats" || cmd === "I want to Display Chats" || cmd === "I want to Have Chats" || cmd === "QuizzoneAI, export all chats data" || cmd === "QuizzoneAI, get all chats data" || cmd === "QuizzoneAI, show all chats data" || cmd === "QuizzoneAI, display all chats data" || cmd === "QuizzoneAI, give me all chats data" || cmd === "QuizzoneAI, Export Chats" || cmd === "QuizzoneAI, Get Chats" || cmd === "QuizzoneAI, Show Chats" || cmd === "QuizzoneAI, Display Chats" || cmd === "QuizzoneAI, Give me Chats" || cmd === "Exports Chats" || cmd === "Gets Chats" || cmd === "Shows Chats" || cmd === "Displays Chats" || cmd === "Gives me Chats" || cmd === "export chat data" || cmd === "get chat data" || cmd === "show chat data" || cmd === "display chat data" || cmd === "give me chat data" || cmd === "QuizzoneAI, export chat data" || cmd === "QuizzoneAI, get chat data" || cmd === "QuizzoneAI, show chat data" || cmd === "QuizzoneAI, display chat data" || cmd === "QuizzoneAI, give me chat data" || cmd === "exports chats" || cmd === "gets chats" || cmd === "shows chats" || cmd === "displays chats" || cmd === "gives me chats"){
+    let exportContent = `<b>All Chats Data Export</b><br>`;
+    Object.values(chats).forEach(c => {
+      exportContent += `<h3>Chat ID: ${c.id} | Title: ${c.title}</h3>`;
+      c.messages.forEach(m => {
+        exportContent += `
+          <div style="margin-left:20px;
+                      border-left:2px solid #ccc;
+                      padding-left:10px;
+                      margin-bottom:8px;">
+            <b>Role:</b> ${m.role}<br>
+            <b>Content:</b> ${m.content}<br>
+            <b>Time:</b> ${m.time}<br>
+            <b>Message ID:</b> ${m.id}
+          </div>
+        `;
+      });
+    });
+    systemMessage(exportContent);
+    return true;
+  }
+
+  // COMMANDS TO ENCRYPT OR DECRYPT MESSAGES OR CHATS - SIMULATED VIA REVERSING STRINGS FOR DEMO PURPOSES
+  if(cmd.startsWith("encrypt message") || cmd.startsWith("decrypt message") || cmd.startsWith("encrypt chat") || cmd.startsWith("decrypt chat")){
+    const action = cmd.split(" ")[0]; // encrypt or decrypt
+    const target = cmd.split(" ")[1]; // message or chat
+    if(target === "message"){
+      const lastMsg = chats[activeChatId].messages[chats[activeChatId].messages.length - 1];
+      if(lastMsg){
+        if(action === "encrypt"){
+          lastMsg.content = lastMsg.content.split("").reverse().join("");
+          systemMessage("Last message encrypted.");
+        } else {
+          lastMsg.content = lastMsg.content.split("").reverse().join("");
+          systemMessage("Last message decrypted.");
+        }
+        renderMessages();
+        saveState();
+      } else {
+        systemMessage("No messages to process.");
+      }
+    } else if(target === "chat"){
+      chats[activeChatId].messages.forEach(m => {
+        if(action === "encrypt"){
+          m.content = m.content.split("").reverse().join("");
+        } else {
+          m.content = m.content.split("").reverse().join("");
+        }
+      });
+      systemMessage(`All messages in current chat ${action}ed.`);
+      renderMessages();
+      saveState();
+    }
+    return true;
+  }
+
+  // COMMANDS THAT MAKE ALL TEXT UPPERCASE OR LOWERCASE IN ALL MESSAGES OF CURRENT CHAT AND MAKE IT REFLECTED IMMEDIATELY BUT NOT SAVE PERMANENTLY
+  if(cmd === "uppercase all messages" || cmd === "make all messages uppercase" ||
+     cmd === "lowercase all messages" || cmd === "make all messages lowercase"){
+    const toUpper = cmd.includes("uppercase");
+    chats[activeChatId].messages.forEach(m => {
+      m.content = toUpper ? m.content.toUpperCase() : m.content.toLowerCase();
+    });
+    systemMessage(`All messages converted to ${toUpper ? "UPPERCASE" : "lowercase"}.`);
+    renderMessages();
+    return true;
+  }
+
+  if(cmd === "reset ai knowledge" || cmd === "clear ai knowledge" || cmd === "forget user taught data" || cmd === "reset learned data" || cmd === "clear learned data" || cmd === "forget custom responses" || cmd === "reset custom responses"){
+    KB = KB.filter(d => d.type !== "custom");
+    systemMessage("AI knowledge reset. All user-taught data forgotten.");
+    return true;
+  }
+
+  // COMMAND TO RETRIEVE TEACH DATA FROM KNOWLEDGE BASE
+  if(cmd.startsWith("what do you know about") || cmd.startsWith("tell me about") || cmd.startsWith("give me information about") || cmd.startsWith("what have you learned about")){
+    const topic = text.split("about").pop()?.trim().toLowerCase();
+    if(topic){
+      const entry = KB.find(d => d.k.includes(topic));
+      if(entry){
+        systemMessage(`I know that "${topic}" is: ${entry.v}`);
+      } else {
+        systemMessage(`I don't have any information about "${topic}".`);
+      }
+    } else {
+      systemMessage("Please specify a topic to inquire about.");
+    }
+    return true;
+  }
 
   return false; // not a command
 }

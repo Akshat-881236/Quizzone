@@ -6,163 +6,191 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body { margin:0; background:#eef3ff; font-family:"Segoe UI",Arial; }
-
+body{margin:0;background:#eef3ff;font-family:"Segoe UI",Arial}
 .settings-box{
-    width:90%; max-width:900px;
-    background:white; margin:80px auto;
-    padding:25px; border-radius:14px;
-    box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  width:90%;max-width:900px;background:#fff;margin:60px auto;
+  padding:25px;border-radius:14px;
+  box-shadow:0 6px 25px rgba(0,0,0,.25)
 }
-
-h2{ color:#007bff; }
-
-.section-title{
-    margin-top:28px; font-size:20px; color:#005fcc;
-}
-
-input{
-    width:100%; padding:12px;
-    margin:8px 0; border-radius:8px;
-    border:1px solid #aaa;
-}
-
-button{
-    padding:12px 18px; background:#007bff; border:none;
-    color:white; font-size:16px;
-    border-radius:8px; cursor:pointer;
-}
-button:hover{ background:#005fcc; }
-
+h2{color:#007bff}
+.section-title{margin-top:28px;font-size:20px;color:#005fcc}
+input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #aaa}
+button{padding:12px 18px;background:#007bff;border:none;color:white;
+  font-size:16px;border-radius:8px;cursor:pointer}
+button:hover{background:#005fcc}
 .photo-preview{
-    width:100px; height:100px;
-    border-radius:12px; border:2px solid #007bff;
-    object-fit:cover; display:block;
-    margin-bottom:12px;
+  width:100px;height:100px;border-radius:12px;
+  border:2px solid #007bff;object-fit:cover
 }
+.meter{height:8px;border-radius:6px;background:#ddd;margin-bottom:10px}
+.meter span{display:block;height:100%;width:0;background:red;border-radius:6px}
+.warning{color:red;font-size:13px}
+.success{color:green;font-size:13px}
 </style>
-<link rel="manifest" href="/Quizzone/manifest.json">
-<meta name="theme-color" content="#007bff">
 </head>
-<body>
 
+<body>
 <script src="/Quizzone/Global/loader.js"></script>
 
 <div class="settings-box">
+<h2>Account Settings</h2>
 
-    <h2>Account Settings</h2>
+<label><input type="checkbox" id="privacyConsent"> I agree to Privacy Policy & Data Usage</label>
 
-    <!-- EDIT PROFILE -->
-    <div class="section-title">Edit Profile Information</div>
+<div class="section-title">Edit Profile</div>
+<img id="photoPrev" class="photo-preview">
+<input type="file" id="newPhoto" accept="image/*" onchange="previewPhoto()">
+<input id="username">
+<input id="fatherName">
+<input id="dob" type="date">
+<input id="email" disabled>
+<input id="contact">
+<input id="address">
+<button onclick="updateProfile()">Save Profile</button>
 
-    <img id="photoPrev" class="photo-preview" />
+<div class="section-title">Change Password</div>
+<input type="password" id="oldPass" placeholder="Old Password">
+<input type="password" id="newPass" placeholder="New Password" oninput="checkStrength()">
+<div class="meter"><span id="strengthBar"></span></div>
+<input type="password" id="confirmPass" placeholder="Confirm Password">
+<button onclick="sendOTP()">Send OTP</button>
+<input id="otpInput" placeholder="Enter OTP">
+<button onclick="changePassword()">Update Password</button>
 
-    <label>Change Profile Photo</label>
-    <input type="file" id="newPhoto" accept="image/*" onchange="previewNewPhoto()">
-
-    <input type="text" id="username">
-    <input type="text" id="fatherName">
-    <input type="date" id="dob">
-    <input type="email" id="email" disabled>
-    <input type="text" id="contact">
-    <input type="text" id="address">
-
-    <button onclick="updateProfile()">Save Changes</button>
-
-    <!-- PASSWORD -->
-    <div class="section-title">Change Password</div>
-    <input type="password" id="oldPass" placeholder="Old Password">
-    <input type="password" id="newPass" placeholder="New Password">
-    <input type="password" id="confirmPass" placeholder="Confirm New Password">
-    <button onclick="changePassword()">Update Password</button>
+<div class="section-title">Danger Zone (GDPR)</div>
+<p class="warning">
+Deleting account will permanently remove all data. This cannot be undone.
+</p>
+<button style="background:#e60000" onclick="deleteAccount()">Delete My Account</button>
 </div>
 
 <script>
-// LOAD USER
+/* ================= LOAD ================= */
 let user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser"));
-if(!user){ alert("Please login first."); window.location.href="/Quizzone/Home/SignIn.htm"; }
+let users = JSON.parse(localStorage.getItem("QuizzoneUsersDB"))||[];
+let audits = JSON.parse(localStorage.getItem("QuizzoneAuditLogs"))||[];
 
-document.getElementById("photoPrev").src = user.photo;
-document.getElementById("username").value = user.username;
-document.getElementById("fatherName").value = user.fatherName;
-document.getElementById("dob").value = user.dob;
-document.getElementById("email").value = user.email;
-document.getElementById("contact").value = user.contact;
-document.getElementById("address").value = user.address;
+if(!user){alert("Login required");location.href="/Quizzone/Home/SignIn.htm"}
 
-/* ------- PHOTO PREVIEW -------- */
-function previewNewPhoto(){
-    let file = document.getElementById("newPhoto").files[0];
-    if(file){
-        document.getElementById("photoPrev").src = URL.createObjectURL(file);
-    }
+photoPrev.src=user.photo;
+username.value=user.username;
+fatherName.value=user.fatherName;
+dob.value=user.dob;
+email.value=user.email;
+contact.value=user.contact;
+address.value=user.address;
+privacyConsent.checked=user.privacyConsent||false;
+
+/* ================= HELPERS ================= */
+function now(){return new Date().toISOString()}
+function log(action,source){
+  audits.push({email:user.email,action,source,time:now()});
+  localStorage.setItem("QuizzoneAuditLogs",JSON.stringify(audits));
+}
+function age(d){
+  let a=new Date().getFullYear()-new Date(d).getFullYear();
+  return a;
+}
+function imgSig(b){let h=0;for(let i=0;i<b.length;i+=60){h=((h<<5)-h)+b.charCodeAt(i)}return h}
+
+/* ================= PHOTO ================= */
+function previewPhoto(){
+  let f=newPhoto.files[0];
+  if(f) photoPrev.src=URL.createObjectURL(f);
 }
 
-/* ------- UPDATE PROFILE -------- */
+/* ================= PROFILE ================= */
 function updateProfile(){
-    let file = document.getElementById("newPhoto").files[0];
+  if(!privacyConsent.checked) return alert("Consent required");
+  if(age(dob.value)<18) return alert("Age must be 18+");
 
-    function saveData(photoData){
-        user.username = document.getElementById("username").value.trim();
-        user.fatherName = document.getElementById("fatherName").value.trim();
-        user.dob = document.getElementById("dob").value;
-        user.contact = document.getElementById("contact").value.trim();
-        user.address = document.getElementById("address").value.trim();
-        if(photoData) user.photo = photoData;
+  let dup=users.find(u=>u.email!==user.email &&
+    (u.contact===contact.value||
+     (u.username===username.value&&u.dob===dob.value)));
+  if(dup) return alert("Duplicate account detected");
 
-        // Save active
-        localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(user));
-
-        // Save global DB
-        let all = JSON.parse(localStorage.getItem("QuizzoneUsersDB"));
-        let idx = all.findIndex(u => u.email === user.email);
-        all[idx] = user;
-        localStorage.setItem("QuizzoneUsersDB", JSON.stringify(all));
-
-        alert("Profile Updated Successfully!");
+  function save(photo){
+    if(photo){
+      let sig=imgSig(photo);
+      if(users.find(u=>u.photoSignature===sig && u.email!==user.email))
+        return alert("Photo matches another account");
+      user.photo=photo;user.photoSignature=sig;
     }
+    Object.assign(user,{
+      username:username.value.trim(),
+      fatherName:fatherName.value.trim(),
+      dob:dob.value,
+      contact:contact.value,
+      address:address.value,
+      privacyConsent:true
+    });
+    users[users.findIndex(u=>u.email===user.email)]=user;
+    localStorage.setItem("ActiveQuizzoneUser",JSON.stringify(user));
+    localStorage.setItem("QuizzoneUsersDB",JSON.stringify(users));
+    log("Profile Updated","Settings");
+    alert("Profile Updated");
+  }
 
-    if(file){
-        let reader = new FileReader();
-        reader.onload = e => saveData(e.target.result);
-        reader.readAsDataURL(file);
-    } else {
-        saveData(null);
-    }
+  let f=newPhoto.files[0];
+  if(f){let r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(f);}
+  else save(null);
 }
 
-/* ------- CHANGE PASSWORD -------- */
+/* ================= PASSWORD ================= */
+let otpCode=null;
+function checkStrength(){
+  let p=newPass.value,bar=strengthBar;
+  let s=0;
+  if(p.length>=8)s++;
+  if(/[A-Z]/.test(p))s++;
+  if(/[0-9]/.test(p))s++;
+  if(/[@$!%*?&]/.test(p))s++;
+  bar.style.width=(s*25)+"%";
+  bar.style.background=["red","orange","yellow","blue","green"][s];
+}
+
+function sendOTP(){
+  otpCode=Math.floor(100000+Math.random()*900000).toString();
+  alert("OTP (mock): "+otpCode);
+}
+
 function changePassword(){
-    let oldP = document.getElementById("oldPass").value;
-    let newP = document.getElementById("newPass").value;
-    let conf = document.getElementById("confirmPass").value;
+  if(user.accountLock?.until && Date.now()<user.accountLock.until)
+    return alert("Account locked");
 
-    if(oldP !== user.password){
-        alert("Old password is incorrect!");
-        return;
+  if(oldPass.value!==user.password){
+    user.failedAttempts=(user.failedAttempts||0)+1;
+    if(user.failedAttempts>=3){
+      user.accountLock={until:Date.now()+72*60*60*1000};
+      alert("Account locked for 72 hours");
     }
-    if(newP !== conf){
-        alert("New passwords do not match!");
-        return;
-    }
+    localStorage.setItem("ActiveQuizzoneUser",JSON.stringify(user));
+    return;
+  }
 
-    user.password = newP;
+  if(otpInput.value!==otpCode) return alert("Invalid OTP");
+  if(newPass.value!==confirmPass.value) return alert("Mismatch");
 
-    localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(user));
-
-    let all = JSON.parse(localStorage.getItem("QuizzoneUsersDB"));
-    let idx = all.findIndex(u => u.email === user.email);
-    all[idx] = user;
-    localStorage.setItem("QuizzoneUsersDB", JSON.stringify(all));
-
-    alert("Password Updated Successfully!");
+  user.password=newPass.value;
+  user.failedAttempts=0;
+  user.accountLock=null;
+  users[users.findIndex(u=>u.email===user.email)]=user;
+  localStorage.setItem("ActiveQuizzoneUser",JSON.stringify(user));
+  localStorage.setItem("QuizzoneUsersDB",JSON.stringify(users));
+  log("Password Changed","Settings");
+  alert("Password Updated");
 }
 
-fetch(window.location.href)
-  .then(res => {
-    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
-  })
-  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
+/* ================= GDPR DELETE ================= */
+function deleteAccount(){
+  if(!confirm("This will permanently delete your account. Continue?")) return;
+  users=users.filter(u=>u.email!==user.email);
+  localStorage.setItem("QuizzoneUsersDB",JSON.stringify(users));
+  log("Account Deleted","Settings");
+  localStorage.removeItem("ActiveQuizzoneUser");
+  alert("Account Deleted");
+  location.href="/Quizzone/Home/SignUp.htm";
+}
 </script>
 <script src="/Quizzone/pwa.js"></script>
 </body>

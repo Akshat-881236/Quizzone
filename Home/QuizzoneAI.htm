@@ -340,9 +340,12 @@ footer.input-box button{
 </main>
 </div>
 <script>
+const OWNER_EMAIL = "akshatprasad2005@gmail.com";
+
 /* =====================================================
    USER
 ===================================================== */
+
 const user = JSON.parse(localStorage.getItem("ActiveQuizzoneUser")) || {
   username: "Guest"
 };
@@ -439,7 +442,7 @@ Ask me about concepts, quizzes, or code.
 
 /* ================= BASIC IDENTITY ================= */
 {
-  k:["what is quizzoneai","define quizzoneai","about quizzoneai"],
+  k:["what is quizzoneai","define quizzoneai","about quizzoneai", "quizzoneai meaning","Tum kaun ho","tum kya ho","quizzoneai kya hai","quizzoneai ke baare mein batao","QuizzoneAI", "Quizzone AI"],
   type:"info",
   tags:["intro","platform"],
   v:`
@@ -478,9 +481,9 @@ Output:
 
 /* ================= HTML EXPLANATION ================= */
 {
-  k:["what is html","define html","html meaning"],
+  k:["what is html","define html","html meaning","html tutorial","html example","What is HTML","HTML kya hai","html ke baare mein batao","HTML","HyperText Markup Language","HTML meaning","explain html","html introduction","html basics","html guide"],
   type:"tutorial",
-  tags:["html","web"],
+  tags:["html","web","markup"],
   v:`
   <b>HTML (HyperText Markup Language)</b> is the standard language used
   to create web pages.<br><br>
@@ -497,7 +500,7 @@ Output:
 
 /* ================= CSS DEMO ================= */
 {
-  k:["css example","what is css","css demo"],
+  k:["css example","what is css","css demo", "css code","show css","css meaning","css tutorial","css introduction","css basics","css guide","Define CSS","Cascading Style Sheets","CSS kya hai","css ke baare mein batao","CSS"],
   type:"code",
   tags:["css","style"],
   v:`
@@ -517,7 +520,7 @@ Output:
 
 /* ================= JAVASCRIPT DEMO ================= */
 {
-  k:["javascript example","js example","what is javascript"],
+  k:["javascript example","js example","what is javascript", "js demo","javascript code","show javascript","js code","javascript meaning","javascript tutorial","javascript introduction","javascript basics","javascript guide","Define JavaScript","JS kya hai","javascript ke baare mein batao","JavaScript","JS"],
   type:"code",
   tags:["javascript","logic"],
   v:`
@@ -535,7 +538,7 @@ This JavaScript code shows an alert popup.
 
 /* ================= PLATFORM FEATURES ================= */
 {
-  k:["features","what can you do","capabilities"],
+  k:["features","what can you do","capabilities","quizzoneai features","quizzoneai capabilities","quizzoneai kya kar sakta hai","quizzoneai ke features","quizzoneai ke capabilities","QuizzoneAI features","QuizzoneAI capabilities"],
   type:"info",
   tags:["features","ai"],
   v:`
@@ -547,6 +550,125 @@ This JavaScript code shows an alert popup.
     <li>Learning Progress Tracking</li>
     <li>Offline-first Architecture</li>
   </ul>
+  `
+},
+
+{
+  k:["how to use","usage guide","getting started","quizzoneai usage","quizzoneai guide","quizzoneai getting started","quizzoneai kaise use karein","quizzoneai istemal kaise karein","QuizzoneAI usage","QuizzoneAI guide","QuizzoneAI getting started"],
+  type:"info",
+  tags:["guide","usage"],
+  v:`
+  <b>Getting Started with QuizzoneAI</b><br><br>
+  1. Ask a question<br>
+  2. Explore concepts & code<br>
+  3. Practice quizzes<br>
+  4. Track progress<br><br>
+  Type <code>help commands</code> to see available commands.
+  `
+},
+
+{
+  k:["supported languages","programming languages","coding languages","quizzoneai supported languages","quizzoneai programming languages","quizzoneai coding languages","quizzoneai kaunse programming languages support karta hai","quizzoneai kaunse coding languages support karta hai","QuizzoneAI supported languages","QuizzoneAI programming languages","QuizzoneAI coding languages"],
+  type:"info",
+  tags:["languages","programming"],
+  v:`
+  QuizzoneAI supports multiple programming languages for the quick learning of coding concepts.<br><br>
+  <b>Supported Programming Languages</b><br><br>
+  <ul>
+    <li>Python</li>
+    <li>C++</li>
+    <li>Java</li>
+    <li>SQL</li>
+    <li>HTML/CSS/JavaScript</li>
+  </ul>
+  `
+},
+
+{
+  k:["quiz topics","available quizzes","quizzoneai quiz topics","quizzoneai available quizzes","quizzoneai ke quiz topics","quizzoneai ke available quizzes","QuizzoneAI quiz topics","QuizzoneAI available quizzes"],
+  type:"info",
+  tags:["quizzes","topics"],
+  v:`
+  QuizzoneAI offers quizzes on a variety of topics to help reinforce your learning.<br><br>
+  <b>Available Quiz Topics</b><br><br>
+  <ul>
+    <li>Programming Languages (Python, C++, Java)</li>
+    <li>Data Structures & Algorithms</li>
+    <li>Database Management (SQL, DBMS)</li>
+    <li>Operating Systems</li>
+    <li>Artificial Intelligence & Machine Learning</li>
+  </ul>
+  `
+},
+
+/* ================= QUIZZONE USAGE & LIMITATIONS ================= */
+{
+  k:["quizzoneai limitations","quizzoneai usage limits","quizzoneai restrictions","quizzoneai kya limitations hain","quizzoneai ke usage limits kya hain","quizzoneai ke restrictions kya hain","QuizzoneAI limitations","QuizzoneAI usage limits","QuizzoneAI restrictions"],
+  type:"info",
+  tags:["limitations","usage"],
+  v:`
+  <b>QuizzoneAI Limitations</b><br><br>
+  1. May not understand very complex queries<br>
+  2. Limited to predefined knowledge base<br>
+  3. Code execution is simulated, not real-time<br>
+  4. Offline mode may restrict some features<br><br>
+  Please use accordingly and report any issues by giving <a href="https://akshat-881236.github.io/Portfolio-881236/feedback.htm" target="_blank">feedback</a>.
+  <b>QuizzoneAI Usage Limits</b><br><br>
+  1. Maximum 100 messages per day<br>
+  2. Maximum 10 quizzes per day<br>
+  3. Code previews limited to 5 per day<br><br>
+  Please use responsibly to ensure fair access for all users.<br><br>
+  Type <code>help commands</code> to see available commands.
+  Hope you have a great learning experience! 😊
+  `
+},
+
+{
+  k:["how to give feedback","provide feedback","quizzoneai feedback","quizzoneai ke liye feedback kaise dein","QuizzoneAI feedback","QuizzoneAI ke liye feedback kaise dein"],
+  type:"info",
+  tags:["feedback","support"],
+  v:`
+  <b>How to Give Feedback</b><br><br>
+  You can provide feedback on QuizzoneAI by visiting the <a href="https://akshat-881236.github.io/Portfolio-881236/feedback.htm" target="_blank">Feedback Page</a>.<br><br>
+  Your feedback helps improve QuizzoneAI and ensures a better learning experience for all users.
+  This page is the common feedback portal for all Akshat's projects and their associated platforms. You can also provide feedback for other projects here.<br><br>
+  <p> Other Useful pages you must check out: </p>
+  <ul>
+    <li><a href="https://akshat-881236.github.io/Portfolio-881236/" target="_blank">Akshat's Portfolio</a></li>
+    <li><a href="https://akshat-881236.github.io/Portfolio-881236/projects.htm" target="_blank">Akshat's Projects</a></li>
+    <li><a href="https://akshat-881236.github.io/Portfolio-881236/contact.htm" target="_blank">Contact Akshat</a></li>
+    <li><a href="https://akshat-881236.github.io/Portfolio-881236/about.htm" target="_blank">About Akshat</a></li>
+  </ul>
+  Thank you for helping us improve! 🙏
+  `
+},
+
+{
+  k:["privacy policy","data policy","quizzoneai privacy policy","quizzoneai data policy","quizzoneai ki privacy policy kya hai","quizzoneai ki data policy kya hai","QuizzoneAI privacy policy","QuizzoneAI data policy"],
+  type:"info",
+  tags:["privacy","policy"],
+  v:`
+  <b>Privacy Policy</b><br><br>
+  QuizzoneAI does not collect personal data or store user information.
+  All interactions are processed locally and securely.
+  However , user feedback submitted via the feedback page may be stored and reviewed for improvement purposes.
+  All data store locally in user's browser storage. No part of the data is sent to any server or third-party service.
+  Please refer to the <a href="/Quizzone/Documentary/OwnerMessageViewer.htm" target="_blank">Owner Message Page</a> for more details.
+  `
+},
+
+{
+  k:["terms of service","terms and conditions","quizzoneai terms of service","quizzoneai terms and conditions","quizzoneai ke terms of service kya hain","quizzoneai ke terms and conditions kya hain","QuizzoneAI terms of service","QuizzoneAI terms and conditions"],
+  type:"info",
+  tags:["terms","service"],
+  v:`
+  <b>Terms of Service</b><br><br>
+  By using QuizzoneAI, you agree to the following terms:<br><br>
+  1. Use QuizzoneAI for educational purposes only.<br>
+  2. Do not misuse or exploit the platform.<br>
+  3. Respect intellectual property rights.<br>
+  4. Report any bugs or issues promptly.<br><br>
+  Please refer to the <a href="/Quizzone/Documentary/OwnerMessageViewer.htm" target="_blank">Owner Message Page</a> for more details.
   `
 },
 
@@ -4416,8 +4538,394 @@ if(
   return true;
 }
 
+// ARTHIMETIC CALCULATIONS
+if(
+  cmd.startsWith("calculate") || cmd.startsWith("what is") || cmd.startsWith("compute") || cmd.startsWith("solve") ||
+  cmd.startsWith("Hal Kare") || cmd.startsWith("Solve kare") || cmd.startsWith("Calculate") || cmd.startsWith("Solve") || cmd.startsWith("Compute") || cmd.startsWith("What is") || cmd.startsWith("Can you calculate") || cmd.startsWith("Can you compute") || cmd.startsWith("Can you solve") || cmd.startsWith("Hey QuizzoneAI, calculate") || cmd.startsWith("Hey QuizzoneAI, compute") || cmd.startsWith("Hey QuizzoneAI, solve")
+){
+  let expression = text;
+  expression = expression.replace(/calculate|compute|solve|what is|Hal Kare|Solve kare|Calculate|Solve|Compute|Can you calculate|Can you compute|Can you solve|Hey QuizzoneAI, calculate|Hey QuizzoneAI, compute|Hey QuizzoneAI, solve/gi, "").trim();
+  // Understanding basic arithmetic expressions using symbols and words
+  expression = expression.replace(/plus/gi, "+")
+                         .replace(/minus/gi, "-")
+                         .replace(/times|multiplied by/gi, "*")
+                         .replace(/divided by/gi, "/")
+                         .replace(/into/gi, "*")
+                         .replace(/by/gi, "/");
+  try {
+    const result = eval(expression);
+    systemMessage(`The result of <b>${expression}</b> is <b>${result}</b>.`);
+  } catch (e) {
+    systemMessage("Sorry, I couldn't compute that expression.");
+  }
+  return true;
+}
+
+// 4 + 3 , 7-2 , 5*6 , 8/4 , 7 * 7 / 2 + 3 - 1 , {23 + 7} /5 * 3^2 + 8  
+if(/^[0-9+\-*/().\s^{}]+$/.test(cmd)){
+  let expression = cmd;
+  expression = expression.replace(/{/g, "(").replace(/}/g, ")");
+  expression = expression.replace(/\^/g, "**");
+  try {
+    const result = eval(expression);
+    systemMessage(`The result of <b>${expression}</b> is <b>${result}</b>.`);
+  } catch (e) {
+    systemMessage("Sorry, I couldn't compute that expression.");
+  }
+  return true;
+}
+
+// Trigger birthday wish on command with too short phrases
+if(cmd === "wish me happy birthday" || cmd === "wish me a happy birthday" || cmd === "can you wish me happy birthday" || cmd === "can you wish me a happy birthday" || cmd === "Hey QuizzoneAI, wish me happy birthday" || cmd === "Hey QuizzoneAI, wish me a happy birthday" || cmd === "Please wish me happy birthday" || cmd === "Kindly wish me happy birthday" || cmd === "Could you wish me happy birthday" || cmd === "I would like to be wished happy birthday" || cmd === "I want to be wished happy birthday" || cmd === "Happy Birthday" || cmd === "happy birthday" || cmd === "It's my birthday" || cmd === "Today is my birthday" || cmd === "My birthday is today" || cmd === "Can you wish me a happy birthday" || cmd === "Can you wish me happy birthday" || cmd === "Hey QuizzoneAI, can you wish me happy birthday" || cmd === "Hey QuizzoneAI, can you wish me a happy birthday" || cmd === "Please wish me a happy birthday" || cmd === "Kindly wish me a happy birthday" || cmd === "Could you wish me a happy birthday" || cmd === "I would like to be wished a happy birthday" || cmd === "I want to be wished a happy birthday"|| cmd === "Birthday" || cmd === "birthday" || cmd === "It's birthday" || cmd === "Today is birthday" || cmd === "Birthday is today" || cmd === "Can you wish me birthday" || cmd === "Hey QuizzoneAI, can you wish me birthday" || cmd === "Please wish me birthday" || cmd === "Kindly wish me birthday" || cmd === "Could you wish me birthday" || cmd === "I would like to be wished birthday" || cmd === "I want to be wished birthday"){
+  // Check if today is user's birthday
+  const today = new Date();
+  const dob = new Date(user.dob);
+  if(dob.getDate() === today.getDate() && dob.getMonth() === today.getMonth()){
+    systemMessage(`🎉 Happy Birthday, ${user.username}! Wishing you a fantastic year ahead filled with joy and success! 🎂`);
+  } else {
+    systemMessage(`It's not your birthday today, but I wish you a happy day nonetheless! 🎉. Your birthaday is ${dob.toDateString()}. I hope you have a wonderful day!`);
+  }
+  return true;
+}
+
+if(
+  cmd === "update profile" || cmd === "edit profile" || cmd === "change profile info" || cmd === "modify profile details" || cmd === "update my profile" || cmd === "edit my profile" || cmd === "change my profile info" || cmd === "modify my profile details" || cmd === "Hey QuizzoneAI, update profile" || cmd === "Hey QuizzoneAI, edit profile" || cmd === "Hey QuizzoneAI, change profile info" || cmd === "Hey QuizzoneAI, modify profile details" || cmd === "Please update profile" || cmd === "Please edit profile" || cmd === "Please change profile info" || cmd === "Please modify profile details" || cmd === "Kindly update profile" || cmd === "Kindly edit profile" || cmd === "Kindly change profile info" || cmd === "Kindly modify profile details" || cmd === "Could you update profile" || cmd === "Could you edit profile" || cmd === "Could you change profile info" || cmd === "Could you modify profile details" || cmd === "I would like to update my profile" || cmd === "I would like to edit my profile" || cmd === "I would like to change my profile info" || cmd === "I would like to modify my profile details" || cmd === "I want to update my profile" || cmd === "I want to edit my profile" || cmd === "I want to change my profile info" || cmd === "I want to modify my profile details" || cmd === "profile update" || cmd === "profile edit" || cmd === "change profile" || cmd === "modify profile" || cmd === "update my profile info" || cmd === "edit my profile info" || cmd === "change my profile" || cmd === "modify my profile" || cmd === "QuizzoneAI, update profile" || cmd === "QuizzoneAI, edit profile" || cmd === "QuizzoneAI, change profile info" || cmd === "QuizzoneAI, modify profile details"
+){
+  systemMessage(`
+    <b>QuizzoneAI Profile Commands</b><br><br>
+
+    <b>Update Fields:</b><br>
+    • update name = Your Name<br>
+    • update email = your@email.com<br>
+    • update dob = YYYY-MM-DD (18+ required)<br>
+    • update contact no = 10 digit number<br>
+    • update address = Your Address<br><br>
+
+    <b>Photo:</b><br>
+    • update profile photo<br><br>
+
+    <b>Password:</b><br>
+    • update password<br>
+    • verify otp = 123456<br><br>
+
+    <b>Danger Zone (GDPR):</b><br>
+    • delete my account<br><br>
+
+    All actions are audited and secured.
+  `);
+  return true;
+}
+
+if(cmd.startsWith("update ")){
+  const parts = cmd.split("=");
+  if(parts.length !== 2){
+    systemMessage("❌ Invalid format. Use: update field = value");
+    return true;
+  }
+
+  const field = parts[0].replace("update","").trim();
+  const value = parts[1].trim();
+
+  // DUPLICATE CHECK FUNCTION
+  function duplicateCheck(predicate){
+    return allUsers.find(u => u.email !== user.email && predicate(u));
+  }
+
+  switch(field){
+
+    case "name":
+      user.username = value;
+      logAudit("Name updated via AI");
+      systemMessage(`✅ Name updated to <b>${value}</b>`);
+      break;
+
+    case "father name":
+      user.fatherName = value;
+      logAudit("Father Name updated via AI");
+      systemMessage(`✅ Father Name updated to <b>${value}</b>`);
+      break;
+
+    case "email":
+      if(duplicateCheck(u => u.email === value)){
+        systemMessage("❌ Email already exists.");
+        return true;
+      }
+      user.email = value;
+      logAudit("Email updated via AI");
+      systemMessage(`✅ Email updated.`);
+      break;
+
+    case "dob":
+      const dob = new Date(value);
+      const age = Math.abs(new Date(Date.now()-dob).getUTCFullYear()-1970);
+      if(age < 18){
+        systemMessage("❌ Age must be 18+.");
+        return true;
+      }
+      user.dob = value;
+      logAudit("DOB updated via AI");
+      systemMessage(`✅ DOB updated.`);
+      break;
+
+    case "contact no":
+      if(!/^\d{10}$/.test(value)){
+        systemMessage("❌ Contact must be 10 digits.");
+        return true;
+      }
+      if(duplicateCheck(u => u.contact === value)){
+        systemMessage("❌ Contact number already exists.");
+        return true;
+      }
+      user.contact = value;
+      logAudit("Contact updated via AI");
+      systemMessage(`✅ Contact updated.`);
+      break;
+
+    case "address":
+      user.address = value;
+      logAudit("Address updated via AI");
+      systemMessage(`✅ Address updated.`);
+      break;
+
+    default:
+      systemMessage("❌ Unknown field.");
+      return true;
+  }
+
+  saveUserData(user);
+  return true;
+}
+
+if(cmd === "update profile photo"){
+  systemMessage(`
+    📸 <b>Profile Photo Update</b><br><br>
+    For security reasons, photo upload is handled via the Settings page.<br><br>
+
+    👉 <a href="/Quizzone/Home/Setting.htm" target="_blank">
+    Click here to upload your new passport-size photo
+    </a><br><br>
+
+    ✔ Your image will be matched with your current photo<br>
+    ✔ Checked against existing accounts<br>
+    ✔ Audit logged from QuizzoneAI
+  `);
+  logAudit("Profile photo update initiated");
+  return true;
+}
+
+let aiOTP = null;
+
+if(cmd === "update password"){
+  aiOTP = Math.floor(100000 + Math.random()*900000).toString();
+  systemMessage(`🔐 OTP sent (mock): <b>${aiOTP}</b><br>
+  Use: <code>verify otp = ${aiOTP}</code>`);
+  logAudit("Password OTP sent via AI");
+  return true;
+}
+
+if(cmd.startsWith("verify otp =")){
+  const otp = cmd.split("=").pop().trim();
+  if(otp !== aiOTP){
+    systemMessage("❌ Invalid OTP.");
+    return true;
+  }
+
+  systemMessage(`
+    ✅ OTP verified.<br><br>
+    <a href="/Quizzone/Home/Setting.htm" target="_blank">
+    Click here to update your password securely
+    </a>
+  `);
+
+  logAudit("OTP verified via AI");
+  return true;
+}
+
+user._gdprStep = user._gdprStep || 0;
+
+if(cmd === "delete my account"){
+  user._gdprStep = 1;
+  systemMessage(`⚠️ This will permanently delete your account. Type: <b>confirm delete</b><br> Why delete? We value your presence. If you have concerns, please reach out to support. You can submit feedback at <a href='https://akshat-881236.github.io/Portfolio-881236/feedback.htm' target='_blank'>Feedback Page</a>. We are always here to help!`);
+  return true;
+}
+
+if(cmd === "confirm delete" && user._gdprStep === 1){
+  user._gdprStep = 2;
+  systemMessage(`⚠️ Second confirmation required. Type: <b>final delete</b> <br> This action is irreversible. All your data will be permanently removed from your local storage. Please ensure you have backed up any important information before proceeding. We are sorry to see you go. If you have any feedback, please share it at <a href='https://akshat-881236.github.io/Portfolio-881236/feedback.htm' target='_blank'>Feedback Page</a>.<br> Type <b>final delete</b> to proceed.`);
+  return true;
+}
+
+if(cmd === "final delete" && user._gdprStep === 2){
+  user._gdprStep = 0;
+  logAudit("Account deleted via AI (GDPR)");
+
+  localStorage.setItem(
+    "QuizzoneUsersDB",
+    JSON.stringify(allUsers.filter(u => u.email !== user.email))
+  );
+  localStorage.removeItem("ActiveQuizzoneUser");
+
+  systemMessage(`🗑️ Your account has been permanently deleted. <br> Thank you for using Quizzone. We hope to see you again soon!. <b>Note:</b> Your data is securely removed from your device storage and you have to create another account to use the service again. However , QuizzoneAI service is also accessible without account setup in Guest mode. So continue your chatting experience as a Guest user!<br><br> 
+  <h1>Goodbye, ${user.username}!</h1>
+  <p>We're sad to see you go. If you ever change your mind, we'll be here to welcome you back with open arms.</p>
+  <p>Wishing you all the best in your future endeavors!</p>
+  <p>— The Quizzone Team</p>
+  <p>Owner : Akshat Prasad</p>
+  <p>Contact : 7838250289 / 9953854901</p>
+  <p>Email : akshatpsd2005@gmail.com</p>
+  <p>Visit <a href="https://akshat-881236.github.io/Portfolio-881236/" target="_blank">My Portfolio to explore more of our projects</a></p>
+  If you have any questions or need assistance, feel free to reach out to us at any time.
+  Type "How to set up new account" to create a new account and start using QuizzoneAI again!
+  `);
+  return true;
+}
+
+if(user._gdprStep > 0){
+  systemMessage("❌ Deletion process underway. Please complete the previous steps.");
+  return true;
+}
+
+if(cmd === "how to set up new account" || cmd === "how to create new account" || cmd === "account setup instructions" || cmd === "create new account instructions" || cmd === "please guide me to set up new account" || cmd === "kindly guide me to create new account" || cmd === "i want to set up a new account" || cmd === "i want to create a new account" || cmd === "guide me to set up new account" || cmd === "guide me to create new account" || cmd === "help me set up new account" || cmd === "help me create new account" || cmd === "How to set up new account" || cmd === "QuizzoneAI, how to create new account" || cmd === "QuizzoneAI, how to set up new account" || cmd === "Please guide me to create new account" || cmd === "Kindly guide me to set up new account" || cmd === "Could you guide me to create new account" || cmd === "Could you guide me to set up new account" || cmd === "I would like to set up a new account" || cmd === "I would like to create a new account" || cmd === "How to set up an account" || cmd === "How to create an account" || cmd === "Account setup instructions" || cmd === "Create new account instructions" || cmd === "Please guide me to set up a account" || cmd === "Kindly guide me to create an account" || cmd === "I want to set up an account" || cmd === "I want to create an account" || cmd === "Guide me to set up a account" || cmd === "Guide me to create an account" || cmd === "Help me set up an account" || cmd === "Help me create an account" || cmd === "QuizzoneAI, how to create an account" || cmd === "QuizzoneAI, how to set up an account" || cmd === "Please guide me to create an account" || cmd === "Kindly guide me to set up an account" || cmd === "Could you guide me to create an account" || cmd === "Could you guide me to set up an account" || cmd === "I would like to set up an account" || cmd === "I would like to create an account" || cmd === "how to set up an account" || cmd === "how to create an account"){
+  systemMessage(`
+    <b>Account Setup Instructions</b><br><br>
+    1. Go to the <a href="/Quizzone/Home/Register.htm" target="_blank">Registration Page</a>.<br>
+    2. Fill in your details: Name, Email, Password, Contact, DOB, Address.<br>
+    3. Click "Register" to create your account.<br>
+    4. Verify your email if required.<br>
+    5. Log in using your email and password on the <a href="/Quizzone/Home/Login.htm" target="_blank">Login Page</a>.<br><br>  OR <br><br>
+    You can also use the "Guest Mode" to access QuizzoneAI without an account. In this mode , Use special commands that are use to edit profile . By default , When you edit your name in Guest mode , the edited name saved in Active Quizzone User and or using this trick you can create your account without reaching out to Registration page.<br><br>
+    6. You can update you other details uaing QuizzoneAI commands after logging in.<br><br>
+    7. Or Go to Settings page after logging in to update your profile photo and password securely.<br><br>
+    8. But those who login using this trick in Guest mode , their data is stored only in local storage and not in Users DB until they register properly using Registration page.<br><br>
+    9. Additionally , first time user can't update their email via setting page and they have to use QuizzoneAI commands to update their email to avoid duplicates in Users DB.<br><br>
+    10. For any assistance , feel free to reach out to our support team.<br><br>
+    Enjoy using QuizzoneAI with your new account! 🎉
+  `);
+  return true;
+}
+
+if(
+  cmd === "export my data" ||
+  cmd === "download my data"
+){
+
+  if(!user.privacyConsent){
+    systemMessage("❌ Please accept privacy policy before exporting your data.");
+    return true;
+  }
+
+  const html = `
+    <h2>My Quizzone Account Data</h2>
+    <ul>
+      <li>Name: ${user.username || "N/A"}</li>
+      <li>Email: ${user.email || "N/A"}</li>
+      <li>Contact: ${user.contact || "N/A"}</li>
+      <li>DOB: ${user.dob || "N/A"}</li>
+      <li>Address: ${user.address || "N/A"}</li>
+      <li>Role: ${user.role || "User"}</li>
+    </ul>
+  `;
+
+  const blob = new Blob([html], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "My_Quizzone_Data.html";
+  a.click();
+
+  logAudit("User exported own data (HTML)");
+
+  systemMessage("✅ Your personal data has been downloaded successfully.");
+  return true;
+}
+
+if(cmd === "admin export all users"){
+
+  if(user.email !== OWNER_EMAIL){
+    systemMessage("❌ Admin access only.");
+    return true;
+  }
+
+  adminExportPending = true;
+
+  systemMessage(`
+    🔐 Admin verification required.<br>
+    Type:<br>
+    <code>admin password = ${OWNER_EMAIL}</code>
+  `);
+
+  return true;
+
+} else if(cmd.startsWith("admin password =")){
+
+  if(!adminExportPending){
+    systemMessage("❌ No admin export request found.");
+    return true;
+  }
+
+  const pass = cmd.split("=").pop().trim();
+  if(pass !== OWNER_EMAIL){
+    systemMessage("❌ Incorrect admin password.");
+    return true;
+  }
+
+  adminExportPending = false;
+
+  const html = `
+    <h2>Quizzone – All Users Data (Admin)</h2>
+    <ul>
+      ${allUsers.map(u => `
+        <li>
+          ${u.username || "N/A"} |
+          ${u.email || "N/A"} |
+          ${u.contact || "N/A"} |
+          ${u.role || "User"}
+        </li>
+      `).join("")}
+    </ul>
+  `;
+
+  const blob = new Blob([html], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Quizzone_All_Users_Admin.html";
+  a.click();
+
+  logAudit("ADMIN exported all users data");
+
+  systemMessage("✅ Admin export completed successfully.");
+  return true;
+}
+
   return false; // not a command
 }
+
+const allUsers = JSON.parse(localStorage.getItem("QuizzoneUsersDB")) || [];
+const auditLogs = JSON.parse(localStorage.getItem("QuizzoneAuditLogs")) || [];
+
+function now(){ return new Date().toISOString(); }
+function saveUserData(u){
+  localStorage.setItem("ActiveQuizzoneUser", JSON.stringify(u));
+  const idx = allUsers.findIndex(x => x.email === u.email);
+  if(idx !== -1){
+    allUsers[idx] = u;
+    localStorage.setItem("QuizzoneUsersDB", JSON.stringify(allUsers));
+  }
+}
+function logAudit(action){
+  auditLogs.push({
+    email: user.email,
+    action,
+    source: "QuizzoneAI",
+    time: now()
+  });
+  localStorage.setItem("QuizzoneAuditLogs", JSON.stringify(auditLogs));
+}
+/* =====================================================
+   SYSTEM MESSAGE =========== */
 
 function systemMessage(text){
   chats[activeChatId].messages.push({

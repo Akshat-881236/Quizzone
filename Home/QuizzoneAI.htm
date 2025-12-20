@@ -267,12 +267,33 @@ footer.input-box button{
   background:white;border-radius:14px;
 }
 .preview-box iframe{width:100%;height:100%;border:none}
+.welcome-wrapper{
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  padding:16px;
+  border-radius:14px;
+}
+.welcome-head{font-size:16px;margin-bottom:8px}
+.welcome-body ul{margin:8px 0 8px 18px}
+.quick-cmd{
+  display:inline-block;
+  background:#e0e7ff;
+  padding:4px 8px;
+  border-radius:6px;
+  margin:3px 0;
+  font-size:12px;
+}
+.welcome-footer{
+  margin-top:10px;
+  font-size:12px;
+  color:#64748b;
+}
+
 </style>
 <link rel="manifest" href="/Quizzone/manifest.json">
 <meta name="theme-color" content="#007bff">
 </head>
 <script src="/Quizzone/Global/loader.js"></script>
-<body data-theme="light">
+<body data-theme="light" onload="wishBirthday();">
 
 <div class="app">
 
@@ -427,13 +448,52 @@ function getGreeting(){
   return "Good night";
 }
 
-function welcomeMessage(){
-  return `
-<b>${getGreeting()}, ${user.username} 👋</b><br><br>
-I am <b>QuizzoneAI</b>, your learning assistant.<br>
-Ask me about concepts, quizzes, or code.
-`;
+function showStartupCloud(){
+  showCloud(true);
+  setTimeout(() => showCloud(false), 2000);
 }
+
+
+function welcomeMessage(){
+  const greeting = getGreeting();
+  const name = user.username || "Learner";
+
+  return `
+  <div class="welcome-wrapper">
+
+    <div class="welcome-head">
+      <b>${greeting}, ${name} 👋</b>
+    </div>
+
+    <div class="welcome-body">
+      I am <b>QuizzoneAI</b>, your personal learning assistant.<br><br>
+
+      <b>You can ask me to:</b>
+      <ul>
+        <li>📘 Explain concepts (HTML, CSS, JS, subjects)</li>
+        <li>🧠 Generate quizzes & questions</li>
+        <li>💻 Show code with preview & explanation</li>
+        <li>📊 Check your progress & stats</li>
+        <li>📄 Export your data (PDF / HTML)</li>
+      </ul>
+
+      <b>Quick Start Options:</b><br>
+      <span class="quick-cmd">👉 what is html</span><br>
+      <span class="quick-cmd">👉 generate a quiz</span><br>
+      <span class="quick-cmd">👉 show html code example</span><br>
+      <span class="quick-cmd">👉 my progress</span><br>
+      <span class="quick-cmd">👉 export my data in pdf format</span>
+    </div>
+
+    <div class="welcome-footer">
+      <i class="bi bi-cloud"></i>
+      <span>Type your question below to begin…</span>
+    </div>
+
+  </div>
+  `;
+}
+
 
 /* =====================================================
    KNOWLEDGE BASE
@@ -4840,63 +4900,70 @@ if(
   return true;
 }
 
-if(cmd === "admin export all users"){
+// COMMAND TO EXPORT DATA (ADMIN ONLY)
+if (
+  cmd === "export all data" ||
+  cmd === "export all account data" ||
+  cmd === "download all data" ||
+  cmd === "download all account data" ||
+  cmd === "please export all data" ||
+  cmd === "kindly export all account data" ||
+  cmd === "i want to export all data" ||
+  cmd === "i want to download my data" ||
+  cmd === "quizzoneai, export my data" ||
+  cmd === "quizzoneai, download my data"
+) {
+  // PREPARE HTML DATA
+  let data = `
+    <h2>Quizzone User Data Export</h2>
 
-  if(user.email !== OWNER_EMAIL){
-    systemMessage("❌ Admin access only.");
-    return true;
-  }
+    <h3>Active Admin Details</h3>
+    <ul>
+      <li><b>Name:</b> ${user.username || "N/A"}</li>
+      <li><b>Email:</b> ${user.email || "N/A"}</li>
+      <li><b>Contact:</b> ${user.contact || "N/A"}</li>
+      <li><b>DOB:</b> ${user.dob || "N/A"}</li>
+      <li><b>Address:</b> ${user.address || "N/A"}</li>
+      <li><b>Role:</b> ${user.role || "Admin"}</li>
+    </ul>
 
-  adminExportPending = true;
-
-  systemMessage(`
-    🔐 Admin verification required.<br>
-    Type:<br>
-    <code>admin password = ${OWNER_EMAIL}</code>
-  `);
-
-  return true;
-
-} else if(cmd.startsWith("admin password =")){
-
-  if(!adminExportPending){
-    systemMessage("❌ No admin export request found.");
-    return true;
-  }
-
-  const pass = cmd.split("=").pop().trim();
-  if(pass !== OWNER_EMAIL){
-    systemMessage("❌ Incorrect admin password.");
-    return true;
-  }
-
-  adminExportPending = false;
-
-  const html = `
-    <h2>Quizzone – All Users Data (Admin)</h2>
+    <h3>All Users in Database</h3>
     <ul>
       ${allUsers.map(u => `
         <li>
-          ${u.username || "N/A"} |
-          ${u.email || "N/A"} |
-          ${u.contact || "N/A"} |
-          ${u.role || "User"}
+          <b>Name:</b> ${u.username || "N/A"},
+          <b>Email:</b> ${u.email || "N/A"},
+          <b>Contact:</b> ${u.contact || "N/A"},
+          <b>DOB:</b> ${u.dob || "N/A"},
+          <b>Address:</b> ${u.address || "N/A"},
+          <b>Role:</b> ${u.role || "User"}
         </li>
       `).join("")}
     </ul>
   `;
 
-  const blob = new Blob([html], { type: "text/html" });
+  // DOWNLOAD HTML FILE
+  const blob = new Blob([data], { type: "text/html" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "Quizzone_All_Users_Admin.html";
+  a.download = "QuizzoneUserData.html";
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
 
-  logAudit("ADMIN exported all users data");
+  // AUDIT LOG
+  logAudit("ADMIN exported all users data via AI");
 
-  systemMessage("✅ Admin export completed successfully.");
+  // SYSTEM MESSAGE
+  systemMessage(`
+    ✅ <b>Admin export completed successfully.</b><br><br>
+    📁 File: <b>QuizzoneUserData.html</b><br><br>
+    ⚠️ This file contains all users data. Handle responsibly.<br><br>
+    Akshat Prasad
+  `);
+
   return true;
 }
 
@@ -5039,12 +5106,30 @@ function deleteActiveChat(){
 
 // Function to wish birthday automatically by QuizzoneAI on user's birthday on chat load
 function wishBirthday(){
+  if(!user.dob) return;
+
   const today = new Date();
   const dob = new Date(user.dob);
-  if(dob.getDate() === today.getDate() && dob.getMonth() === today.getMonth()){
-    systemMessage(`🎉 Happy Birthday, ${user.username}! Wishing you a fantastic year ahead filled with joy and success! 🎂`);
+
+  if(
+    dob.getDate() === today.getDate() &&
+    dob.getMonth() === today.getMonth()
+  ){
+    systemMessage(`
+      🎉 <b>Happy Birthday, ${user.username}! 🎂</b><br><br>
+      Wishing you a year full of learning, growth, and success.<br>
+      Keep shining with <b>QuizzoneAI</b> ✨
+    `);
+  }
+  else {
+     systemMessage(`
+      🎉 <b>Dear User, ${user.username}! 🎂</b><br><br>
+      Wishing you a this day a full of learning, growth, and success.<br>
+      Keep shining with <b>QuizzoneAI</b> ✨
+    `);
   }
 }
+
 
 
 /* =====================================================

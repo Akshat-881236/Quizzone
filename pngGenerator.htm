@@ -2,52 +2,111 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Logo → PNG & Base64 Icon Generator</title>
+<title>Custom Multi-Size PNG & Base64 Icon Generator</title>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+<!-- JSZip for real ZIP download -->
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
 <style>
-  :root{
-    --bg:#f6f9ff; --card:#fff; --accent:#007bff; --muted:#6c757d;
-  }
-  body{ margin:0; font-family:Inter,system-ui,Arial; background:var(--bg); color:#111; }
-  .wrap{ max-width:980px; margin:36px auto; padding:18px; }
-  .card{ background:var(--card); padding:18px; border-radius:12px; box-shadow:0 6px 24px rgba(20,20,60,0.06); }
-  h1{ margin:0 0 6px 0; color:var(--accent); font-size:20px; }
-  p.lead{ margin:6px 0 18px 0; color:var(--muted); }
-  .row{ display:flex; gap:16px; flex-wrap:wrap; }
-  .col{ flex:1 1 300px; min-width:260px; }
-  label.btn-upload{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:10px 14px; background:linear-gradient(90deg,#fff,#f4fbff);
-    border:1px dashed #cfe8ff; border-radius:8px; cursor:pointer; color:var(--accent);
-  }
-  input[type=file]{ display:none; }
-  img.preview{ max-width:220px; max-height:220px; border-radius:10px; display:block; margin-top:12px; border:1px solid #eee; }
-  .outputs{ margin-top:14px; display:flex; flex-direction:column; gap:12px; }
-  .out-item{ padding:12px; background:#f8fbff; border-radius:8px; display:flex; gap:12px; align-items:flex-start; }
-  .out-item canvas, .out-item img { border-radius:8px; border:1px solid #e6f0ff; width:96px; height:96px; object-fit:contain; background:white; }
-  .meta{ flex:1; }
-  pre.base64{ max-height:140px; overflow:auto; background:#001; color:#0f0; padding:8px; border-radius:6px; font-size:12px; white-space:pre-wrap; word-break:break-word; }
-  .controls{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-  button{ background:var(--accent); color:white; border:0; padding:8px 12px; border-radius:8px; cursor:pointer; }
-  button.alt{ background:#28a745; }
-  .small{ font-size:13px; color:var(--muted); }
-  .download-list{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
-  code.inline{ background:#eff6ff; padding:6px 8px; border-radius:6px; font-size:13px; }
-  .notice{ margin-top:12px; padding:10px; background:#fff4e6; border-radius:8px; color:#7a4b00; }
-  footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
-  @media(max-width:720px){
-    .row{ flex-direction:column; }
-    .out-item{ flex-direction:column; align-items:center; }
-    .out-item canvas,.out-item img{ width:160px; height:160px; }
-  }
+:root{
+  --bg:#f6f9ff; --card:#fff; --accent:#007bff; --muted:#6c757d;
+}
+body{
+  margin:0; font-family:Inter,system-ui,Arial;
+  background:var(--bg); color:#111;
+}
+.wrap{ max-width:1100px; margin:32px auto; padding:18px; }
+.card{
+  background:var(--card); padding:18px;
+  border-radius:14px;
+  box-shadow:0 6px 24px rgba(20,20,60,0.08);
+}
+h1{ margin:0 0 6px; color:var(--accent); font-size:22px; }
+p.lead{ margin:6px 0 18px; color:var(--muted); }
+
+.row{ display:flex; gap:18px; flex-wrap:wrap; }
+.col{ flex:1 1 320px; min-width:280px; }
+
+label.btn-upload{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 16px;
+  background:linear-gradient(90deg,#fff,#f4fbff);
+  border:1px dashed #cfe8ff;
+  border-radius:10px; cursor:pointer;
+  color:var(--accent);
+}
+input[type=file]{ display:none; }
+
+.preview{
+  max-width:240px; max-height:240px;
+  border-radius:12px;
+  margin-top:14px;
+  border:1px solid #eee;
+  display:none;
+}
+
+.notice{
+  margin-top:12px; padding:10px;
+  background:#fff4e6; border-radius:8px;
+  color:#7a4b00; font-size:13px;
+}
+
+input, textarea{
+  width:100%; padding:8px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+button{
+  background:var(--accent); color:#fff;
+  border:0; padding:10px 14px;
+  border-radius:10px; cursor:pointer;
+}
+button.alt{ background:#28a745; }
+
+.controls{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+
+.outputs{ margin-top:18px; display:none; flex-direction:column; gap:14px; }
+
+.icon-item{
+  display:flex; gap:14px; align-items:center;
+  background:#f8fbff; padding:12px;
+  border-radius:10px;
+}
+.icon-item canvas{
+  border:1px solid #dbeafe;
+  border-radius:8px;
+  background:white;
+}
+
+textarea{
+  max-height: fit-content;
+  background:#001; color:#0f0;
+  padding:8px; border-radius:6px;
+  font-size:12px;
+}
+
+footer{
+  text-align:center; margin-top:18px;
+  color:var(--muted); font-size:13px;
+}
+
+@media(max-width:720px){
+  .icon-item{ flex-direction:column; }
+}
 </style>
 </head>
-<body>
 
+<body>
 <div class="wrap">
   <div class="card">
-    <h1>Logo → Icon Generator (PNG 192 & 512) + Base64</h1>
-    <p class="lead">Upload your real Quizzone logo (PNG/JPG/SVG). This tool creates `icon-192.png` and `icon-512.png`, shows base64 strings, and provides downloadable files including a ready `manifest.json` and a starter `service-worker.js` for PWA offline caching.</p>
+
+    <h1>Custom Multi-Size PNG & Base64 Icon Generator</h1>
+    <p class="lead">
+      Upload one logo and generate <b>multiple PNG icons at once</b>
+      in any size you need. All processing happens locally.
+    </p>
 
     <div class="row">
       <div class="col">
@@ -55,326 +114,151 @@
           <input id="fileInput" type="file" accept="image/*">
           📁 Upload Logo
         </label>
-        <div id="fileInfo" class="small" style="margin-top:10px;">No file chosen</div>
-        <img id="preview" class="preview" alt="logo preview" style="display:none;">
-        <div class="notice">Tip: Best results with a square, high-resolution PNG (≥ 1024×1024) with transparent background.</div>
+        <div id="fileInfo" class="notice">No file selected</div>
+        <img id="preview" class="preview">
       </div>
 
       <div class="col">
-        <div class="card" style="padding:12px;">
-          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
-            <div><b>Generate Options</b><div class="small">Choose formats & names</div></div>
-            <div class="small">Icons: <code class="inline">icon-192.png</code>, <code class="inline">icon-512.png</code></div>
-          </div>
+        <label><b>Output Base Name</b></label>
+        <input id="baseName" value="icon">
 
-          <div style="margin-top:10px;">
-            <label>Output Base Name: <input id="baseName" type="text" value="icon" style="padding:6px;border-radius:6px;border:1px solid #ddd;"></label>
-            <div class="small" style="margin-top:8px;">(Final generated names: <code id="name192">icon-192.png</code>, <code id="name512">icon-512.png</code>)</div>
-          </div>
+        <label style="margin-top:12px;">
+          <b>Icon Sizes (comma-separated)</b>
+        </label>
+        <textarea id="sizes" rows="3">16,32,48,64,96,128,192,256,384,512</textarea>
 
-          <div class="controls">
-            <button id="genBtn">Generate Icons</button>
-            <button id="downloadAll" class="alt" disabled>Download All (zip)</button>
-            <button id="downloadTxt" disabled>Download Base64 .txt</button>
-          </div>
-
-          <div class="small" style="margin-top:8px;">You can also copy base64 strings directly from the boxes below.</div>
+        <div class="controls">
+          <button id="generate">Generate Icons</button>
+          <button id="downloadZip" class="alt" disabled>Download All (ZIP)</button>
+          <button id="downloadB64" disabled>Download Base64 (.txt)</button>
         </div>
       </div>
     </div>
 
-    <div class="outputs" id="outputs" style="display:none;">
-      <!-- Icon 192 -->
-      <div class="out-item" id="out192">
-        <canvas id="canvas192" width="192" height="192"></canvas>
-        <div class="meta">
-          <b id="label192">icon-192.png</b>
-          <div class="small">Resolution: 192 × 192</div>
-          <div class="download-list" style="margin-top:8px;">
-            <a id="dl192" download="icon-192.png"><button>Download PNG</button></a>
-            <button id="copyB64_192">Copy Base64</button>
-          </div>
-          <div style="margin-top:10px;">
-            <div class="small">Base64 (preview)</div>
-            <pre id="b64_192" class="base64">n/a</pre>
-          </div>
-        </div>
-      </div>
+    <div id="outputs" class="outputs"></div>
 
-      <!-- Icon 512 -->
-      <div class="out-item" id="out512">
-        <canvas id="canvas512" width="512" height="512"></canvas>
-        <div class="meta">
-          <b id="label512">icon-512.png</b>
-          <div class="small">Resolution: 512 × 512</div>
-          <div class="download-list" style="margin-top:8px;">
-            <a id="dl512" download="icon-512.png"><button>Download PNG</button></a>
-            <button id="copyB64_512">Copy Base64</button>
-          </div>
-          <div style="margin-top:10px;">
-            <div class="small">Base64 (preview)</div>
-            <pre id="b64_512" class="base64">n/a</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- Manifest + Service Worker -->
-      <div class="out-item" style="align-items:center;gap:18px;">
-        <div style="flex:1">
-          <b>manifest.json (ready)</b>
-          <div class="small" style="margin-top:6px;">Download and place the icons in your PWA root or update the paths as needed.</div>
-          <pre id="manifestContent" class="base64" style="background:#f4f6ff;color:#003f80;"></pre>
-          <div style="margin-top:8px;">
-            <button id="dlManifest">Download manifest.json</button>
-            <button id="dlSW">Download service-worker.js</button>
-            <button id="copyManifest">Copy manifest</button>
-          </div>
-        </div>
-
-        <div style="width:220px;">
-          <b>PWA Install Note</b>
-          <div class="small" style="margin-top:8px;">Place the icons and manifest in your web root and register the service worker in your site pages to enable offline and install prompts.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <footer class="small">Generated locally in your browser — files are not uploaded anywhere.</footer>
+    <footer>Frontend-only • No upload • No backend</footer>
   </div>
 </div>
 
 <script>
-/* Utility: create downloadable link from blob */
-function createDownloadLink(blob, filename){
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  return { url, a };
-}
-
-/* Elements */
 const fileInput = document.getElementById('fileInput');
-const previewImg = document.getElementById('preview');
+const preview = document.getElementById('preview');
 const fileInfo = document.getElementById('fileInfo');
-const genBtn = document.getElementById('genBtn');
+const baseName = document.getElementById('baseName');
+const sizesInput = document.getElementById('sizes');
 const outputs = document.getElementById('outputs');
-const canvas192 = document.getElementById('canvas192');
-const canvas512 = document.getElementById('canvas512');
-const ctx192 = canvas192.getContext('2d');
-const ctx512 = canvas512.getContext('2d');
-const b64_192 = document.getElementById('b64_192');
-const b64_512 = document.getElementById('b64_512');
-const dl192 = document.getElementById('dl192');
-const dl512 = document.getElementById('dl512');
-const copyB64_192 = document.getElementById('copyB64_192');
-const copyB64_512 = document.getElementById('copyB64_512');
-const manifestContent = document.getElementById('manifestContent');
-const dlManifest = document.getElementById('dlManifest');
-const dlSW = document.getElementById('dlSW');
-const copyManifest = document.getElementById('copyManifest');
-const downloadTxt = document.getElementById('downloadTxt');
-const downloadAll = document.getElementById('downloadAll');
-const baseNameInput = document.getElementById('baseName');
-const name192 = document.getElementById('name192');
-const name512 = document.getElementById('name512');
+const downloadZipBtn = document.getElementById('downloadZip');
+const downloadB64Btn = document.getElementById('downloadB64');
 
-/* State */
 let imgObj = null;
-let lastFiles = {}; // store blobs & base64
+let generated = [];
 
-/* Handle file input */
-fileInput.addEventListener('change', async (e)=>{
+fileInput.onchange = e=>{
   const f = e.target.files[0];
   if(!f) return;
-  fileInfo.textContent = `${f.name} • ${Math.round(f.size/1024)} KB • ${f.type}`;
+  fileInfo.textContent = `${f.name} • ${Math.round(f.size/1024)} KB`;
   const url = URL.createObjectURL(f);
-  previewImg.src = url;
-  previewImg.style.display = 'block';
-
-  // load into Image object (preserve aspect)
+  preview.src = url;
+  preview.style.display = 'block';
   const img = new Image();
-  img.crossOrigin = 'anonymous';
-  img.onload = ()=> { imgObj = img; };
-  img.onerror = ()=> { alert('Error loading the image. Use a standard PNG/JPG/SVG.'); };
+  img.onload = ()=> imgObj = img;
   img.src = url;
-});
+};
 
-/* Update filenames */
-baseNameInput.addEventListener('input', ()=>{
-  const base = baseNameInput.value.trim() || 'icon';
-  name192.textContent = `${base}-192.png`;
-  name512.textContent = `${base}-512.png`;
-  dl192.setAttribute('download', `${base}-192.png`);
-  dl512.setAttribute('download', `${base}-512.png`);
-});
-
-/* Generate icons */
-genBtn.addEventListener('click', async ()=>{
-  if(!imgObj){ alert('Please upload a logo first.'); return; }
-
-  // clear canvases
-  ctx192.clearRect(0,0,canvas192.width,canvas192.height);
-  ctx512.clearRect(0,0,canvas512.width,canvas512.height);
-
-  // Helper to draw with aspect-fit and centered
-  function drawImageFit(ctx, img, w, h){
-    ctx.clearRect(0,0,w,h);
-    // fill transparent background
-    ctx.fillStyle = 'rgba(0,0,0,0)';
-    ctx.fillRect(0,0,w,h);
-
-    const iw = img.width, ih = img.height;
-    const r = Math.min(w/iw, h/ih);
-    const nw = iw*r, nh = ih*r;
-    const dx = (w - nw)/2;
-    const dy = (h - nh)/2;
-    ctx.drawImage(img, dx, dy, nw, nh);
-  }
-
-  drawImageFit(ctx192, imgObj, canvas192.width, canvas192.height);
-  drawImageFit(ctx512, imgObj, canvas512.width, canvas512.height);
-
-  // toDataURL / toBlob
-  const data192 = canvas192.toDataURL('image/png');
-  const data512 = canvas512.toDataURL('image/png');
-
-  // show base64 previews (trim long)
-  const trimBase64 = (s)=> s.replace(/^data:image\/png;base64,/, '');
-  b64_192.textContent = data192;
-  b64_512.textContent = data512;
-
-  // create blobs
-  canvas192.toBlob(blob192=>{
-    lastFiles['192'] = { blob: blob192, dataURL: data192 };
-    const base = baseNameInput.value.trim() || 'icon';
-    const fname = `${base}-192.png`;
-    const url = URL.createObjectURL(blob192);
-    dl192.href = url;
-    dl192.download = fname;
-    dl192.style.display = 'inline-block';
-    updateManifest();
-  }, 'image/png', 1);
-
-  canvas512.toBlob(blob512=>{
-    lastFiles['512'] = { blob: blob512, dataURL: data512 };
-    const base = baseNameInput.value.trim() || 'icon';
-    const fname = `${base}-512.png`;
-    const url = URL.createObjectURL(blob512);
-    dl512.href = url;
-    dl512.download = fname;
-    dl512.style.display = 'inline-block';
-    updateManifest();
-  }, 'image/png', 1);
-
-  outputs.style.display = 'block';
-  downloadTxt.disabled = false;
-  downloadAll.disabled = false;
-});
-
-/* Copy base64 */
-copyB64_192.addEventListener('click', ()=>{
-  navigator.clipboard.writeText(b64_192.textContent).then(()=> alert('Copied base64 for 192px'));
-});
-copyB64_512.addEventListener('click', ()=>{
-  navigator.clipboard.writeText(b64_512.textContent).then(()=> alert('Copied base64 for 512px'));
-});
-
-/* Download base64 .txt (both) */
-downloadTxt.addEventListener('click', ()=>{
-  const out = [
-    `# icon base64 (dataURL) - generated by logo-icon-generator`,
-    `icon-192:`,
-    lastFiles['192'] ? lastFiles['192'].dataURL : 'n/a',
-    '',
-    `icon-512:`,
-    lastFiles['512'] ? lastFiles['512'].dataURL : 'n/a',
-    '',
-    'manifest.json (suggested):',
-    manifestContent.textContent
-  ].join('\n');
-
-  const blob = new Blob([out], { type: 'text/plain' });
-  const u = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = u; a.download = 'icons-base64.txt';
-  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u);
-});
-
-/* Update manifest preview & downloads */
-function updateManifest(){
-  const base = baseNameInput.value.trim() || 'icon';
-  const manifest = {
-    "name": "Quizzone",
-    "short_name": "Quizzone",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#007bff",
-    "icons": [
-      { "src": `/${base}-192.png`, "sizes": "192x192", "type": "image/png", "purpose":"any maskable" },
-      { "src": `/${base}-512.png`, "sizes": "512x512", "type": "image/png", "purpose":"any maskable" }
-    ]
-  };
-
-  const text = JSON.stringify(manifest, null, 2);
-  manifestContent.textContent = text;
-
-  // prepare manifest download
-  const blob = new Blob([text], { type: 'application/json' });
-  const { url } = createDownloadLink(blob, 'manifest.json');
-  dlManifest.href = url;
-  dlManifest.download = 'manifest.json';
-
-  // prepare service-worker.js (simple offline cache)
-  const sw = `// Basic service worker generated by logo-icon-generator\nconst CACHE_NAME = 'quizzone-cache-v1';\nconst FILES_TO_CACHE = [ '/', '/index.html', '/${base}-192.png', '/${base}-512.png', '/manifest.json' ];\nself.addEventListener('install', (evt) => { evt.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))); self.skipWaiting(); });\nself.addEventListener('activate', (evt) => { evt.waitUntil(self.clients.claim()); });\nself.addEventListener('fetch', (evt) => { evt.respondWith(caches.match(evt.request).then(resp => resp || fetch(evt.request))); });`;
-  const blobSw = new Blob([sw], { type: 'application/javascript' });
-  const { url: swUrl } = createDownloadLink(blobSw, 'service-worker.js');
-  dlSW.href = swUrl;
-  dlSW.download = 'service-worker.js';
+function drawFit(ctx,img,size){
+  const r = Math.min(size/img.width, size/img.height);
+  const w = img.width*r, h = img.height*r;
+  ctx.clearRect(0,0,size,size);
+  ctx.drawImage(img,(size-w)/2,(size-h)/2,w,h);
 }
 
-/* Download manifest copy & copy manifest text */
-copyManifest.addEventListener('click', ()=>{
-  navigator.clipboard.writeText(manifestContent.textContent).then(()=> alert('manifest copied to clipboard'));
-});
+document.getElementById('generate').onclick = ()=>{
+  if(!imgObj) return alert('Upload an image first');
 
-/* Download ZIP - optional simple implementation using JSZip if included
-   We'll implement a basic zip-less download: if JSZip is not present,
-   create a .txt with instructions. For a real zip, include jszip library.
-*/
-downloadAll.addEventListener('click', ()=>{
-  if(!lastFiles['192'] || !lastFiles['512']) return alert('Generate icons first');
-  // create single ZIP would be nicer, but to avoid external libs we prompt the user to download individually
-  alert('Downloading individual files. Please save both PNGs, manifest.json and service-worker.js into your web root.');
-  dl192.click();
-  dl512.click();
-  dlManifest.click();
-  dlSW.click();
-});
+  outputs.innerHTML = '';
+  generated = [];
 
-/* Clean up object URLs when unloading */
-window.addEventListener('unload', ()=>{
-  // Nothing critical — browser will revoke when closed.
-});
+  const sizes = sizesInput.value
+    .split(',')
+    .map(s=>parseInt(s.trim()))
+    .filter(s=>s>0);
 
-/* Small usability: handle drag/drop */
-document.addEventListener('dragover', e=>e.preventDefault());
-document.addEventListener('drop', e=>{
-  e.preventDefault();
-  if(e.dataTransfer.files && e.dataTransfer.files[0]){
-    fileInput.files = e.dataTransfer.files;
-    const evt = new Event('change');
-    fileInput.dispatchEvent(evt);
-  }
-});
+  sizes.forEach(size=>{
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    drawFit(ctx,imgObj,size);
 
-fetch(window.location.href)
-  .then(res => {
-    if (!res.ok) window.location.href = "/Quizzone/Errors/404.htm";
-  })
-  .catch(() => window.location.href = "/Quizzone/Errors/404.htm");
+    const dataURL = canvas.toDataURL('image/png');
 
+    const item = document.createElement('div');
+    item.className = 'icon-item';
+    item.innerHTML = `
+      <canvas width="${size}" height="${size}"></canvas>
+      <div style="flex:1">
+        <b>${baseName.value}-${size}.png</b>
+        <div style="margin-top:6px;">
+          <button>Download PNG</button>
+          <button>Copy Base64</button>
+        </div>
+        <textarea>${dataURL}</textarea>
+      </div>
+    `;
+
+    const viewCanvas = item.querySelector('canvas');
+    viewCanvas.getContext('2d').drawImage(canvas,0,0);
+
+    item.querySelectorAll('button')[0].onclick = ()=>{
+      canvas.toBlob(b=>{
+        const a=document.createElement('a');
+        a.href=URL.createObjectURL(b);
+        a.download=`${baseName.value}-${size}.png`;
+        a.click();
+      });
+    };
+
+    item.querySelectorAll('button')[1].onclick = ()=>{
+      navigator.clipboard.writeText(dataURL);
+    };
+
+    outputs.appendChild(item);
+    generated.push({ size, dataURL, canvas });
+  });
+
+  outputs.style.display = 'flex';
+  downloadZipBtn.disabled = false;
+  downloadB64Btn.disabled = false;
+};
+
+downloadZipBtn.onclick = ()=>{
+  const zip = new JSZip();
+  generated.forEach(g=>{
+    zip.file(
+      `${baseName.value}-${g.size}.png`,
+      g.dataURL.split(',')[1],
+      { base64:true }
+    );
+  });
+  zip.generateAsync({type:'blob'}).then(b=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(b);
+    a.download='icons.zip';
+    a.click();
+  });
+};
+
+downloadB64Btn.onclick = ()=>{
+  let txt = '';
+  generated.forEach(g=>{
+    txt += `${baseName.value}-${g.size}.png\n${g.dataURL}\n\n`;
+  });
+  const b = new Blob([txt],{type:'text/plain'});
+  const a = document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='icons-base64.txt';
+  a.click();
+};
 </script>
-
 </body>
 </html>

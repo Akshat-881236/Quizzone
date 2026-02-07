@@ -569,6 +569,13 @@ function handleCommand(text){
     window.open("https://akshat-881236.github.io/Portfolio-881236/", "_blank");
     return true;
   }
+  
+  if(cmd === "open feedback form" || cmd === "I want to give suggestion" || cmd === "How to give my feedback" || cmd === "Feedback Form"){
+    systemMessage("Opening creator portfolio…");
+    window.open("https://akshat-881236.github.io/Portfolio-881236/feedback.htm?title=Quizzone%20AI&description=A%20Chatbot%20made%20with%20predefined%20knowledge%20that%20guide%20you%20on%20Quizzone&url=https://akshat-881236.github.io/Quizzone/Home/QuizzoneAI.htm", "_blank");
+    return true;
+  }
+
 
   // OPEN GITHUB
   if(cmd === "open github" || cmd === "open github profile" || cmd === "github profile" || cmd === "github" || cmd === "open owner github" || cmd === "open creator github" || cmd === "Akshat Prasad GitHub" || cmd === "open Akshat Prasad GitHub" || cmd === "open Akshat-881236 GitHub"){
@@ -1329,13 +1336,13 @@ user._gdprStep = user._gdprStep || 0;
 
 if(cmd === "delete my account"){
   user._gdprStep = 1;
-  systemMessage(`⚠️ This will permanently delete your account. Type: <b>confirm delete</b><br> Why delete? We value your presence. If you have concerns, please reach out to support. You can submit feedback at <a href='https://akshat-881236.github.io/Portfolio-881236/feedback.htm' target='_blank'>Feedback Page</a>. We are always here to help!`);
+  systemMessage(`⚠️ This will permanently delete your account. Type: <b>confirm delete</b><br> Why delete? We value your presence. If you have concerns, please reach out to support. You can submit feedback at <a href='https://akshat-881236.github.io/Portfolio-881236/feedback.htm?title=Quizzone%20AI&description=Submitting%20your%20opinion%20on%20deleting%20your%20Quizzone%20Account&url=https://akshat-881236.github.io/Quizzone/Home/QuizzoneAI.htm' target='_blank'>Feedback Page</a>. We are always here to help!`);
   return true;
 }
 
 if(cmd === "confirm delete" && user._gdprStep === 1){
   user._gdprStep = 2;
-  systemMessage(`⚠️ Second confirmation required. Type: <b>final delete</b> <br> This action is irreversible. All your data will be permanently removed from your local storage. Please ensure you have backed up any important information before proceeding. We are sorry to see you go. If you have any feedback, please share it at <a href='https://akshat-881236.github.io/Portfolio-881236/feedback.htm' target='_blank'>Feedback Page</a>.<br> Type <b>final delete</b> to proceed.`);
+  systemMessage(`⚠️ Second confirmation required. Type: <b>final delete</b> <br> This action is irreversible. All your data will be permanently removed from your local storage. Please ensure you have backed up any important information before proceeding. We are sorry to see you go. If you have any feedback, please share it at <a href='https://akshat-881236.github.io/Portfolio-881236/feedback.htm?title=Quizzone%20AI&description=Submitting%20your%20opinion%20on%20deleting%20your%20Quizzone%20Account&url=https://akshat-881236.github.io/Quizzone/Home/QuizzoneAI.htm' target='_blank'>Feedback Page</a>.<br> Type <b>final delete</b> to proceed.`);
   return true;
 }
 

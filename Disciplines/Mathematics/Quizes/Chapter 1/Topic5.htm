@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- =========================================================
+     BASIC META
+========================================================= -->
+
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible"
+      content="IE=edge">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=5.0">
+
+<!-- =========================================================
+     SEO META
+========================================================= -->
+
+<title>
+Mathematics Quiz | Chapter 1 | Topic 5 | Irrational Numbers
+</title>
+
+<meta name="title"
+      content="Irrational Numbers Quiz | Quizzone">
+
+<meta name="description"
+      content="Advanced Irrational Numbers Quiz powered by Quizzone Smart Runtime with responsive educational UI, auto timers, smart scoring and automatic progression system.">
+
+<meta name="keywords"
+      content="Irrational Numbers Quiz,Pi Quiz,Square Root Quiz,Mathematics Quiz,Quizzone">
+
+<meta name="author"
+      content="Akshat Prasad">
+
+<meta name="robots"
+      content="index,follow">
+
+<meta name="theme-color"
+      content="#007bff">
+
+<!-- =========================================================
+     OPEN GRAPH
+========================================================= -->
+
+<meta property="og:title"
+      content="Topic 5 Irrational Numbers Quiz">
+
+<meta property="og:description"
+      content="Interactive Quizzone educational runtime">
+
+<meta property="og:image"
+      content="/Quizzone/icons/QuizzoneLogo.png">
+
+<!-- =========================================================
+     TWITTER
+========================================================= -->
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="Irrational Numbers Quiz">
+
+<meta name="twitter:description"
+      content="Smart Mathematics Quiz Runtime">
+
+<!-- =========================================================
+     JSON LD
+========================================================= -->
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Quiz",
+ "name":"Irrational Numbers Quiz",
+ "educationalLevel":"Beginner",
+ "author":{
+   "@type":"Person",
+   "name":"Akshat Prasad"
+ }
+}
+</script>
+
+<!-- =========================================================
+     BOOTSTRAP
+========================================================= -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<!-- =========================================================
+     GOOGLE FONT
+========================================================= -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- =========================================================
+     ROUTER
+========================================================= -->
+
+<script src="https://akshat-881236.github.io/AkshatNetworkHub/ActivityLog/router.js"
+        referrerpolicy="referrer">
+</script>
+
+<script src="/Quizzone/Global/loader.js"></script>
+<script src="/Quizzone/Global/seoMeta.js"></script>
+
+<!-- =========================================================
+     STYLE
+========================================================= -->
+
+<style>
+
+:root{
+
+    --primary:#007bff;
+    --secondary:#00d4ff;
+    --dark:#0d1117;
+    --light:#eef4ff;
+
+}
+
+body{
+
+    margin:0;
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef4ff,
+            #dce8ff
+        );
+
+    overflow-x:hidden;
+
+}
+
+.header{
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00d4ff
+        );
+
+    color:white;
+
+    padding:20px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,.15);
+
+}
+
+.header-title{
+
+    font-size:1.7rem;
+
+    font-weight:700;
+
+}
+
+.header-sub{
+
+    opacity:.92;
+
+}
+
+.quiz-box{
+
+    width:92%;
+
+    max-width:1050px;
+
+    margin:30px auto;
+
+    background:
+        rgba(255,255,255,.82);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.12);
+
+}
+
+.info-grid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+.info-card{
+
+    flex:1;
+
+    min-width:180px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.08);
+
+}
+
+.info-card h3{
+
+    margin:0;
+
+    color:#007bff;
+
+}
+
+.question-box{
+
+    background:white;
+
+    padding:28px;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.08);
+
+}
+
+.question-number{
+
+    color:#007bff;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+.question-text{
+
+    font-size:1.15rem;
+
+    line-height:1.9;
+
+    font-weight:500;
+
+}
+
+.option{
+
+    background:#eef4ff;
+
+    padding:18px;
+
+    margin-top:15px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    border:
+        2px solid transparent;
+
+}
+
+.option:hover{
+
+    background:#dce8ff;
+
+    border-color:#007bff;
+
+    transform:translateY(-2px);
+
+}
+
+.timer-area{
+
+    margin-top:25px;
+
+}
+
+.progress{
+
+    height:14px;
+
+    border-radius:50px;
+
+}
+
+.progress-bar{
+
+    animation:
+        progressMove 30s linear forwards;
+
+}
+
+@keyframes progressMove{
+
+    from{
+        width:0%;
+    }
+
+    to{
+        width:100%;
+    }
+
+}
+
+.btn-area{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.runtime-btn{
+
+    border:none;
+
+    padding:14px 24px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00d4ff
+        );
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.runtime-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.result-box{
+
+    text-align:center;
+
+    padding:40px;
+
+}
+
+@media(max-width:576px){
+
+    .quiz-box{
+
+        padding:20px;
+
+    }
+
+    .question-text{
+
+        font-size:1rem;
+
+    }
+
+    .runtime-btn{
+
+        width:100%;
+
+    }
+
+}
+
+@media(min-width:2200px){
+
+    body{
+
+        zoom:1.4;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-title">
+
+        Mathematics → Chapter 1 → Quiz Topic 5
+
+    </div>
+
+    <div class="header-sub">
+
+        Irrational Numbers Smart Quiz Runtime
+
+    </div>
+
+</header>
+
+
+<section class="quiz-box">
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <h3 id="questionTimer">
+                30s
+            </h3>
+
+            <p>
+                Per Question Timer
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3 id="overallTimer">
+                300s
+            </h3>
+
+            <p>
+                Overall Quiz Time
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3 id="scoreBox">
+                0
+            </h3>
+
+            <p>
+                Current Score
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="question-box">
+
+        <div class="question-number"
+             id="questionNumber">
+
+            Question 1 / 10
+
+        </div>
+
+        <div class="question-text"
+             id="questionText">
+
+        </div>
+
+        <div id="options"></div>
+
+    </div>
+
+
+    <div class="timer-area">
+
+        <div class="progress">
+
+            <div class="progress-bar
+                        progress-bar-striped
+                        progress-bar-animated
+                        bg-info"
+
+                 id="progressBar"
+                 style="width:0%">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="btn-area">
+
+        <button class="runtime-btn"
+                onclick="previousQuiz()">
+
+            ← Previous Quiz
+
+        </button>
+
+        <button class="runtime-btn"
+                onclick="skipQuestion()">
+
+            Skip Question
+
+        </button>
+
+        <button class="runtime-btn"
+                onclick="submitQuiz()">
+
+            Submit Quiz ✓
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   LOGIN CHECK
+========================================================= */
+
+let user =
+    JSON.parse(
+        localStorage.getItem(
+            "ActiveQuizzoneUser"
+        )
+    );
+
+if(!user){
+
+    alert("Please login first!");
+
+    location.href =
+        "/Quizzone/Home/SignIn.htm";
+
+}
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+const questions = [
+
+{
+q:"Which statement correctly defines an irrational number in mathematics?",
+opt:[
+"A number expressible as p/q",
+"A number with terminating decimal",
+"A number with non terminating and non repeating decimal expansion",
+"A number smaller than zero"
+],
+ans:2
+},
+
+{
+q:"Why are irrational numbers important in geometry and scientific calculations?",
+opt:[
+"They simplify all equations",
+"They help represent exact measurements and continuous quantities",
+"They remove decimal values",
+"They are only used in arithmetic"
+],
+ans:1
+},
+
+{
+q:"Which of the following is an irrational number?",
+opt:[
+"3/4",
+"0.25",
+"√2",
+"-8/5"
+],
+ans:2
+},
+
+{
+q:"What is special about the decimal expansion of irrational numbers?",
+opt:[
+"They always terminate",
+"They always repeat",
+"They continue infinitely without repeating",
+"They contain only zeros"
+],
+ans:2
+},
+
+{
+q:"Which mathematical constant is commonly considered irrational?",
+opt:[
+"2",
+"1/5",
+"π",
+"0.75"
+],
+ans:2
+},
+
+{
+q:"Why is √2 considered irrational?",
+opt:[
+"It can be expressed exactly as a fraction",
+"It has a terminating decimal form",
+"It has a non repeating infinite decimal expansion",
+"It is a negative number"
+],
+ans:2
+},
+
+{
+q:"How are irrational numbers used in modern computer systems?",
+opt:[
+"They are ignored in calculations",
+"They are approximated for scientific and engineering computations",
+"They replace integers completely",
+"They are only used in graphics"
+],
+ans:1
+},
+
+{
+q:"Which of the following values is NOT irrational?",
+opt:[
+"√5",
+"π",
+"2/3",
+"e"
+],
+ans:2
+},
+
+{
+q:"Irrational numbers are highly important in which mathematical field?",
+opt:[
+"Geometry",
+"Only counting",
+"Only subtraction",
+"Only percentages"
+],
+ans:0
+},
+
+{
+q:"Why should students understand irrational numbers before advanced algebra and calculus?",
+opt:[
+"To avoid decimals",
+"To improve mathematical reasoning and analytical thinking",
+"To simplify only fractions",
+"To remove geometry concepts"
+],
+ans:1
+}
+
+];
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let index = 0;
+
+let score = 0;
+
+let questionSeconds = 30;
+
+let totalSeconds = 300;
+
+let questionTimer;
+
+let overallTimer;
+
+
+/* =========================================================
+   LOAD QUESTION
+========================================================= */
+
+function loadQuestion(){
+
+    resetQuestionTimer();
+
+    document.getElementById(
+        "questionNumber"
+    ).innerText =
+
+        `Question ${index + 1} / ${questions.length}`;
+
+    document.getElementById(
+        "questionText"
+    ).innerText =
+
+        questions[index].q;
+
+    let html = "";
+
+    questions[index].opt.forEach((o,i)=>{
+
+        html += `
+
+        <div class='option'
+             onclick='checkAnswer(${i})'>
+
+             ${o}
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "options"
+    ).innerHTML = html;
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
+function checkAnswer(i){
+
+    if(i === questions[index].ans){
+
+        score += 4;
+
+    }
+
+    else{
+
+        score -= 1;
+
+    }
+
+    updateScore();
+
+    nextQuestion();
+
+}
+
+
+/* =========================================================
+   NEXT QUESTION
+========================================================= */
+
+function nextQuestion(){
+
+    clearInterval(questionTimer);
+
+    index++;
+
+    if(index >= questions.length){
+
+        submitQuiz();
+
+        return;
+
+    }
+
+    loadQuestion();
+
+}
+
+
+/* =========================================================
+   SKIP QUESTION
+========================================================= */
+
+function skipQuestion(){
+
+    nextQuestion();
+
+}
+
+
+/* =========================================================
+   UPDATE SCORE
+========================================================= */
+
+function updateScore(){
+
+    document.getElementById(
+        "scoreBox"
+    ).innerText = score;
+
+}
+
+
+/* =========================================================
+   QUESTION TIMER
+========================================================= */
+
+function resetQuestionTimer(){
+
+    clearInterval(questionTimer);
+
+    questionSeconds = 30;
+
+    document.getElementById(
+        "questionTimer"
+    ).innerText =
+        questionSeconds + "s";
+
+    document.getElementById(
+        "progressBar"
+    ).style.animation =
+        "none";
+
+    void document.getElementById(
+        "progressBar"
+    ).offsetWidth;
+
+    document.getElementById(
+        "progressBar"
+    ).style.animation =
+        "progressMove 30s linear forwards";
+
+    questionTimer = setInterval(()=>{
+
+        questionSeconds--;
+
+        document.getElementById(
+            "questionTimer"
+        ).innerText =
+            questionSeconds + "s";
+
+        if(questionSeconds <= 0){
+
+            nextQuestion();
+
+        }
+
+    },1000);
+
+}
+
+
+/* =========================================================
+   OVERALL TIMER
+========================================================= */
+
+overallTimer = setInterval(()=>{
+
+    totalSeconds--;
+
+    document.getElementById(
+        "overallTimer"
+    ).innerText =
+        totalSeconds + "s";
+
+    if(totalSeconds <= 0){
+
+        submitQuiz();
+
+    }
+
+},1000);
+
+
+/* =========================================================
+   SUBMIT QUIZ
+========================================================= */
+
+function submitQuiz(){
+
+    clearInterval(questionTimer);
+
+    clearInterval(overallTimer);
+
+    let percentage =
+
+        (
+            (
+                score /
+                (questions.length * 4)
+            ) * 100
+        ).toFixed(1);
+
+    document.querySelector(
+        ".quiz-box"
+    ).innerHTML = `
+
+        <div class='result-box'>
+
+            <h1>
+                Quiz Completed 🎉
+            </h1>
+
+            <h2>
+                Score : ${score}
+            </h2>
+
+            <h3>
+                Percentage : ${percentage}%
+            </h3>
+
+            <p>
+                Irrational Numbers performance
+                analyzed successfully.
+
+            </p>
+
+            <button class='runtime-btn'
+                    onclick='saveScore()'>
+
+                Save Score & Continue →
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SAVE SCORE
+========================================================= */
+
+function saveScore(){
+
+    let user =
+        JSON.parse(
+            localStorage.getItem(
+                "ActiveQuizzoneUser"
+            )
+        );
+
+    user.scores =
+        user.scores || {};
+
+    user.scores.math_ch1_quiz5 = {
+
+        marks : score,
+
+        total :
+            questions.length * 4,
+
+        submitted :
+            new Date()
+
+    };
+
+    localStorage.setItem(
+
+        "ActiveQuizzoneUser",
+
+        JSON.stringify(user)
+
+    );
+    window.location.href="/Quizzone/Disciplines/Mathematics/Quizes/Chapter%201/Topic6.htm";
+    autoNextQuiz();
+
+}
+
+
+/* =========================================================
+   AUTO NEXT QUIZ
+========================================================= */
+
+function autoNextQuiz(){
+
+    const currentPath =
+        window.location.pathname;
+
+    const match =
+        currentPath.match(/Topic(\d+)\.htm/i);
+
+    if(!match){
+
+        location.href =
+            "/Quizzone/index.htm";
+
+        return;
+
+    }
+
+    const currentQuiz =
+        parseInt(match[1]);
+
+    const nextQuiz =
+        currentQuiz + 1;
+
+    const nextQuizFile =
+        `Topic${nextQuiz}.htm`;
+
+    fetch(nextQuizFile)
+
+    .then(response=>{
+
+        if(response.ok){
+
+            setTimeout(()=>{
+
+                location.href =
+                    nextQuizFile;
+
+            },3000);
+
+        }
+
+        else{
+
+            showCompletionPage();
+
+        }
+
+    })
+
+    .catch(()=>{
+
+        showCompletionPage();
+
+    });
+
+}
+
+
+/* =========================================================
+   COMPLETION PAGE
+========================================================= */
+
+function showCompletionPage(){
+
+    document.body.innerHTML = `
+
+        <div style='
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #007bff,
+                    #00d4ff
+                );
+            color:white;
+            font-family:Poppins;
+            text-align:center;
+            padding:20px;
+        '>
+
+            <div>
+
+                <h1>
+                    🎉
+                </h1>
+
+                <h2>
+                    All Available Quizzes Completed
+                </h2>
+
+                <button onclick='goHome()'
+
+                    style='
+                        padding:14px 24px;
+                        border:none;
+                        border-radius:50px;
+                        background:white;
+                        color:#007bff;
+                        font-weight:700;
+                        cursor:pointer;
+                    '>
+
+                    Go To Home
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   GO HOME
+========================================================= */
+
+function goHome(){
+
+    location.href =
+        "/Quizzone/index.htm";
+
+}
+
+
+/* =========================================================
+   PREVIOUS QUIZ
+========================================================= */
+
+function previousQuiz(){
+
+    history.back();
+
+}
+
+
+/* =========================================================
+   PAGE VALIDATION
+========================================================= */
+
+fetch(window.location.href)
+
+.then(res=>{
+
+    if(!res.ok){
+
+        location.href =
+            "/Quizzone/404.html";
+
+    }
+
+})
+
+.catch(()=>{
+
+    location.href =
+        "/Quizzone/404.html";
+
+});
+
+
+/* =========================================================
+   LOAD FIRST QUESTION
+========================================================= */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

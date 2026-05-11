@@ -11,24 +11,27 @@
 <meta http-equiv="X-UA-Compatible"
       content="IE=edge">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=5.0">
 
 <!-- =========================================================
-     PRIMARY SEO
+     SEO META
 ========================================================= -->
 
 <title>
-Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
+Mathematics | Chapter 1 | Topic 5 | Irrational Numbers | Quizzone
 </title>
 
 <meta name="title"
-      content="Mathematics Chapter 1 Topic 3 - Integers">
+      content="Mathematics Chapter 1 Topic 5 - Irrational Numbers">
 
 <meta name="description"
-      content="Learn Integers in Mathematics with Quizzone Smart Learning Engine featuring auto progress tracking, responsive UI, runtime SEO, and dynamic educational navigation.">
+      content="Learn Irrational Numbers with Quizzone Smart Educational Runtime featuring responsive learning UI, runtime SEO, automatic progression system and intelligent analytics.">
 
 <meta name="keywords"
-      content="Integers,Mathematics,Positive Numbers,Negative Numbers,Quizzone,Education,Topic 3">
+      content="Irrational Numbers,Mathematics,Square Root,Pi,Number System,Quizzone">
 
 <meta name="author"
       content="Akshat Prasad">
@@ -50,10 +53,10 @@ Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
       content="article">
 
 <meta property="og:title"
-      content="Mathematics Chapter 1 Topic 3">
+      content="Mathematics Chapter 1 Topic 5">
 
 <meta property="og:description"
-      content="Understand Integers with Quizzone Smart Discipline Runtime.">
+      content="Understand Irrational Numbers using Quizzone Smart Runtime">
 
 <meta property="og:image"
       content="/Quizzone/icons/QuizzoneLogo.png">
@@ -66,13 +69,41 @@ Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
       content="summary_large_image">
 
 <meta name="twitter:title"
-      content="Mathematics Topic 3">
+      content="Irrational Numbers | Quizzone">
 
 <meta name="twitter:description"
-      content="Advanced educational topic powered by Quizzone.">
+      content="Advanced Smart Educational Learning System">
 
 <!-- =========================================================
-     GOOGLE FONTS
+     JSON LD
+========================================================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"Irrational Numbers",
+  "description":"Mathematics Chapter 1 Topic 5",
+  "author":{
+    "@type":"Person",
+    "name":"Akshat Prasad"
+  },
+  "publisher":{
+    "@type":"Organization",
+    "name":"Quizzone"
+  }
+}
+</script>
+
+<!-- =========================================================
+     BOOTSTRAP
+========================================================= -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<!-- =========================================================
+     GOOGLE FONT
 ========================================================= -->
 
 <link rel="preconnect"
@@ -83,13 +114,6 @@ Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
       crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet">
-
-<!-- =========================================================
-     BOOTSTRAP
-========================================================= -->
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet">
 
 <!-- =========================================================
@@ -108,27 +132,6 @@ Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
 <script src="/Quizzone/Global/seoMeta.js"></script>
 
 <!-- =========================================================
-     JSON-LD
-========================================================= -->
-
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Article",
-  "headline":"Integers",
-  "description":"Mathematics Topic 3 - Integers",
-  "author":{
-    "@type":"Person",
-    "name":"Akshat Prasad"
-  },
-  "publisher":{
-    "@type":"Organization",
-    "name":"Quizzone"
-  }
-}
-</script>
-
-<!-- =========================================================
      STYLE
 ========================================================= -->
 
@@ -144,7 +147,7 @@ Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
     --secondary:#00d4ff;
     --dark:#0d1117;
     --light:#eef5ff;
-    --glass:rgba(255,255,255,.75);
+    --glass:rgba(255,255,255,.78);
 
 }
 
@@ -163,7 +166,7 @@ body{
         linear-gradient(
             135deg,
             #eef5ff,
-            #d9e7ff
+            #d7e6ff
         );
 
     overflow-x:hidden;
@@ -221,14 +224,14 @@ body{
 
 
 /* =========================================================
-   MAIN CONTAINER
+   MAIN BOX
 ========================================================= */
 
 .main-box{
 
     width:92%;
 
-    max-width:1050px;
+    max-width:1100px;
 
     margin:30px auto;
 
@@ -342,10 +345,10 @@ body{
 
 
 /* =========================================================
-   INTEGER VISUAL
+   EXAMPLE BOX
 ========================================================= */
 
-.integer-line{
+.example-box{
 
     background:#0d1117;
 
@@ -359,7 +362,7 @@ body{
 
     overflow:auto;
 
-    font-size:1.05rem;
+    font-size:1.02rem;
 
     line-height:2;
 
@@ -420,7 +423,7 @@ body{
 
 
 /* =========================================================
-   BUTTON AREA
+   BUTTONS
 ========================================================= */
 
 .btn-area{
@@ -466,9 +469,6 @@ body{
 
     transform:translateY(-3px);
 
-    box-shadow:
-        0 6px 18px rgba(0,123,255,.25);
-
 }
 
 
@@ -505,32 +505,9 @@ body{
 
     }
 
-    .topic-para{
-
-        font-size:.95rem;
-
-        padding:18px;
-
-    }
-
     .runtime-btn{
 
         width:100%;
-
-    }
-
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media(min-width:577px) and (max-width:992px){
-
-    .topic-title{
-
-        font-size:1.8rem;
 
     }
 
@@ -565,13 +542,13 @@ body{
 
     <div class="header-title">
 
-        Mathematics → Chapter 1 → Topic 3
+        Mathematics → Chapter 1 → Topic 5
 
     </div>
 
     <div class="header-sub">
 
-        Integers Smart Learning Runtime
+        Irrational Numbers Smart Learning Runtime
 
     </div>
 
@@ -603,7 +580,7 @@ body{
         <div class="info-card">
 
             <h3>
-                Topic 3
+                Topic 5
             </h3>
 
             <p>
@@ -631,7 +608,7 @@ body{
 
     <h1 class="topic-title">
 
-        Understanding Integers
+        Understanding Irrational Numbers
 
     </h1>
 
@@ -640,7 +617,7 @@ body{
 
     <div class="topic-para">
 
-        Integers are an important part of the number system and include positive numbers, negative numbers, and zero. They are widely used in mathematics, science, finance, and computer systems to represent quantities that increase or decrease. Positive integers are used for gains and upward movement, while negative integers represent losses, debts, or downward movement. Zero acts as the center point between positive and negative values on the number line. Students use integers in temperature calculations, banking systems, elevations, and game score tracking. Understanding integers builds a strong foundation for algebra, equations, coordinate geometry, and advanced mathematical operations involving signs and directional values.
+        Irrational numbers are numbers that cannot be written in the form of a fraction where both numerator and denominator are integers. These numbers have decimal expansions that continue infinitely without repeating in any predictable pattern. Irrational numbers are important in mathematics because they represent quantities that cannot be perfectly expressed through simple ratios. Examples such as square root of two and the value of pi are widely used in geometry, physics, engineering, and computer science. Understanding irrational numbers helps students build stronger numerical reasoning and prepares them for advanced algebraic and scientific calculations involving continuous measurements and complex mathematical relationships.
 
     </div>
 
@@ -649,32 +626,32 @@ body{
 
     <div class="topic-para">
 
-        Operations involving integers require careful understanding of signs and arithmetic rules. Adding two positive integers increases value, while adding negative integers decreases value. Multiplication and division follow sign rules where like signs produce positive results and unlike signs produce negative results. Integers are represented on a number line, helping students visualize movement to the left or right depending on operations. This topic improves logical thinking and helps learners solve real-life mathematical situations accurately. Integers are also heavily used in programming, databases, scientific calculations, and digital systems where values may rise above or fall below zero depending on runtime conditions.
+        Irrational numbers play a major role in geometry and real world scientific applications because many natural measurements involve non terminating and non repeating values. The diagonal of a square, circular calculations using pi, and trigonometric operations often depend on irrational numbers. Unlike rational numbers, irrational values cannot be represented exactly using finite decimal forms. Modern computers use approximations to work with these values during simulations, graphics rendering, engineering analysis, and artificial intelligence systems. Learning irrational numbers develops analytical thinking, improves understanding of mathematical accuracy, and helps students differentiate between exact values and approximated decimal representations used in scientific computation and advanced technological systems.
 
-        <div class="integer-line">
+        <div class="example-box">
 
-            Number Line Example:<br><br>
+            Irrational Number Examples:<br><br>
 
-            -5  -4  -3  -2  -1   0   1   2   3   4   5
-
-            <br><br>
-
-            Integer Addition:<br>
-
-            (-3) + 5 = 2
+            √2 , √5 , π , e
 
             <br><br>
 
-            Integer Multiplication:<br>
+            Decimal Expansion:<br>
 
-            (-2) × (-4) = 8
+            π = 3.1415926535...
+
+            <br><br>
+
+            Non Repeating Decimal:<br>
+
+            √2 = 1.414213562...
 
         </div>
 
     </div>
 
 
-    <!-- AUTO SYSTEM -->
+    <!-- AUTO -->
 
     <div class="auto-box">
 
@@ -750,7 +727,7 @@ body{
 <footer class="footer">
 
     © 2026 Quizzone —
-    Intelligent Discipline Learning Runtime
+    Intelligent Discipline Runtime
 
 </footer>
 
@@ -851,32 +828,6 @@ function markAsRead(){
         "ActiveQuizzoneUser",
 
         JSON.stringify(user)
-
-    );
-
-    let allUsers =
-        JSON.parse(
-            localStorage.getItem(
-                "QuizzoneUsersDB"
-            )
-        ) || [];
-
-    let idx =
-        allUsers.findIndex(
-            x=>x.email===user.email
-        );
-
-    if(idx !== -1){
-
-        allUsers[idx] = user;
-
-    }
-
-    localStorage.setItem(
-
-        "QuizzoneUsersDB",
-
-        JSON.stringify(allUsers)
 
     );
 
@@ -1019,45 +970,33 @@ const timer =
    RUNTIME SEO
 ========================================================= */
 
-(function(){
-
-    document.title =
-
-        "Mathematics Topic " +
-
-        getPageNumber() +
-
-        " | Quizzone";
-
-})();
+document.title =
+    "Mathematics Topic 5 | Quizzone";
 
 
 /* =========================================================
-   ANALYTICS
+   PAGE VALIDATION
 ========================================================= */
 
-window.addEventListener(
-    "beforeunload",
-    ()=>{
+fetch(window.location.href)
 
-        localStorage.setItem(
+.then(res=>{
 
-            "QZ_LAST_TOPIC",
+    if(!res.ok){
 
-            JSON.stringify({
-
-                topic :
-                    location.pathname,
-
-                timestamp :
-                    new Date()
-
-            })
-
-        );
+        location.href =
+            "/Quizzone/404.html";
 
     }
-);
+
+})
+
+.catch(()=>{
+
+    location.href =
+        "/Quizzone/404.html";
+
+});
 
 </script>
 

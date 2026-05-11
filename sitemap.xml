@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- =========================================================
+     QUIZZONE ADVANCED SITEMAP.XML
+     Powered By Akshat Network Hub
+========================================================== -->
+
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+
+    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+
+    xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+
+    xsi:schemaLocation="
+    http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+    <!-- =====================================================
+         HOME PAGE
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            daily
+        </changefreq>
+
+        <priority>
+            1.0
+        </priority>
+
+        <image:image>
+
+            <image:loc>
+                https://akshat-881236.github.io/Quizzone/icons/QuizzoneLogo.png
+            </image:loc>
+
+            <image:title>
+                Quizzone Logo
+            </image:title>
+
+        </image:image>
+
+    </url>
+
+
+    <!-- =====================================================
+         INDEX PAGE
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/index.htm
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            hourly
+        </changefreq>
+
+        <priority>
+            0.98
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         404 RECOVERY SYSTEM
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/404.html
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            monthly
+        </changefreq>
+
+        <priority>
+            0.65
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         SYSTEM ERROR ENGINE
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/SystemError/systemerror.js
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            weekly
+        </changefreq>
+
+        <priority>
+            0.40
+        </priority>
+
+    </url>
+
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/SystemError/systemerror.css
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            weekly
+        </changefreq>
+
+        <priority>
+            0.35
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         DISCIPLINES
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/Disciplines/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            daily
+        </changefreq>
+
+        <priority>
+            0.95
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         HOME MODULE
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/Home/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            daily
+        </changefreq>
+
+        <priority>
+            0.90
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         ASSETS
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/Assets/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            weekly
+        </changefreq>
+
+        <priority>
+            0.55
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         PWA SYSTEM
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/PWA/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            weekly
+        </changefreq>
+
+        <priority>
+            0.70
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/icons/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            monthly
+        </changefreq>
+
+        <priority>
+            0.30
+        </priority>
+
+        <image:image>
+
+            <image:loc>
+                https://akshat-881236.github.io/Quizzone/icons/QuizzoneLogo.png
+            </image:loc>
+
+            <image:title>
+                Quizzone Recovery Runtime Logo
+            </image:title>
+
+        </image:image>
+
+    </url>
+
+
+    <!-- =====================================================
+         SAMPLE DISCIPLINE PAGES
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/Disciplines/Mathematics/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            daily
+        </changefreq>
+
+        <priority>
+            0.92
+        </priority>
+
+    </url>
+
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/Disciplines/Science/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            daily
+        </changefreq>
+
+        <priority>
+            0.92
+        </priority>
+
+    </url>
+
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/Disciplines/ComputerScience/
+        </loc>
+
+        <lastmod>
+            2026-01-12T20:00:00+05:30
+        </lastmod>
+
+        <changefreq>
+            daily
+        </changefreq>
+
+        <priority>
+            0.94
+        </priority>
+
+    </url>
+
+
+    <!-- =====================================================
+         NEWS STYLE ENTRY
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/
+        </loc>
+
+        <news:news>
+
+            <news:publication>
+
+                <news:name>
+                    Quizzone
+                </news:name>
+
+                <news:language>
+                    en
+                </news:language>
+
+            </news:publication>
+
+            <news:publication_date>
+                2026-01-12T20:00:00+05:30
+            </news:publication_date>
+
+            <news:title>
+                Quizzone Runtime Recovery System Updated
+            </news:title>
+
+        </news:news>
+
+    </url>
+
+
+    <!-- =====================================================
+         VIDEO STRUCTURE SAMPLE
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/
+        </loc>
+
+        <video:video>
+
+            <video:title>
+                Quizzone Platform Overview
+            </video:title>
+
+            <video:description>
+                Intelligent educational assessment ecosystem.
+            </video:description>
+
+            <video:thumbnail_loc>
+                https://akshat-881236.github.io/Quizzone/icons/QuizzoneLogo.png
+            </video:thumbnail_loc>
+
+            <video:publication_date>
+                2026-01-12T20:00:00+05:30
+            </video:publication_date>
+
+        </video:video>
+
+    </url>
+
+
+    <!-- =====================================================
+         MULTILINGUAL SUPPORT PLACEHOLDER
+    ====================================================== -->
+
+    <url>
+
+        <loc>
+            https://akshat-881236.github.io/Quizzone/
+        </loc>
+
+        <xhtml:link
+            rel="alternate"
+            hreflang="en"
+            href="https://akshat-881236.github.io/Quizzone/" />
+
+    </url>
+
+
+    <!-- =====================================================
+         PERFORMANCE / CACHE HINTS
+    ====================================================== -->
+
+    <!--
+        Priority Scale:
+        1.0   = Critical Entry
+        0.9+  = Main Learning Routes
+        0.7+  = Important Modules
+        0.5+  = Supporting Infrastructure
+        0.3+  = Assets / Runtime Resources
+    -->
+
+
+    <!-- =====================================================
+         GENERATED FOR:
+         Quizzone Recovery Runtime v1.0
+         Powered By Akshat Network Hub
+    ====================================================== -->
+
+</urlset>

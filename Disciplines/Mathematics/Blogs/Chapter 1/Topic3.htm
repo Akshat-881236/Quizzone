@@ -21,17 +21,17 @@
 ========================================================= -->
 
 <title>
-Mathematics | Chapter 1 | Topic 1 | Number System | Quizzone
+Mathematics | Chapter 1 | Topic 3 | Integers | Quizzone
 </title>
 
 <meta name="title"
-      content="Mathematics Chapter 1 Topic 1 - Number System">
+      content="Mathematics Chapter 1 Topic 3 - Integers">
 
 <meta name="description"
-      content="Learn the fundamentals of Number System in Mathematics with short conceptual paragraphs, smart learning tracking, and auto progress management in Quizzone.">
+      content="Learn Integers in Mathematics with Quizzone Smart Learning Engine featuring auto progress tracking, responsive UI, runtime SEO, and dynamic educational navigation.">
 
 <meta name="keywords"
-      content="Mathematics,Number System,Integers,Rational Numbers,Quizzone,Education,Topic 1">
+      content="Integers,Mathematics,Positive Numbers,Negative Numbers,Quizzone,Education,Topic 3">
 
 <meta name="author"
       content="Akshat Prasad">
@@ -53,10 +53,10 @@ Mathematics | Chapter 1 | Topic 1 | Number System | Quizzone
       content="article">
 
 <meta property="og:title"
-      content="Mathematics Chapter 1 Topic 1">
+      content="Mathematics Chapter 1 Topic 3">
 
 <meta property="og:description"
-      content="Learn Number System concepts with smart Quizzone discipline engine.">
+      content="Understand Integers with Quizzone Smart Discipline Runtime.">
 
 <meta property="og:image"
       content="/Quizzone/icons/QuizzoneLogo.png">
@@ -69,13 +69,13 @@ Mathematics | Chapter 1 | Topic 1 | Number System | Quizzone
       content="summary_large_image">
 
 <meta name="twitter:title"
-      content="Mathematics Topic 1">
+      content="Mathematics Topic 3">
 
 <meta name="twitter:description"
-      content="Advanced educational blog powered by Quizzone.">
+      content="Advanced educational topic powered by Quizzone.">
 
 <!-- =========================================================
-     FONTS
+     GOOGLE FONTS
 ========================================================= -->
 
 <link rel="preconnect"
@@ -111,6 +111,27 @@ Mathematics | Chapter 1 | Topic 1 | Number System | Quizzone
 <script src="/Quizzone/Global/seoMeta.js"></script>
 
 <!-- =========================================================
+     JSON-LD
+========================================================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"Integers",
+  "description":"Mathematics Topic 3 - Integers",
+  "author":{
+    "@type":"Person",
+    "name":"Akshat Prasad"
+  },
+  "publisher":{
+    "@type":"Organization",
+    "name":"Quizzone"
+  }
+}
+</script>
+
+<!-- =========================================================
      STYLE
 ========================================================= -->
 
@@ -123,10 +144,10 @@ Mathematics | Chapter 1 | Topic 1 | Number System | Quizzone
 :root{
 
     --primary:#007bff;
-    --secondary:#00b7ff;
-    --bg:#eef3ff;
-    --text:#0d1117;
-    --glass:rgba(255,255,255,0.7);
+    --secondary:#00d4ff;
+    --dark:#0d1117;
+    --light:#eef5ff;
+    --glass:rgba(255,255,255,.75);
 
 }
 
@@ -144,13 +165,13 @@ body{
     background:
         linear-gradient(
             135deg,
-            #eef3ff,
-            #dce8ff
+            #eef5ff,
+            #d9e7ff
         );
 
-    color:var(--text);
-
     overflow-x:hidden;
+
+    color:#111;
 
 }
 
@@ -165,28 +186,28 @@ body{
         linear-gradient(
             135deg,
             #007bff,
-            #00b7ff
+            #00d4ff
         );
-
-    padding:18px;
 
     color:white;
 
-    box-shadow:
-        0 4px 20px rgba(0,0,0,.15);
+    padding:20px;
 
     position:sticky;
 
     top:0;
 
-    z-index:100;
+    z-index:1000;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,.15);
 
 }
 
 
 .header-title{
 
-    font-size:1.5rem;
+    font-size:1.7rem;
 
     font-weight:700;
 
@@ -195,22 +216,22 @@ body{
 
 .header-sub{
 
-    font-size:.9rem;
+    font-size:.95rem;
 
-    opacity:.9;
+    opacity:.92;
 
 }
 
 
 /* =========================================================
-   MAIN BOX
+   MAIN CONTAINER
 ========================================================= */
 
-.blog-box{
+.main-box{
 
     width:92%;
 
-    max-width:1000px;
+    max-width:1050px;
 
     margin:30px auto;
 
@@ -218,15 +239,63 @@ body{
 
     backdrop-filter:blur(18px);
 
-    border-radius:22px;
+    border-radius:24px;
 
     padding:35px;
 
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.12);
-
     border:
-        1px solid rgba(255,255,255,.4);
+        1px solid rgba(255,255,255,.45);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================================
+   INFO GRID
+========================================================= */
+
+.info-grid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+
+.info-card{
+
+    flex:1;
+
+    min-width:180px;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.08);
+
+}
+
+
+.info-card h3{
+
+    margin:0;
+
+    color:#007bff;
+
+    font-weight:700;
 
 }
 
@@ -249,157 +318,72 @@ body{
 
 
 /* =========================================================
-   PARAGRAPHS
+   PARAGRAPH
 ========================================================= */
 
 .topic-para{
-
-    font-size:1.02rem;
-
-    line-height:2;
-
-    margin-bottom:28px;
 
     background:white;
 
     padding:24px;
 
-    border-radius:16px;
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    line-height:2;
+
+    font-size:1rem;
 
     border-left:
         5px solid #007bff;
 
     box-shadow:
-        0 2px 12px rgba(0,0,0,.08);
+        0 3px 14px rgba(0,0,0,.08);
 
 }
 
 
 /* =========================================================
-   INFO BAR
+   INTEGER VISUAL
 ========================================================= */
 
-.info-bar{
+.integer-line{
 
-    display:flex;
+    background:#0d1117;
 
-    flex-wrap:wrap;
+    color:#00ffb3;
 
-    gap:15px;
-
-    margin-bottom:25px;
-
-}
-
-
-.info-card{
-
-    flex:1;
-
-    min-width:180px;
-
-    background:white;
+    padding:20px;
 
     border-radius:14px;
 
-    padding:18px;
+    margin-top:18px;
 
-    text-align:center;
+    overflow:auto;
 
-    box-shadow:
-        0 2px 10px rgba(0,0,0,.08);
+    font-size:1.05rem;
 
-}
-
-
-.info-card h4{
-
-    margin:0;
-
-    color:#007bff;
-
-    font-size:1.4rem;
-
-}
-
-
-.info-card p{
-
-    margin-top:8px;
-
-    font-size:.9rem;
+    line-height:2;
 
 }
 
 
 /* =========================================================
-   BUTTONS
-========================================================= */
-
-.btns{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-    margin-top:35px;
-
-}
-
-
-.runtime-btn{
-
-    border:none;
-
-    padding:14px 22px;
-
-    border-radius:50px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #007bff,
-            #00b7ff
-        );
-
-    color:white;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-
-.runtime-btn:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 6px 18px rgba(0,123,255,.25);
-
-}
-
-
-/* =========================================================
-   AUTO STATUS
+   AUTO BOX
 ========================================================= */
 
 .auto-box{
 
-    margin-top:30px;
+    margin-top:35px;
 
     background:#0d1117;
 
     color:white;
 
-    padding:18px;
+    padding:20px;
 
-    border-radius:16px;
+    border-radius:18px;
 
     text-align:center;
 
@@ -410,7 +394,7 @@ body{
 
     height:12px;
 
-    margin-top:14px;
+    margin-top:15px;
 
     border-radius:50px;
 
@@ -439,6 +423,59 @@ body{
 
 
 /* =========================================================
+   BUTTON AREA
+========================================================= */
+
+.btn-area{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+
+.runtime-btn{
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00d4ff
+        );
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.runtime-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 6px 18px rgba(0,123,255,.25);
+
+}
+
+
+/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -446,9 +483,9 @@ body{
 
     text-align:center;
 
-    padding:30px;
+    padding:35px;
 
-    color:#555;
+    color:#666;
 
 }
 
@@ -459,7 +496,7 @@ body{
 
 @media(max-width:576px){
 
-    .blog-box{
+    .main-box{
 
         padding:20px;
 
@@ -482,6 +519,21 @@ body{
     .runtime-btn{
 
         width:100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(min-width:577px) and (max-width:992px){
+
+    .topic-title{
+
+        font-size:1.8rem;
 
     }
 
@@ -515,31 +567,35 @@ body{
 <header class="header">
 
     <div class="header-title">
-        Mathematics → Chapter 1 → Topic 1
+
+        Mathematics → Chapter 1 → Topic 3
+
     </div>
 
     <div class="header-sub">
-        Smart Learning Discipline Engine
+
+        Integers Smart Learning Runtime
+
     </div>
 
 </header>
 
 
 <!-- =========================================================
-     BLOG
+     MAIN BOX
 ========================================================= -->
 
-<section class="blog-box">
+<section class="main-box">
 
     <!-- INFO -->
 
-    <div class="info-bar">
+    <div class="info-grid">
 
         <div class="info-card">
 
-            <h4 id="read-time">
+            <h3 id="timerBox">
                 35s
-            </h4>
+            </h3>
 
             <p>
                 Auto Read Timer
@@ -549,9 +605,9 @@ body{
 
         <div class="info-card">
 
-            <h4>
-                Topic 1
-            </h4>
+            <h3>
+                Topic 3
+            </h3>
 
             <p>
                 Learning Unit
@@ -561,9 +617,9 @@ body{
 
         <div class="info-card">
 
-            <h4 id="device-name">
+            <h3 id="deviceBox">
                 Device
-            </h4>
+            </h3>
 
             <p>
                 Runtime Device
@@ -578,7 +634,7 @@ body{
 
     <h1 class="topic-title">
 
-        Introduction to Number System
+        Understanding Integers
 
     </h1>
 
@@ -587,7 +643,7 @@ body{
 
     <div class="topic-para">
 
-        The number system forms the base of mathematics and helps us understand how quantities, values, and measurements work in real life. Every mathematical operation depends on numbers and their properties. From counting basic objects to solving advanced equations, number systems provide structure and clarity. In this chapter, students learn how numbers evolved and how different categories of numbers connect with each other. Understanding these concepts improves logical thinking and problem-solving skills. Number systems are used in science, engineering, computing, finance, and many modern technologies that depend on accurate calculations and organized numerical representation systems.
+        Integers are an important part of the number system and include positive numbers, negative numbers, and zero. They are widely used in mathematics, science, finance, and computer systems to represent quantities that increase or decrease. Positive integers are used for gains and upward movement, while negative integers represent losses, debts, or downward movement. Zero acts as the center point between positive and negative values on the number line. Students use integers in temperature calculations, banking systems, elevations, and game score tracking. Understanding integers builds a strong foundation for algebra, equations, coordinate geometry, and advanced mathematical operations involving signs and directional values.
 
     </div>
 
@@ -596,33 +652,64 @@ body{
 
     <div class="topic-para">
 
-        Natural numbers are the counting numbers used in everyday activities such as counting books, students, or objects. Whole numbers extend natural numbers by including zero, while integers include positive and negative values. Rational numbers can be represented in fraction form, whereas irrational numbers cannot be written as simple fractions. Together, these numbers create a powerful mathematical framework. Students should understand how each category differs because advanced topics like algebra, coordinate geometry, and calculus rely heavily on these foundations. Learning number systems also helps students improve accuracy, analytical reasoning, and confidence while solving mathematical expressions and equations.
+        Operations involving integers require careful understanding of signs and arithmetic rules. Adding two positive integers increases value, while adding negative integers decreases value. Multiplication and division follow sign rules where like signs produce positive results and unlike signs produce negative results. Integers are represented on a number line, helping students visualize movement to the left or right depending on operations. This topic improves logical thinking and helps learners solve real-life mathematical situations accurately. Integers are also heavily used in programming, databases, scientific calculations, and digital systems where values may rise above or fall below zero depending on runtime conditions.
+
+        <div class="integer-line">
+
+            Number Line Example:<br><br>
+
+            -5  -4  -3  -2  -1   0   1   2   3   4   5
+
+            <br><br>
+
+            Integer Addition:<br>
+
+            (-3) + 5 = 2
+
+            <br><br>
+
+            Integer Multiplication:<br>
+
+            (-2) × (-4) = 8
+
+        </div>
 
     </div>
 
 
-    <!-- AUTO TIMER -->
+    <!-- AUTO SYSTEM -->
 
     <div class="auto-box">
 
         <h4>
+
             Smart Auto Read System Active
+
         </h4>
 
         <p>
+
             This topic will automatically mark as read
             and move to the next topic in
+
             <span id="counter">
                 35
             </span>
+
             seconds.
+
         </p>
 
         <div class="progress">
 
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-                 id="auto-progress"
-                 style="width:0%"></div>
+            <div class="progress-bar
+                        progress-bar-striped
+                        progress-bar-animated
+                        bg-info"
+
+                 style="width:0%">
+
+            </div>
 
         </div>
 
@@ -631,7 +718,7 @@ body{
 
     <!-- BUTTONS -->
 
-    <div class="btns">
+    <div class="btn-area">
 
         <button class="runtime-btn"
                 onclick="previous()">
@@ -666,7 +753,7 @@ body{
 <footer class="footer">
 
     © 2026 Quizzone —
-    Smart Discipline Learning Runtime
+    Intelligent Discipline Learning Runtime
 
 </footer>
 
@@ -704,9 +791,11 @@ if(!user){
 
 (function(){
 
-    let width = window.innerWidth;
+    let width =
+        window.innerWidth;
 
-    let device = "Desktop";
+    let device =
+        "Desktop";
 
     if(width < 576){
 
@@ -727,14 +816,16 @@ if(!user){
     }
 
     document
-        .getElementById("device-name")
+        .getElementById(
+            "deviceBox"
+        )
         .innerText = device;
 
 })();
 
 
 /* =========================================================
-   MARK AS READ
+   MARK READ
 ========================================================= */
 
 function markAsRead(){
@@ -748,8 +839,6 @@ function markAsRead(){
 
     if(!user){
 
-        alert("Login Required!");
-
         return;
 
     }
@@ -761,8 +850,11 @@ function markAsRead(){
         (user.progress.blogs || 0) + 1;
 
     localStorage.setItem(
+
         "ActiveQuizzoneUser",
+
         JSON.stringify(user)
+
     );
 
     let allUsers =
@@ -774,7 +866,7 @@ function markAsRead(){
 
     let idx =
         allUsers.findIndex(
-            x => x.email === user.email
+            x=>x.email===user.email
         );
 
     if(idx !== -1){
@@ -784,8 +876,11 @@ function markAsRead(){
     }
 
     localStorage.setItem(
+
         "QuizzoneUsersDB",
+
         JSON.stringify(allUsers)
+
     );
 
 }
@@ -863,7 +958,7 @@ function previous(){
 
     else{
 
-        alert("First Topic");
+        alert("This is the first topic.");
 
     }
 
@@ -885,7 +980,7 @@ function next(){
 
 
 /* =========================================================
-   AUTO READ ENGINE
+   AUTO TIMER
 ========================================================= */
 
 let seconds = 35;
@@ -902,6 +997,13 @@ const timer =
 
         counter.innerText =
             seconds;
+
+        document
+            .getElementById(
+                "timerBox"
+            )
+            .innerText =
+                seconds + "s";
 
         if(seconds <= 0){
 
@@ -923,15 +1025,18 @@ const timer =
 (function(){
 
     document.title =
+
         "Mathematics Topic " +
+
         getPageNumber() +
+
         " | Quizzone";
 
 })();
 
 
 /* =========================================================
-   READING ANALYTICS
+   ANALYTICS
 ========================================================= */
 
 window.addEventListener(

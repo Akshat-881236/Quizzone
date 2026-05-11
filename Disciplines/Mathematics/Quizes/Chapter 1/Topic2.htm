@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- =========================================================
+     BASIC META
+========================================================= -->
+
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible"
+      content="IE=edge">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=5.0">
+
+<!-- =========================================================
+     SEO META
+========================================================= -->
+
+<title>
+Mathematics Quiz | Chapter 1 | Topic 2 | Real Numbers | Quizzone
+</title>
+
+<meta name="title"
+      content="Mathematics Quiz Topic 2 - Real Numbers">
+
+<meta name="description"
+      content="Advanced Real Numbers Quiz powered by Quizzone Smart Runtime with auto timers, responsive design, intelligent scoring system, runtime analytics and automatic submission engine.">
+
+<meta name="keywords"
+      content="Real Numbers Quiz,Rational Numbers,Irrational Numbers,Mathematics Quiz,Quizzone">
+
+<meta name="author"
+      content="Akshat Prasad">
+
+<meta name="robots"
+      content="index,follow">
+
+<meta name="theme-color"
+      content="#007bff">
+
+<meta name="color-scheme"
+      content="light dark">
+
+<!-- =========================================================
+     OPEN GRAPH
+========================================================= -->
+
+<meta property="og:type"
+      content="website">
+
+<meta property="og:title"
+      content="Mathematics Quiz Topic 2">
+
+<meta property="og:description"
+      content="Interactive Real Numbers Quiz powered by Quizzone.">
+
+<meta property="og:image"
+      content="/Quizzone/icons/QuizzoneLogo.png">
+
+<!-- =========================================================
+     TWITTER
+========================================================= -->
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="Real Numbers Quiz">
+
+<meta name="twitter:description"
+      content="Smart Educational Quiz Runtime">
+
+<!-- =========================================================
+     JSON LD
+========================================================= -->
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Quiz",
+ "name":"Mathematics Quiz Topic 2",
+ "educationalLevel":"Beginner",
+ "author":{
+   "@type":"Person",
+   "name":"Akshat Prasad"
+ }
+}
+</script>
+
+<!-- =========================================================
+     BOOTSTRAP
+========================================================= -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<!-- =========================================================
+     GOOGLE FONT
+========================================================= -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- =========================================================
+     ROUTER
+========================================================= -->
+
+<script src="https://akshat-881236.github.io/AkshatNetworkHub/ActivityLog/router.js"
+        referrerpolicy="referrer">
+</script>
+
+<script src="/Quizzone/Global/loader.js"></script>
+<script src="/Quizzone/Global/seoMeta.js"></script>
+
+<!-- =========================================================
+     STYLE
+========================================================= -->
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+    --primary:#007bff;
+    --secondary:#00d4ff;
+    --dark:#0d1117;
+    --light:#eef4ff;
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+
+    margin:0;
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef4ff,
+            #d8e8ff
+        );
+
+    overflow-x:hidden;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00d4ff
+        );
+
+    color:white;
+
+    padding:20px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,.15);
+
+}
+
+
+.header-title{
+
+    font-size:1.7rem;
+
+    font-weight:700;
+
+}
+
+
+.header-sub{
+
+    opacity:.9;
+
+}
+
+
+/* =========================================================
+   QUIZ BOX
+========================================================= */
+
+.quiz-box{
+
+    width:92%;
+
+    max-width:1050px;
+
+    margin:30px auto;
+
+    background:
+        rgba(255,255,255,.78);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================================
+   INFO GRID
+========================================================= */
+
+.info-grid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+
+.info-card{
+
+    flex:1;
+
+    min-width:180px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.08);
+
+}
+
+
+.info-card h3{
+
+    margin:0;
+
+    color:#007bff;
+
+}
+
+
+/* =========================================================
+   QUESTION BOX
+========================================================= */
+
+.question-box{
+
+    background:white;
+
+    padding:28px;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.08);
+
+}
+
+
+.question-number{
+
+    color:#007bff;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+
+.question-text{
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+    font-weight:500;
+
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.option{
+
+    background:#eef4ff;
+
+    padding:18px;
+
+    margin-top:15px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    border:
+        2px solid transparent;
+
+}
+
+
+.option:hover{
+
+    transform:translateY(-2px);
+
+    background:#dce8ff;
+
+    border-color:#007bff;
+
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+.timer-area{
+
+    margin-top:25px;
+
+}
+
+
+.progress{
+
+    height:14px;
+
+    border-radius:50px;
+
+}
+
+
+.progress-bar{
+
+    animation:
+        moveProgress 30s linear forwards;
+
+}
+
+
+@keyframes moveProgress{
+
+    from{
+        width:0%;
+    }
+
+    to{
+        width:100%;
+    }
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-area{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+
+.runtime-btn{
+
+    border:none;
+
+    padding:14px 24px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00d4ff
+        );
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.runtime-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+/* =========================================================
+   RESULT BOX
+========================================================= */
+
+.result-box{
+
+    text-align:center;
+
+    padding:40px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    text-align:center;
+
+    padding:35px;
+
+    color:#666;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:576px){
+
+    .quiz-box{
+
+        padding:20px;
+
+    }
+
+    .question-text{
+
+        font-size:1rem;
+
+    }
+
+    .runtime-btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMARTBOARD
+========================================================= */
+
+@media(min-width:2200px){
+
+    body{
+
+        zoom:1.4;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <div class="header-title">
+
+        Mathematics → Chapter 1 → Quiz Topic 2
+
+    </div>
+
+    <div class="header-sub">
+
+        Real Numbers Smart Quiz Runtime
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     QUIZ BOX
+========================================================= -->
+
+<section class="quiz-box">
+
+    <!-- INFO -->
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <h3 id="questionTimer">
+                30s
+            </h3>
+
+            <p>
+                Per Question Timer
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3 id="overallTimer">
+                240s
+            </h3>
+
+            <p>
+                Overall Quiz Time
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3 id="scoreBox">
+                0
+            </h3>
+
+            <p>
+                Current Score
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div class="question-box">
+
+        <div class="question-number"
+             id="questionNumber">
+
+            Question 1 / 8
+
+        </div>
+
+        <div class="question-text"
+             id="questionText">
+
+        </div>
+
+        <div id="options"></div>
+
+    </div>
+
+
+    <!-- TIMER -->
+
+    <div class="timer-area">
+
+        <div class="progress">
+
+            <div class="progress-bar
+                        progress-bar-striped
+                        progress-bar-animated
+                        bg-info"
+
+                 id="progressBar"
+                 style="width:0%">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="btn-area">
+
+        <button class="runtime-btn"
+                onclick="previousQuiz()">
+
+            ← Previous Quiz
+
+        </button>
+
+        <button class="runtime-btn"
+                onclick="skipQuestion()">
+
+            Skip Question
+
+        </button>
+
+        <button class="runtime-btn"
+                onclick="submitQuiz()">
+
+            Submit Quiz ✓
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    © 2026 Quizzone —
+    Intelligent Educational Runtime
+
+</footer>
+
+
+<!-- =========================================================
+     SCRIPT
+========================================================= -->
+
+<script>
+
+/* =========================================================
+   LOGIN CHECK
+========================================================= */
+
+let user =
+    JSON.parse(
+        localStorage.getItem(
+            "ActiveQuizzoneUser"
+        )
+    );
+
+if(!user){
+
+    alert("Please login first!");
+
+    location.href =
+        "/Quizzone/Home/SignIn.htm";
+
+}
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+const questions = [
+
+{
+q:"Which category of numbers includes both rational and irrational numbers together on the mathematical number line system?",
+opt:[
+"Natural Numbers",
+"Whole Numbers",
+"Real Numbers",
+"Prime Numbers"
+],
+ans:2
+},
+
+{
+q:"Why are rational numbers considered important in mathematics and scientific calculations involving measurable quantities?",
+opt:[
+"They cannot be represented in fraction form",
+"They are always imaginary values",
+"They can be represented as fractions of integers",
+"They exist only in geometry"
+],
+ans:2
+},
+
+{
+q:"Which statement correctly describes irrational numbers in advanced mathematical representation systems?",
+opt:[
+"They terminate after a few digits",
+"They repeat continuously",
+"They are non-terminating and non-repeating",
+"They are always negative integers"
+],
+ans:2
+},
+
+{
+q:"Which of the following values is classified as an irrational number in mathematics?",
+opt:[
+"5/2",
+"0.75",
+"π",
+"4"
+],
+ans:2
+},
+
+{
+q:"How do real numbers help students understand coordinate geometry and graphical mathematical systems?",
+opt:[
+"They remove graphical representation",
+"They represent measurable points on number lines",
+"They eliminate calculations",
+"They only represent fractions"
+],
+ans:1
+},
+
+{
+q:"Which field heavily depends on real numbers for accurate calculations, measurements, and analytical problem solving?",
+opt:[
+"Engineering",
+"Physics",
+"Computer Science",
+"All of the Above"
+],
+ans:3
+},
+
+{
+q:"What is the major difference between rational and irrational numbers?",
+opt:[
+"Rational numbers repeat or terminate while irrational numbers do not",
+"Irrational numbers are always integers",
+"Rational numbers are always negative",
+"There is no difference"
+],
+ans:0
+},
+
+{
+q:"Why is understanding real numbers considered foundational for advanced mathematics and analytical sciences?",
+opt:[
+"They simplify only basic counting",
+"They help build concepts used in algebra, calculus and geometry",
+"They eliminate equations completely",
+"They are used only in financial systems"
+],
+ans:1
+}
+
+];
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let index = 0;
+
+let score = 0;
+
+let questionSeconds = 30;
+
+let totalSeconds = 240;
+
+let questionTimer;
+
+let overallTimer;
+
+
+/* =========================================================
+   LOAD QUESTION
+========================================================= */
+
+function loadQuestion(){
+
+    resetQuestionTimer();
+
+    document.getElementById(
+        "questionNumber"
+    ).innerText =
+
+        `Question ${index + 1} / ${questions.length}`;
+
+    document.getElementById(
+        "questionText"
+    ).innerText =
+
+        questions[index].q;
+
+    let html = "";
+
+    questions[index].opt.forEach((o,i)=>{
+
+        html += `
+
+        <div class='option'
+             onclick='checkAnswer(${i})'>
+
+             ${o}
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "options"
+    ).innerHTML = html;
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
+function checkAnswer(i){
+
+    if(i === questions[index].ans){
+
+        score += 4;
+
+    }
+
+    else{
+
+        score -= 1;
+
+    }
+
+    updateScore();
+
+    nextQuestion();
+
+}
+
+
+/* =========================================================
+   NEXT QUESTION
+========================================================= */
+
+function nextQuestion(){
+
+    clearInterval(questionTimer);
+
+    index++;
+
+    if(index >= questions.length){
+
+        submitQuiz();
+
+        return;
+
+    }
+
+    loadQuestion();
+
+}
+
+
+/* =========================================================
+   SKIP
+========================================================= */
+
+function skipQuestion(){
+
+    nextQuestion();
+
+}
+
+
+/* =========================================================
+   SCORE UPDATE
+========================================================= */
+
+function updateScore(){
+
+    document.getElementById(
+        "scoreBox"
+    ).innerText = score;
+
+}
+
+
+/* =========================================================
+   QUESTION TIMER
+========================================================= */
+
+function resetQuestionTimer(){
+
+    clearInterval(questionTimer);
+
+    questionSeconds = 30;
+
+    document.getElementById(
+        "questionTimer"
+    ).innerText =
+        questionSeconds + "s";
+
+    document.getElementById(
+        "progressBar"
+    ).style.animation =
+        "none";
+
+    void document.getElementById(
+        "progressBar"
+    ).offsetWidth;
+
+    document.getElementById(
+        "progressBar"
+    ).style.animation =
+        "moveProgress 30s linear forwards";
+
+    questionTimer = setInterval(()=>{
+
+        questionSeconds--;
+
+        document.getElementById(
+            "questionTimer"
+        ).innerText =
+            questionSeconds + "s";
+
+        if(questionSeconds <= 0){
+
+            nextQuestion();
+
+        }
+
+    },1000);
+
+}
+
+
+/* =========================================================
+   OVERALL TIMER
+========================================================= */
+
+overallTimer = setInterval(()=>{
+
+    totalSeconds--;
+
+    document.getElementById(
+        "overallTimer"
+    ).innerText =
+        totalSeconds + "s";
+
+    if(totalSeconds <= 0){
+
+        submitQuiz();
+
+    }
+
+},1000);
+
+
+/* =========================================================
+   SUBMIT QUIZ
+========================================================= */
+
+function submitQuiz(){
+
+    clearInterval(questionTimer);
+
+    clearInterval(overallTimer);
+
+    let percentage =
+
+        (
+            (
+                score /
+                (questions.length * 4)
+            ) * 100
+        ).toFixed(1);
+
+    document.querySelector(
+        ".quiz-box"
+    ).innerHTML = `
+
+        <div class='result-box'>
+
+            <h1>
+                Quiz Completed 🎉
+            </h1>
+
+            <h2>
+                Score : ${score}
+            </h2>
+
+            <h3>
+                Percentage : ${percentage}%
+            </h3>
+
+            <p>
+                Your Real Numbers understanding
+                was analyzed using Quizzone
+                Smart Runtime Engine.
+            </p>
+
+            <button class='runtime-btn'
+                    onclick='saveScore()'>
+
+                Save Score & Continue →
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SAVE SCORE
+========================================================= */
+
+function saveScore(){
+
+    let user =
+        JSON.parse(
+            localStorage.getItem(
+                "ActiveQuizzoneUser"
+            )
+        );
+
+    if(!user){
+
+        return;
+
+    }
+
+    user.scores =
+        user.scores || {};
+
+    user.scores.math_ch1_quiz2 = {
+
+        marks : score,
+
+        submitted :
+            new Date(),
+
+        total :
+            questions.length * 4
+
+    };
+
+    localStorage.setItem(
+
+        "ActiveQuizzoneUser",
+
+        JSON.stringify(user)
+
+    );
+
+    let allUsers =
+        JSON.parse(
+            localStorage.getItem(
+                "QuizzoneUsersDB"
+            )
+        ) || [];
+
+    let idx =
+        allUsers.findIndex(
+            x=>x.email===user.email
+        );
+
+    if(idx !== -1){
+
+        allUsers[idx] = user;
+
+    }
+
+    localStorage.setItem(
+
+        "QuizzoneUsersDB",
+
+        JSON.stringify(allUsers)
+
+    );
+    window.location.href="/Quizzone/Disciplines/Mathematics/Quizes/Chapter%201/Topic3.htm"
+    autoNextQuiz();
+
+}
+
+
+/* =========================================================
+   AUTO NEXT QUIZ
+========================================================= */
+
+function autoNextQuiz(){
+
+    const currentPath =
+        window.location.pathname;
+
+    const match =
+        currentPath.match(/Topic(\d+)\.htm/i);
+
+    if(!match){
+
+        window.location.href =
+            "/Quizzone/index.htm";
+
+        return;
+
+    }
+
+    const currentQuiz =
+        parseInt(match[1]);
+
+    const nextQuiz =
+        currentQuiz + 1;
+
+    const nextQuizFile =
+        `Topic${nextQuiz}.htm`;
+
+    fetch(nextQuizFile)
+
+    .then(response=>{
+
+        if(response.ok){
+
+            setTimeout(()=>{
+
+                window.location.href =
+                    nextQuizFile;
+
+            },3000);
+
+        }
+
+        else{
+
+            showCompletionPage();
+
+        }
+
+    })
+
+    .catch(()=>{
+
+        showCompletionPage();
+
+    });
+
+}
+
+
+/* =========================================================
+   FINAL COMPLETION
+========================================================= */
+
+function showCompletionPage(){
+
+    document.body.innerHTML = `
+
+        <div style='
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #007bff,
+                    #00d4ff
+                );
+            font-family:Poppins;
+            color:white;
+            text-align:center;
+            padding:20px;
+        '>
+
+            <div>
+
+                <h1 style='font-size:60px;'>
+
+                    🎉
+
+                </h1>
+
+                <h2>
+
+                    Chapter Completed Successfully
+
+                </h2>
+
+                <p>
+
+                    You completed all quizzes
+                    of Mathematics Chapter 1.
+
+                </p>
+
+                <button onclick='goHome()'
+
+                    style='
+                        padding:14px 24px;
+                        border:none;
+                        border-radius:50px;
+                        background:white;
+                        color:#007bff;
+                        font-weight:700;
+                        cursor:pointer;
+                    '>
+
+                    Go To Home
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   GO HOME
+========================================================= */
+
+function goHome(){
+
+    window.location.href =
+        "/Quizzone/index.htm";
+
+}
+
+/* =========================================================
+   PREVIOUS QUIZ
+========================================================= */
+
+function previousQuiz(){
+
+    history.back();
+
+}
+
+
+/* =========================================================
+   PAGE VALIDATION
+========================================================= */
+
+fetch(window.location.href)
+
+.then(res=>{
+
+    if(!res.ok){
+
+        location.href =
+            "/Quizzone/404.html";
+
+    }
+
+})
+
+.catch(()=>{
+
+    location.href =
+        "/Quizzone/404.html";
+
+});
+
+
+/* =========================================================
+   RUNTIME TITLE
+========================================================= */
+
+document.title =
+    "Mathematics Quiz Topic 2 | Quizzone";
+
+
+/* =========================================================
+   LOAD FIRST QUESTION
+========================================================= */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

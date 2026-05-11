@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- =========================================================
+     BASIC META
+========================================================= -->
+
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible"
+      content="IE=edge">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=5.0">
+
+<!-- =========================================================
+     PRIMARY SEO
+========================================================= -->
+
+<title>
+Mathematics | Chapter 1 | Topic 2 | Real Numbers | Quizzone
+</title>
+
+<meta name="title"
+      content="Mathematics Chapter 1 Topic 2 - Real Numbers">
+
+<meta name="description"
+      content="Learn Real Numbers in Mathematics with intelligent Quizzone learning engine, auto progress tracking, responsive educational UI, and dynamic topic navigation.">
+
+<meta name="keywords"
+      content="Mathematics,Real Numbers,Rational Numbers,Irrational Numbers,Quizzone,Education,Topic 2">
+
+<meta name="author"
+      content="Akshat Prasad">
+
+<meta name="robots"
+      content="index,follow">
+
+<meta name="theme-color"
+      content="#007bff">
+
+<meta name="color-scheme"
+      content="light dark">
+
+<!-- =========================================================
+     OPEN GRAPH
+========================================================= -->
+
+<meta property="og:type"
+      content="article">
+
+<meta property="og:title"
+      content="Mathematics Chapter 1 Topic 2">
+
+<meta property="og:description"
+      content="Understand Real Numbers with Quizzone Smart Discipline Runtime.">
+
+<meta property="og:image"
+      content="/Quizzone/icons/QuizzoneLogo.png">
+
+<!-- =========================================================
+     TWITTER
+========================================================= -->
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="Mathematics Topic 2">
+
+<meta name="twitter:description"
+      content="Advanced educational topic powered by Quizzone.">
+
+<!-- =========================================================
+     FONTS
+========================================================= -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- =========================================================
+     BOOTSTRAP
+========================================================= -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<!-- =========================================================
+     ROUTER
+========================================================= -->
+
+<script src="https://akshat-881236.github.io/AkshatNetworkHub/ActivityLog/router.js"
+        referrerpolicy="referrer">
+</script>
+
+<!-- =========================================================
+     GLOBAL
+========================================================= -->
+
+<script src="/Quizzone/Global/loader.js"></script>
+<script src="/Quizzone/Global/seoMeta.js"></script>
+
+<!-- =========================================================
+     JSON-LD
+========================================================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"Real Numbers",
+  "description":"Mathematics Topic 2 - Real Numbers",
+  "author":{
+    "@type":"Person",
+    "name":"Akshat Prasad"
+  },
+  "publisher":{
+    "@type":"Organization",
+    "name":"Quizzone"
+  }
+}
+</script>
+
+<!-- =========================================================
+     STYLE
+========================================================= -->
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+    --primary:#007bff;
+    --secondary:#00c3ff;
+    --bg:#eef3ff;
+    --dark:#0d1117;
+    --glass:rgba(255,255,255,.7);
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+
+    margin:0;
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef3ff,
+            #dce8ff
+        );
+
+    overflow-x:hidden;
+
+    color:#111;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00c3ff
+        );
+
+    color:white;
+
+    padding:18px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,.15);
+
+}
+
+
+.header-title{
+
+    font-size:1.6rem;
+
+    font-weight:700;
+
+}
+
+
+.header-sub{
+
+    font-size:.95rem;
+
+    opacity:.9;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-box{
+
+    width:92%;
+
+    max-width:1000px;
+
+    margin:30px auto;
+
+    background:var(--glass);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    border:
+        1px solid rgba(255,255,255,.4);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.topic-title{
+
+    color:#007bff;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+
+/* =========================================================
+   INFO BAR
+========================================================= */
+
+.info-grid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+
+.info-card{
+
+    flex:1;
+
+    min-width:180px;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.08);
+
+}
+
+
+.info-card h3{
+
+    margin:0;
+
+    color:#007bff;
+
+}
+
+
+/* =========================================================
+   PARAGRAPH
+========================================================= */
+
+.topic-para{
+
+    background:white;
+
+    padding:24px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    line-height:2;
+
+    font-size:1rem;
+
+    border-left:
+        5px solid #007bff;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.08);
+
+}
+
+
+/* =========================================================
+   MATH BOX
+========================================================= */
+
+.math-box{
+
+    background:#0d1117;
+
+    color:#00ffb3;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    margin-top:20px;
+
+    font-size:1.1rem;
+
+    overflow:auto;
+
+}
+
+
+/* =========================================================
+   AUTO BOX
+========================================================= */
+
+.auto-box{
+
+    margin-top:35px;
+
+    background:#0d1117;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+}
+
+
+.progress{
+
+    height:12px;
+
+    margin-top:15px;
+
+    border-radius:50px;
+
+}
+
+
+.progress-bar{
+
+    animation:
+        autoMove 35s linear forwards;
+
+}
+
+
+@keyframes autoMove{
+
+    from{
+        width:0%;
+    }
+
+    to{
+        width:100%;
+    }
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-area{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+
+.runtime-btn{
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #007bff,
+            #00c3ff
+        );
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.runtime-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 6px 18px rgba(0,123,255,.25);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    text-align:center;
+
+    padding:35px;
+
+    color:#666;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:576px){
+
+    .main-box{
+
+        padding:20px;
+
+    }
+
+    .topic-title{
+
+        font-size:1.5rem;
+
+    }
+
+    .topic-para{
+
+        font-size:.95rem;
+
+        padding:18px;
+
+    }
+
+    .runtime-btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMARTBOARD
+========================================================= */
+
+@media(min-width:2200px){
+
+    body{
+
+        zoom:1.4;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <div class="header-title">
+        Mathematics → Chapter 1 → Topic 2
+    </div>
+
+    <div class="header-sub">
+        Real Numbers Learning Engine
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN BOX
+========================================================= -->
+
+<section class="main-box">
+
+    <!-- INFO -->
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <h3 id="timerBox">
+                35s
+            </h3>
+
+            <p>
+                Auto Read Timer
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>
+                Topic 2
+            </h3>
+
+            <p>
+                Learning Unit
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3 id="deviceBox">
+                Device
+            </h3>
+
+            <p>
+                Runtime Device
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="topic-title">
+
+        Understanding Real Numbers
+
+    </h1>
+
+
+    <!-- PARA 1 -->
+
+    <div class="topic-para">
+
+        Real numbers include all rational and irrational numbers that exist on the number line. Rational numbers can be written in the form of fractions such as 1/2 or 5/8, while irrational numbers like √2 and π cannot be represented as exact fractions. Real numbers help students understand mathematical continuity and measurements used in daily life. They are essential in geometry, algebra, physics, engineering, and computer science. Every point on the number line represents a real number, which makes this topic extremely important for visualizing quantities and solving mathematical equations involving distance, area, and scientific calculations.
+
+    </div>
+
+
+    <!-- PARA 2 -->
+
+    <div class="topic-para">
+
+        Irrational numbers have non-terminating and non-repeating decimal values, while rational numbers either terminate or repeat after some digits. Together they create the complete real number system. Students should learn to identify different number types and understand their practical applications. Real numbers are used in measurements such as temperature, speed, weight, and financial calculations. Advanced mathematical concepts like trigonometry, calculus, and coordinate geometry depend heavily on real numbers. Understanding this topic improves logical reasoning and prepares learners for future analytical studies. Real numbers also help in graphical representation and accurate problem solving in scientific fields.
+
+        <div class="math-box">
+
+            √2 = 1.4142135... <br><br>
+
+            π = 3.1415926... <br><br>
+
+            Rational Example = 5/2 = 2.5
+
+        </div>
+
+    </div>
+
+
+    <!-- AUTO -->
+
+    <div class="auto-box">
+
+        <h4>
+            Smart Auto Read System Active
+        </h4>
+
+        <p>
+
+            This topic will automatically mark as read
+            and move to the next topic in
+
+            <span id="counter">
+                35
+            </span>
+
+            seconds.
+
+        </p>
+
+        <div class="progress">
+
+            <div class="progress-bar
+                        progress-bar-striped
+                        progress-bar-animated
+                        bg-info"
+
+                 style="width:0%">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="btn-area">
+
+        <button class="runtime-btn"
+                onclick="previous()">
+
+            ← Previous Topic
+
+        </button>
+
+        <button class="runtime-btn"
+                onclick="markAsRead()">
+
+            Mark as Read ✓
+
+        </button>
+
+        <button class="runtime-btn"
+                onclick="next()">
+
+            Next Topic →
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    © 2026 Quizzone —
+    Intelligent Discipline Learning Runtime
+
+</footer>
+
+
+<!-- =========================================================
+     SCRIPT
+========================================================= -->
+
+<script>
+
+/* =========================================================
+   LOGIN CHECK
+========================================================= */
+
+let user =
+    JSON.parse(
+        localStorage.getItem(
+            "ActiveQuizzoneUser"
+        )
+    );
+
+if(!user){
+
+    alert("Please login first!");
+
+    location.href =
+        "/Quizzone/Home/SignIn.htm";
+
+}
+
+/* =========================================================
+   DEVICE DETECTOR
+========================================================= */
+
+(function(){
+
+    let width =
+        window.innerWidth;
+
+    let device =
+        "Desktop";
+
+    if(width < 576){
+
+        device = "Mobile";
+
+    }
+
+    else if(width < 992){
+
+        device = "Tablet";
+
+    }
+
+    else if(width > 2200){
+
+        device = "SmartBoard";
+
+    }
+
+    document
+        .getElementById(
+            "deviceBox"
+        )
+        .innerText = device;
+
+})();
+
+
+/* =========================================================
+   MARK READ
+========================================================= */
+
+function markAsRead(){
+
+    let user =
+        JSON.parse(
+            localStorage.getItem(
+                "ActiveQuizzoneUser"
+            )
+        );
+
+    if(!user){
+
+        return;
+
+    }
+
+    user.progress =
+        user.progress || {};
+
+    user.progress.blogs =
+        (user.progress.blogs || 0) + 1;
+
+    localStorage.setItem(
+
+        "ActiveQuizzoneUser",
+
+        JSON.stringify(user)
+
+    );
+
+    let allUsers =
+        JSON.parse(
+            localStorage.getItem(
+                "QuizzoneUsersDB"
+            )
+        ) || [];
+
+    let idx =
+        allUsers.findIndex(
+            x=>x.email===user.email
+        );
+
+    if(idx !== -1){
+
+        allUsers[idx] = user;
+
+    }
+
+    localStorage.setItem(
+
+        "QuizzoneUsersDB",
+
+        JSON.stringify(allUsers)
+
+    );
+
+}
+
+
+/* =========================================================
+   PAGE NUMBER
+========================================================= */
+
+function getPageNumber(){
+
+    const url =
+        location.pathname;
+
+    const match =
+        url.match(/Topic(\d+)\.htm/i);
+
+    return match
+        ? parseInt(match[1])
+        : 1;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function navigateToPage(num){
+
+    fetch(`Topic${num}.htm`)
+
+    .then(response=>{
+
+        if(response.ok){
+
+            location.href =
+                `Topic${num}.htm`;
+
+        }
+
+        else{
+
+            location.href =
+                "/Quizzone/404.html";
+
+        }
+
+    })
+
+    .catch(()=>{
+
+        location.href =
+            "/Quizzone/404.html";
+
+    });
+
+}
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+function previous(){
+
+    const current =
+        getPageNumber();
+
+    if(current > 1){
+
+        navigateToPage(current - 1);
+
+    }
+
+    else{
+
+        alert("This is the first topic.");
+
+    }
+
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+function next(){
+
+    const current =
+        getPageNumber();
+
+    navigateToPage(current + 1);
+
+}
+
+
+/* =========================================================
+   AUTO TIMER
+========================================================= */
+
+let seconds = 35;
+
+const counter =
+    document.getElementById(
+        "counter"
+    );
+
+const timer =
+    setInterval(()=>{
+
+        seconds--;
+
+        counter.innerText =
+            seconds;
+
+        document
+            .getElementById(
+                "timerBox"
+            )
+            .innerText =
+                seconds + "s";
+
+        if(seconds <= 0){
+
+            clearInterval(timer);
+
+            markAsRead();
+
+            next();
+
+        }
+
+    },1000);
+
+
+/* =========================================================
+   RUNTIME SEO
+========================================================= */
+
+(function(){
+
+    document.title =
+
+        "Mathematics Topic " +
+
+        getPageNumber() +
+
+        " | Quizzone";
+
+})();
+
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    ()=>{
+
+        localStorage.setItem(
+
+            "QZ_LAST_TOPIC",
+
+            JSON.stringify({
+
+                topic :
+                    location.pathname,
+
+                timestamp :
+                    new Date()
+
+            })
+
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>

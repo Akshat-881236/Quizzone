@@ -21,17 +21,17 @@
 ========================================================= -->
 
 <title>
-Mathematics Quiz | Chapter 1 | Topic 1 | Quizzone
+Mathematics Quiz | Chapter 1 | Topic 3 | Integers | Quizzone
 </title>
 
 <meta name="title"
-      content="Mathematics Quiz Topic 1 - Number System">
+      content="Mathematics Quiz Topic 3 - Integers">
 
 <meta name="description"
-      content="Advanced Mathematics Quiz with smart timer engine, auto submission, responsive UI, runtime SEO, auto progression and intelligent quiz analytics powered by Quizzone.">
+      content="Advanced Integers Quiz powered by Quizzone Smart Runtime Engine with auto timers, intelligent scoring, auto submission, responsive design and educational analytics.">
 
 <meta name="keywords"
-      content="Mathematics Quiz,Number System Quiz,Quizzone,Online Education,Responsive Quiz">
+      content="Integers Quiz,Positive Numbers,Negative Numbers,Mathematics Quiz,Quizzone">
 
 <meta name="author"
       content="Akshat Prasad">
@@ -53,10 +53,10 @@ Mathematics Quiz | Chapter 1 | Topic 1 | Quizzone
       content="website">
 
 <meta property="og:title"
-      content="Mathematics Quiz Topic 1">
+      content="Mathematics Quiz Topic 3">
 
 <meta property="og:description"
-      content="Interactive Smart Quiz powered by Quizzone.">
+      content="Interactive Integers Quiz powered by Quizzone.">
 
 <meta property="og:image"
       content="/Quizzone/icons/QuizzoneLogo.png">
@@ -69,10 +69,10 @@ Mathematics Quiz | Chapter 1 | Topic 1 | Quizzone
       content="summary_large_image">
 
 <meta name="twitter:title"
-      content="Mathematics Quiz">
+      content="Integers Quiz">
 
 <meta name="twitter:description"
-      content="Advanced Quizzone Smart Quiz System">
+      content="Smart Educational Quiz Runtime">
 
 <!-- =========================================================
      JSON LD
@@ -82,7 +82,7 @@ Mathematics Quiz | Chapter 1 | Topic 1 | Quizzone
 {
  "@context":"https://schema.org",
  "@type":"Quiz",
- "name":"Mathematics Quiz Topic 1",
+ "name":"Mathematics Quiz Topic 3",
  "educationalLevel":"Beginner",
  "author":{
    "@type":"Person",
@@ -139,8 +139,6 @@ Mathematics Quiz | Chapter 1 | Topic 1 | Quizzone
     --secondary:#00d4ff;
     --dark:#0d1117;
     --light:#eef4ff;
-    --success:#00b894;
-    --danger:#ff4d4d;
 
 }
 
@@ -153,20 +151,16 @@ body{
 
     margin:0;
 
-    padding:0;
-
     font-family:'Poppins',sans-serif;
 
     background:
         linear-gradient(
             135deg,
             #eef4ff,
-            #d9e8ff
+            #d8e8ff
         );
 
     overflow-x:hidden;
-
-    color:#111;
 
 }
 
@@ -213,13 +207,11 @@ body{
 
     opacity:.9;
 
-    margin-top:5px;
-
 }
 
 
 /* =========================================================
-   MAIN BOX
+   QUIZ BOX
 ========================================================= */
 
 .quiz-box{
@@ -231,9 +223,9 @@ body{
     margin:30px auto;
 
     background:
-        rgba(255,255,255,.75);
+        rgba(255,255,255,.78);
 
-    backdrop-filter:blur(16px);
+    backdrop-filter:blur(18px);
 
     border-radius:24px;
 
@@ -270,9 +262,9 @@ body{
 
     background:white;
 
-    padding:18px;
-
     border-radius:18px;
+
+    padding:18px;
 
     text-align:center;
 
@@ -292,18 +284,16 @@ body{
 
 
 /* =========================================================
-   QUESTION
+   QUESTION BOX
 ========================================================= */
 
 .question-box{
 
     background:white;
 
-    border-radius:20px;
-
     padding:28px;
 
-    margin-top:20px;
+    border-radius:20px;
 
     box-shadow:
         0 2px 12px rgba(0,0,0,.08);
@@ -324,7 +314,7 @@ body{
 
 .question-text{
 
-    font-size:1.2rem;
+    font-size:1.15rem;
 
     line-height:1.8;
 
@@ -343,9 +333,9 @@ body{
 
     padding:18px;
 
-    border-radius:14px;
-
     margin-top:15px;
+
+    border-radius:14px;
 
     cursor:pointer;
 
@@ -361,7 +351,7 @@ body{
 
     transform:translateY(-2px);
 
-    background:#dce9ff;
+    background:#dce8ff;
 
     border-color:#007bff;
 
@@ -369,7 +359,7 @@ body{
 
 
 /* =========================================================
-   TIMER AREA
+   TIMER
 ========================================================= */
 
 .timer-area{
@@ -391,12 +381,12 @@ body{
 .progress-bar{
 
     animation:
-        progressMove 25s linear forwards;
+        moveProgress 30s linear forwards;
 
 }
 
 
-@keyframes progressMove{
+@keyframes moveProgress{
 
     from{
         width:0%;
@@ -455,9 +445,6 @@ body{
 .runtime-btn:hover{
 
     transform:translateY(-3px);
-
-    box-shadow:
-        0 6px 18px rgba(0,123,255,.25);
 
 }
 
@@ -545,13 +532,13 @@ body{
 
     <div class="header-title">
 
-        Mathematics → Chapter 1 → Quiz Topic 1
+        Mathematics → Chapter 1 → Quiz Topic 3
 
     </div>
 
     <div class="header-sub">
 
-        Smart Quiz Runtime Engine
+        Integers Smart Quiz Runtime
 
     </div>
 
@@ -571,11 +558,11 @@ body{
         <div class="info-card">
 
             <h3 id="questionTimer">
-                25s
+                30s
             </h3>
 
             <p>
-                Question Timer
+                Per Question Timer
             </p>
 
         </div>
@@ -583,7 +570,7 @@ body{
         <div class="info-card">
 
             <h3 id="overallTimer">
-                180s
+                300s
             </h3>
 
             <p>
@@ -614,7 +601,7 @@ body{
         <div class="question-number"
              id="questionNumber">
 
-            Question 1 / 6
+            Question 1 / 10
 
         </div>
 
@@ -623,9 +610,7 @@ body{
 
         </div>
 
-        <div id="options">
-
-        </div>
+        <div id="options"></div>
 
     </div>
 
@@ -688,7 +673,7 @@ body{
 <footer class="footer">
 
     © 2026 Quizzone —
-    Smart Educational Quiz Runtime
+    Intelligent Educational Runtime
 
 </footer>
 
@@ -699,7 +684,25 @@ body{
 
 <script>
 
+/* =========================================================
+   LOGIN CHECK
+========================================================= */
 
+let user =
+    JSON.parse(
+        localStorage.getItem(
+            "ActiveQuizzoneUser"
+        )
+    );
+
+if(!user){
+
+    alert("Please login first!");
+
+    location.href =
+        "/Quizzone/Home/SignIn.htm";
+
+}
 
 
 /* =========================================================
@@ -709,69 +712,113 @@ body{
 const questions = [
 
 {
-q:"Which number system contains all positive counting numbers including zero and is commonly used in computer science, mathematics, and logical counting systems?",
-opt:[
-"Natural Numbers",
-"Whole Numbers",
-"Irrational Numbers",
-"Imaginary Numbers"
-],
-ans:1
-},
-
-{
-q:"Which of the following values represents a rational number because it can be written in the form of a fraction between two integers?",
-opt:[
-"√2",
-"π",
-"7/5",
-"√7"
-],
-ans:2
-},
-
-{
-q:"Integers are extremely important in mathematics because they include which categories of numbers?",
+q:"Which category correctly represents integers in mathematics and advanced number systems?",
 opt:[
 "Only positive numbers",
-"Only negative numbers",
-"Both positive and negative numbers including zero",
+"Only fractions",
+"Positive numbers, negative numbers and zero",
 "Only decimal numbers"
 ],
 ans:2
 },
 
 {
-q:"Which statement correctly explains irrational numbers in advanced mathematics and scientific calculations?",
+q:"Why are integers considered important in mathematical operations and real life calculations involving gains and losses?",
 opt:[
-"They terminate after one digit",
-"They can always be converted into fractions",
-"They are non-terminating and non-repeating",
-"They are always whole numbers"
+"They represent only positive quantities",
+"They cannot represent negative values",
+"They help represent values above and below zero",
+"They exist only in geometry"
 ],
 ans:2
 },
 
 {
-q:"Why are real numbers important in geometry, algebra, physics, and modern engineering systems?",
+q:"Which of the following is an example of a negative integer commonly used in temperature measurements?",
 opt:[
-"They only represent imaginary values",
-"They help represent measurable quantities accurately",
-"They remove the need for calculations",
-"They exist only in computer science"
+"+8",
+"0",
+"-12",
+"4/5"
+],
+ans:2
+},
+
+{
+q:"How are integers represented visually in mathematics and coordinate systems?",
+opt:[
+"Pie chart",
+"Bar graph",
+"Number line",
+"Triangle diagram"
+],
+ans:2
+},
+
+{
+q:"What happens when two negative integers are multiplied together according to sign rules in mathematics?",
+opt:[
+"The result becomes negative",
+"The result becomes zero",
+"The result becomes positive",
+"The result becomes irrational"
+],
+ans:2
+},
+
+{
+q:"Which mathematical operation involving integers helps represent movement on a number line?",
+opt:[
+"Addition and subtraction",
+"Only multiplication",
+"Only division",
+"Square root operations"
+],
+ans:0
+},
+
+{
+q:"Integers are heavily used in programming systems because they help computers handle what type of values?",
+opt:[
+"Only images",
+"Only fractions",
+"Positive and negative data values",
+"Only irrational numbers"
+],
+ans:2
+},
+
+{
+q:"Which of the following examples correctly represents integer subtraction?",
+opt:[
+"5 - 8 = -3",
+"4 × 2 = 8",
+"6 / 3 = 2",
+"7 + 0 = 7"
+],
+ans:0
+},
+
+{
+q:"Why is zero considered an important integer in mathematics and computer science?",
+opt:[
+"It separates positive and negative values",
+"It removes all calculations",
+"It is always irrational",
+"It only represents fractions"
+],
+ans:0
+},
+
+{
+q:"How do integers help students build a strong foundation for advanced algebra and coordinate geometry?",
+opt:[
+"They eliminate the need for equations",
+"They improve understanding of signed operations and directions",
+"They only simplify counting",
+"They remove graphical calculations"
 ],
 ans:1
-},
-
-{
-q:"What is the primary role of number systems in mathematics and modern digital technologies?",
-opt:[
-"They reduce logic",
-"They create confusion in calculations",
-"They provide structured numerical representation",
-"They only help in geometry"
-],
-ans:2
 }
 
 ];
@@ -785,9 +832,9 @@ let index = 0;
 
 let score = 0;
 
-let questionSeconds = 25;
+let questionSeconds = 30;
 
-let totalSeconds = 180;
+let totalSeconds = 300;
 
 let questionTimer;
 
@@ -823,7 +870,7 @@ function loadQuestion(){
         <div class='option'
              onclick='checkAnswer(${i})'>
 
-            ${o}
+             ${o}
 
         </div>
 
@@ -918,12 +965,11 @@ function resetQuestionTimer(){
 
     clearInterval(questionTimer);
 
-    questionSeconds = 25;
+    questionSeconds = 30;
 
     document.getElementById(
         "questionTimer"
     ).innerText =
-
         questionSeconds + "s";
 
     document.getElementById(
@@ -938,7 +984,7 @@ function resetQuestionTimer(){
     document.getElementById(
         "progressBar"
     ).style.animation =
-        "progressMove 25s linear forwards";
+        "moveProgress 30s linear forwards";
 
     questionTimer = setInterval(()=>{
 
@@ -993,8 +1039,13 @@ function submitQuiz(){
     clearInterval(overallTimer);
 
     let percentage =
-        ((score / (questions.length * 4)) * 100)
-        .toFixed(1);
+
+        (
+            (
+                score /
+                (questions.length * 4)
+            ) * 100
+        ).toFixed(1);
 
     document.querySelector(
         ".quiz-box"
@@ -1007,7 +1058,7 @@ function submitQuiz(){
             </h1>
 
             <h2>
-                Your Score : ${score}
+                Score : ${score}
             </h2>
 
             <h3>
@@ -1015,8 +1066,9 @@ function submitQuiz(){
             </h3>
 
             <p>
-                Your quiz was automatically analyzed
-                using Quizzone Smart Runtime Engine.
+                Your Integers understanding
+                was analyzed using Quizzone
+                Smart Runtime Engine.
             </p>
 
             <button class='runtime-btn'
@@ -1055,7 +1107,7 @@ function saveScore(){
     user.scores =
         user.scores || {};
 
-    user.scores.math_ch1_quiz1 = {
+    user.scores.math_ch1_quiz3 = {
 
         marks : score,
 
@@ -1100,7 +1152,7 @@ function saveScore(){
         JSON.stringify(allUsers)
 
     );
-    window.location.href="/Quizzone/Disciplines/Mathematics/Quizes/Chapter%201/Topic2.htm"
+    window.location.href="/Quizzone/Disciplines/Mathematics/Quizes/Chapter%201/Topic4.htm"
     autoNextQuiz();
 
 }
@@ -1110,7 +1162,7 @@ function saveScore(){
    AUTO NEXT QUIZ
 ========================================================= */
 
-    function autoNextQuiz(){
+function autoNextQuiz(){
 
     const currentPath =
         window.location.pathname;
@@ -1292,7 +1344,7 @@ fetch(window.location.href)
 ========================================================= */
 
 document.title =
-    "Mathematics Quiz Topic 1 | Quizzone";
+    "Mathematics Quiz Topic 3 | Quizzone";
 
 
 /* =========================================================

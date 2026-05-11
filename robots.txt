@@ -1,0 +1,185 @@
+# =========================================================
+# QUIZZONE ROBOTS.TXT
+# Advanced SEO + AI + Crawler + Recovery Runtime Control
+# =========================================================
+
+User-agent: *
+Allow: /
+
+# =========================================================
+# CORE STRUCTURE
+# =========================================================
+
+Allow: /Quizzone/
+Allow: /Quizzone/index.htm
+Allow: /Quizzone/Disciplines/
+Allow: /Quizzone/Home/
+Allow: /Quizzone/Assets/
+Allow: /Quizzone/icons/
+Allow: /Quizzone/PWA/
+
+# =========================================================
+# SYSTEM ERROR ENGINE
+# =========================================================
+
+Allow: /Quizzone/404.html
+Allow: /Quizzone/SystemError/
+
+# =========================================================
+# IMPORTANT RESOURCES
+# =========================================================
+
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.json$
+Allow: /*.webmanifest$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.gif$
+
+# =========================================================
+# PRIVATE / INTERNAL / DEBUG BLOCKS
+# =========================================================
+
+Disallow: /Quizzone/.git/
+Disallow: /Quizzone/.github/
+Disallow: /Quizzone/node_modules/
+Disallow: /Quizzone/SystemError/debug/
+Disallow: /Quizzone/SystemError/internal/
+Disallow: /Quizzone/SystemError/runtime/
+Disallow: /Quizzone/private/
+Disallow: /Quizzone/cache/
+Disallow: /Quizzone/temp/
+Disallow: /Quizzone/logs/
+Disallow: /Quizzone/test/
+Disallow: /Quizzone/tests/
+Disallow: /Quizzone/backup/
+Disallow: /Quizzone/dev/
+Disallow: /Quizzone/staging/
+Disallow: /Quizzone/experimental/
+
+# =========================================================
+# QUERY PARAMETER CONTROL
+# =========================================================
+
+Disallow: /*?session=
+Disallow: /*?token=
+Disallow: /*?auth=
+Disallow: /*?password=
+Disallow: /*?debug=
+Disallow: /*?preview=
+Disallow: /*?admin=
+Disallow: /*?internal=
+Disallow: /*&session=
+Disallow: /*&token=
+Disallow: /*&debug=
+
+# =========================================================
+# AI / LLM / SEARCH ENGINE OPTIMIZATION
+# =========================================================
+
+User-agent: GPTBot
+Allow: /Quizzone/
+Disallow: /Quizzone/private/
+Disallow: /Quizzone/internal/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Crawl-delay: 20
+
+# =========================================================
+# AGGRESSIVE SCRAPER LIMITS
+# =========================================================
+
+User-agent: SemrushBot
+Crawl-delay: 15
+
+User-agent: AhrefsBot
+Crawl-delay: 15
+
+User-agent: MJ12bot
+Crawl-delay: 20
+
+User-agent: DotBot
+Crawl-delay: 20
+
+# =========================================================
+# BAD / ABUSIVE BOT CONTROL
+# =========================================================
+
+User-agent: HTTrack
+Disallow: /
+
+User-agent: wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+# =========================================================
+# PERFORMANCE OPTIMIZATION
+# =========================================================
+
+Crawl-delay: 3
+
+# =========================================================
+# HOST
+# =========================================================
+
+Host: akshat-881236.github.io
+
+# =========================================================
+# SITEMAPS
+# =========================================================
+
+Sitemap:
+https://akshat-881236.github.io/Quizzone/sitemap.xml
+
+Sitemap:
+https://akshat-881236.github.io/sitemap.xml
+
+# =========================================================
+# SECURITY POLICY
+# =========================================================
+
+# Prevent indexing of runtime cache systems
+Noindex: /Quizzone/cache/
+Noindex: /Quizzone/runtime/
+Noindex: /Quizzone/temp/
+
+# =========================================================
+# RECOVERY ENGINE DIRECTIVE
+# =========================================================
+
+# Quizzone uses intelligent route recovery.
+# Invalid routes may redirect dynamically through:
+# /Quizzone/404.html
+
+# =========================================================
+# GENERATED FOR:
+# Quizzone Recovery Runtime v1.0
+# Powered By Akshat Network Hub
+# =========================================================

@@ -1,0 +1,1148 @@
+/* =========================================================
+   QUIZZONE SYSTEM ERROR CSS
+   File : systemerror.css
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
+
+:root{
+
+    --primary:#0d6efd;
+    --primary-light:#3ea6ff;
+    --secondary:#00c3ff;
+    --danger:#ff4d6d;
+    --success:#00ffb3;
+
+    --bg:#020617;
+    --bg2:#07111f;
+    --bg3:#0d1117;
+
+    --glass:rgba(255,255,255,0.08);
+    --glass-border:rgba(255,255,255,0.12);
+
+    --text:#ffffff;
+    --muted:#b7c2d0;
+
+    --shadow:
+        0 10px 40px rgba(0,0,0,0.45);
+
+    --radius:24px;
+
+    --transition:
+        all .35s ease;
+
+    --font-main:'Poppins',sans-serif;
+
+    --font-tech:'Orbitron',sans-serif;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg),
+            var(--bg2),
+            #000
+        );
+
+    color:var(--text);
+
+    font-family:var(--font-main);
+
+    overflow-x:hidden;
+
+    position:relative;
+
+}
+
+
+/* =========================================================
+   GEOMETRIC BACKGROUND
+========================================================= */
+
+#geometry-container{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:-10;
+
+}
+
+
+/* =========================================================
+   GRID OVERLAY
+========================================================= */
+
+.grid-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.03) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.03) 1px,
+            transparent 1px
+        );
+
+    background-size:60px 60px;
+
+    mask-image:
+        radial-gradient(circle at center,
+        black,
+        transparent 90%);
+
+    animation:gridMove 15s linear infinite;
+
+    opacity:.4;
+
+}
+
+
+@keyframes gridMove{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    100%{
+        transform:translateY(60px);
+    }
+
+}
+
+
+/* =========================================================
+   GRADIENT ORBS
+========================================================= */
+
+.gradient-orb{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.35;
+
+    animation:floatOrb 10s ease-in-out infinite;
+
+}
+
+.orb-1{
+
+    width:400px;
+    height:400px;
+
+    background:#007bff;
+
+    top:-100px;
+    left:-120px;
+
+}
+
+.orb-2{
+
+    width:320px;
+    height:320px;
+
+    background:#00c3ff;
+
+    right:-100px;
+    top:20%;
+
+}
+
+.orb-3{
+
+    width:300px;
+    height:300px;
+
+    background:#ff0066;
+
+    bottom:-120px;
+    left:35%;
+
+}
+
+
+@keyframes floatOrb{
+
+    0%,100%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-35px);
+    }
+
+}
+
+
+/* =========================================================
+   PARTICLE CANVAS
+========================================================= */
+
+#particle-canvas{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+}
+
+
+/* =========================================================
+   MAIN APPLICATION
+========================================================= */
+
+#system-error-app{
+
+    position:relative;
+
+    z-index:5;
+
+    padding:40px;
+
+}
+
+
+/* =========================================================
+   MAIN RECOVERY CARD
+========================================================= */
+
+#recovery-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:var(--glass);
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:var(--shadow);
+
+    padding:50px;
+
+}
+
+
+/* =========================================================
+   TOP SHINE EFFECT
+========================================================= */
+
+#recovery-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,0.05),
+            transparent
+        );
+
+    transform:translateX(-100%);
+
+    animation:shine 8s infinite;
+
+}
+
+
+@keyframes shine{
+
+    100%{
+        transform:translateX(100%);
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.system-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-bottom:45px;
+
+    flex-wrap:wrap;
+
+}
+
+
+#quizzone-logo{
+
+    width:100px;
+
+    height:auto;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 0 20px rgba(0,123,255,.5));
+
+}
+
+
+.system-title-wrapper{
+
+    flex:1;
+
+}
+
+
+#system-title{
+
+    font-family:var(--font-tech);
+
+    font-size:clamp(2rem,4vw,4.5rem);
+
+    font-weight:900;
+
+    line-height:1.1;
+
+    letter-spacing:2px;
+
+    margin-bottom:10px;
+
+    text-shadow:
+        0 0 25px rgba(0,123,255,.4);
+
+}
+
+
+#system-subtitle{
+
+    color:var(--muted);
+
+    font-size:1.05rem;
+
+    letter-spacing:1px;
+
+}
+
+
+/* =========================================================
+   ERROR VISUAL SECTION
+========================================================= */
+
+#error-visual-section{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+    position:relative;
+
+}
+
+
+#error-glow-ring{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(0,123,255,.25);
+
+    box-shadow:
+        0 0 50px rgba(0,123,255,.5);
+
+    animation:ringRotate 10s linear infinite;
+
+}
+
+
+@keyframes ringRotate{
+
+    from{
+        transform:translate(-50%,-50%) rotate(0deg);
+    }
+
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
+    }
+
+}
+
+
+#runtime-error-code{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:clamp(4rem,12vw,10rem);
+
+    font-family:var(--font-tech);
+
+    font-weight:900;
+
+    letter-spacing:6px;
+
+    margin-bottom:10px;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 40px rgba(0,123,255,.8);
+
+}
+
+
+#runtime-error-title{
+
+    font-size:clamp(1.4rem,3vw,2.5rem);
+
+    margin-bottom:15px;
+
+    font-weight:700;
+
+}
+
+
+#runtime-error-description{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+}
+
+
+/* =========================================================
+   ANALYSIS PANEL
+========================================================= */
+
+#analysis-panel{
+
+    margin-top:30px;
+
+    margin-bottom:40px;
+
+    row-gap:25px;
+
+}
+
+
+/* =========================================================
+   INFO CARD
+========================================================= */
+
+.info-card{
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.04),
+            rgba(255,255,255,.02)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    transition:var(--transition);
+
+}
+
+
+.info-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:rgba(0,123,255,.4);
+
+}
+
+
+.info-card h4{
+
+    font-family:var(--font-tech);
+
+    margin-bottom:22px;
+
+    font-size:1.1rem;
+
+    color:#9fd8ff;
+
+}
+
+
+/* =========================================================
+   RUNTIME LIST
+========================================================= */
+
+.runtime-list{
+
+    list-style:none;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+
+.runtime-list li{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    border-bottom:
+        1px dashed rgba(255,255,255,.08);
+
+    padding-bottom:12px;
+
+}
+
+
+.runtime-label{
+
+    color:var(--muted);
+
+    font-size:.95rem;
+
+}
+
+
+/* =========================================================
+   RECOVERY TIMELINE
+========================================================= */
+
+#recovery-timeline{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+
+.timeline-step{
+
+    position:relative;
+
+    padding:16px 18px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.03);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    overflow:hidden;
+
+    transition:var(--transition);
+
+}
+
+
+.timeline-step.active{
+
+    border-color:
+        rgba(0,123,255,.4);
+
+    background:
+        rgba(0,123,255,.12);
+
+    box-shadow:
+        0 0 25px rgba(0,123,255,.18);
+
+}
+
+
+/* =========================================================
+   ACTION PANEL
+========================================================= */
+
+#action-panel{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.runtime-btn{
+
+    min-width:220px;
+
+    padding:14px 28px;
+
+    border-radius:50px;
+
+    border:none;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+    transition:var(--transition);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.runtime-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.18),
+            transparent
+        );
+
+    transform:translateX(-100%);
+
+}
+
+
+.runtime-btn:hover::before{
+
+    transform:translateX(100%);
+
+    transition:1s;
+
+}
+
+
+.primary-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0066ff,
+            #00a6ff
+        );
+
+    color:#fff;
+
+}
+
+
+.secondary-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #00c3ff,
+            #0099ff
+        );
+
+    color:#fff;
+
+}
+
+
+.glass-btn{
+
+    background:
+        rgba(255,255,255,.08);
+
+    color:#fff;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+}
+
+
+.runtime-btn:hover{
+
+    transform:translateY(-4px) scale(1.03);
+
+    box-shadow:
+        0 10px 30px rgba(0,123,255,.3);
+
+}
+
+
+/* =========================================================
+   REDIRECT PANEL
+========================================================= */
+
+#redirect-panel{
+
+    margin-top:10px;
+
+    margin-bottom:35px;
+
+}
+
+
+.redirect-progress{
+
+    width:100%;
+
+    height:10px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    margin-bottom:15px;
+
+}
+
+
+#redirect-progress-bar{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #007bff,
+            #00c3ff
+        );
+
+    animation:progressMove 10s linear forwards;
+
+}
+
+
+@keyframes progressMove{
+
+    from{
+        width:0%;
+    }
+
+    to{
+        width:100%;
+    }
+
+}
+
+
+#redirect-message{
+
+    text-align:center;
+
+    color:var(--muted);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+#system-footer{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    padding-top:25px;
+
+}
+
+
+#system-footer p{
+
+    margin-bottom:6px;
+
+}
+
+
+/* =========================================================
+   NOSCRIPT
+========================================================= */
+
+.noscript-box{
+
+    padding:40px;
+
+    text-align:center;
+
+    background:#111;
+
+    color:#fff;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#020617;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#007bff;
+
+    border-radius:20px;
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media (max-width:360px){
+
+    #system-error-app{
+
+        padding:10px;
+
+    }
+
+    #recovery-card{
+
+        padding:18px;
+
+        border-radius:18px;
+
+    }
+
+    #system-title{
+
+        font-size:1.4rem;
+
+    }
+
+    #runtime-error-code{
+
+        font-size:4rem;
+
+        letter-spacing:2px;
+
+    }
+
+    .runtime-btn{
+
+        width:100%;
+
+        min-width:100%;
+
+    }
+
+    .grid-overlay{
+
+        opacity:.1;
+
+    }
+
+    .gradient-orb{
+
+        filter:blur(60px);
+
+    }
+
+}
+
+
+/* =========================================================
+   SMARTPHONE
+========================================================= */
+
+@media (min-width:361px) and (max-width:576px){
+
+    #recovery-card{
+
+        padding:24px;
+
+    }
+
+    .runtime-btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width:577px) and (max-width:992px){
+
+    #recovery-card{
+
+        padding:35px;
+
+    }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (min-width:993px) and (max-width:1440px){
+
+    #recovery-card{
+
+        padding:45px;
+
+    }
+
+}
+
+
+/* =========================================================
+   ULTRAWIDE
+========================================================= */
+
+@media (min-width:1441px){
+
+    #recovery-card{
+
+        padding:70px;
+
+    }
+
+    #system-title{
+
+        font-size:5rem;
+
+    }
+
+    #runtime-error-code{
+
+        font-size:12rem;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMARTBOARD MODE
+========================================================= */
+
+@media (min-width:2560px){
+
+    body{
+
+        zoom:1.35;
+
+    }
+
+    #recovery-card{
+
+        max-width:2200px;
+
+        margin:auto;
+
+    }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONE
+========================================================= */
+
+@media (max-height:500px)
+and (orientation:landscape){
+
+    #runtime-error-code{
+
+        font-size:3rem;
+
+    }
+
+    #recovery-card{
+
+        padding:18px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   LIGHT MODE SUPPORT
+========================================================= */
+
+@media (prefers-color-scheme:light){
+
+    body{
+
+        background:
+            linear-gradient(
+                135deg,
+                #eef4ff,
+                #dbeafe
+            );
+
+        color:#111827;
+
+    }
+
+    #recovery-card{
+
+        background:
+            rgba(255,255,255,.65);
+
+        border:
+            1px solid rgba(0,0,0,.08);
+
+    }
+
+    .runtime-label,
+    #system-footer,
+    #redirect-message,
+    #runtime-error-description{
+
+        color:#374151;
+
+    }
+
+}

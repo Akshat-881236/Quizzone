@@ -21,17 +21,17 @@
 ========================================================= -->
 
 <title>
-Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
+Mathematics | Chapter 2 | Topic 3 | Prime and Composite Numbers | Quizzone
 </title>
 
 <meta name="title"
-      content="Mathematics Chapter 1 Topic 7 - Number Line Representation">
+      content="Prime and Composite Numbers | Quizzone">
 
 <meta name="description"
-      content="Learn Number Line Representation with Quizzone Smart Educational Runtime featuring responsive UI, intelligent SEO optimization, automated reading progression and modern educational analytics.">
+      content="Learn Prime and Composite Numbers with Quizzone Smart Educational Runtime featuring responsive learning UI, auto progression, dynamic SEO and intelligent educational analytics.">
 
 <meta name="keywords"
-      content="Number Line,Real Numbers,Mathematics,Integers,Rational Numbers,Irrational Numbers,Quizzone">
+      content="Prime Numbers,Composite Numbers,Mathematics,Number Theory,Quizzone">
 
 <meta name="author"
       content="Akshat Prasad">
@@ -39,8 +39,6 @@ Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
 <meta name="robots"
       content="index,follow">
 
-<meta name="theme-color"
-      content="#007bff">
 
 <meta name="color-scheme"
       content="light dark">
@@ -53,10 +51,10 @@ Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
       content="article">
 
 <meta property="og:title"
-      content="Mathematics Chapter 1 Topic 7">
+      content="Prime and Composite Numbers">
 
 <meta property="og:description"
-      content="Understand Number Line Representation with Quizzone Smart Runtime">
+      content="Chapter 2 Topic 3 Smart Educational Runtime">
 
 <meta property="og:image"
       content="/Quizzone/icons/QuizzoneLogo.png">
@@ -69,10 +67,10 @@ Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
       content="summary_large_image">
 
 <meta name="twitter:title"
-      content="Number Line Representation | Quizzone">
+      content="Prime and Composite Numbers">
 
 <meta name="twitter:description"
-      content="Advanced Smart Educational Learning System">
+      content="Interactive Mathematics Learning Runtime">
 
 <!-- =========================================================
      JSON LD
@@ -80,18 +78,18 @@ Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"Article",
-  "headline":"Number Line Representation",
-  "description":"Mathematics Chapter 1 Topic 7",
-  "author":{
-    "@type":"Person",
-    "name":"Akshat Prasad"
-  },
-  "publisher":{
-    "@type":"Organization",
-    "name":"Quizzone"
-  }
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"Prime and Composite Numbers",
+ "description":"Mathematics Chapter 2 Topic 3",
+ "author":{
+   "@type":"Person",
+   "name":"Akshat Prasad"
+ },
+ "publisher":{
+   "@type":"Organization",
+   "name":"Quizzone"
+ }
 }
 </script>
 
@@ -117,16 +115,11 @@ Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
       rel="stylesheet">
 
 <!-- =========================================================
-     ROUTER
+     ROUTER + GLOBAL
 ========================================================= -->
 
 <script src="https://akshat-881236.github.io/AkshatNetworkHub/ActivityLog/router.js"
-        referrerpolicy="referrer">
-</script>
-
-<!-- =========================================================
-     GLOBAL
-========================================================= -->
+        referrerpolicy="referrer"></script>
 
 <script src="/Quizzone/Global/loader.js"></script>
 <script src="/Quizzone/Global/seoMeta.js"></script>
@@ -142,8 +135,7 @@ Mathematics | Chapter 1 | Topic 7 | Number Line Representation | Quizzone
     --primary:#007bff;
     --secondary:#00d4ff;
     --dark:#0d1117;
-    --light:#eef5ff;
-    --glass:rgba(255,255,255,.78);
+    --glass:rgba(255,255,255,.82);
 
 }
 
@@ -157,7 +149,7 @@ body{
         linear-gradient(
             135deg,
             #eef5ff,
-            #d9e8ff
+            #dce8ff
         );
 
     overflow-x:hidden;
@@ -165,6 +157,10 @@ body{
     color:#111;
 
 }
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
 
@@ -177,7 +173,7 @@ body{
 
     color:white;
 
-    padding:20px;
+    padding:22px;
 
     position:sticky;
 
@@ -192,7 +188,7 @@ body{
 
 .header-title{
 
-    font-size:1.7rem;
+    font-size:1.8rem;
 
     font-weight:700;
 
@@ -200,17 +196,21 @@ body{
 
 .header-sub{
 
-    font-size:.95rem;
+    margin-top:6px;
 
     opacity:.92;
 
 }
 
+/* =========================================================
+   MAIN
+========================================================= */
+
 .main-box{
 
     width:92%;
 
-    max-width:1100px;
+    max-width:1150px;
 
     margin:30px auto;
 
@@ -218,17 +218,21 @@ body{
 
     backdrop-filter:blur(18px);
 
-    border-radius:24px;
+    border-radius:26px;
 
-    padding:35px;
+    padding:38px;
 
     border:
         1px solid rgba(255,255,255,.45);
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.12);
+        0 10px 28px rgba(0,0,0,.12);
 
 }
+
+/* =========================================================
+   INFO GRID
+========================================================= */
 
 .info-grid{
 
@@ -236,9 +240,9 @@ body{
 
     flex-wrap:wrap;
 
-    gap:15px;
+    gap:18px;
 
-    margin-bottom:30px;
+    margin-bottom:35px;
 
 }
 
@@ -250,14 +254,14 @@ body{
 
     background:white;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    padding:18px;
+    padding:20px;
 
     text-align:center;
 
     box-shadow:
-        0 2px 12px rgba(0,0,0,.08);
+        0 3px 14px rgba(0,0,0,.08);
 
 }
 
@@ -267,13 +271,17 @@ body{
 
     color:#007bff;
 
-    font-weight:700;
+    font-size:1.6rem;
 
 }
 
+/* =========================================================
+   CONTENT
+========================================================= */
+
 .topic-title{
 
-    font-size:2rem;
+    font-size:2.1rem;
 
     font-weight:700;
 
@@ -287,15 +295,13 @@ body{
 
     background:white;
 
-    padding:24px;
-
     border-radius:18px;
 
-    margin-bottom:25px;
+    padding:26px;
 
     line-height:2;
 
-    font-size:1rem;
+    margin-bottom:25px;
 
     border-left:
         5px solid #007bff;
@@ -307,43 +313,45 @@ body{
 
 .example-box{
 
+    margin-top:20px;
+
     background:#0d1117;
 
     color:#00ffb3;
 
-    padding:20px;
-
     border-radius:14px;
 
-    margin-top:18px;
-
-    overflow:auto;
-
-    font-size:1.02rem;
+    padding:20px;
 
     line-height:2;
 
+    overflow:auto;
+
 }
 
-.auto-box{
+/* =========================================================
+   AUTO BOX
+========================================================= */
 
-    margin-top:35px;
+.auto-box{
 
     background:#0d1117;
 
     color:white;
 
-    padding:20px;
-
     border-radius:18px;
 
+    padding:25px;
+
     text-align:center;
+
+    margin-top:35px;
 
 }
 
 .progress{
 
-    height:12px;
+    height:14px;
 
     margin-top:15px;
 
@@ -354,11 +362,11 @@ body{
 .progress-bar{
 
     animation:
-        progressMove 35s linear forwards;
+        autoProgress 35s linear forwards;
 
 }
 
-@keyframes progressMove{
+@keyframes autoProgress{
 
     from{
         width:0%;
@@ -369,6 +377,10 @@ body{
     }
 
 }
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .btn-area{
 
@@ -388,7 +400,7 @@ body{
 
     border:none;
 
-    padding:14px 22px;
+    padding:14px 24px;
 
     border-radius:50px;
 
@@ -405,6 +417,8 @@ body{
 
     transition:.3s;
 
+    cursor:pointer;
+
 }
 
 .runtime-btn:hover{
@@ -412,6 +426,10 @@ body{
     transform:translateY(-3px);
 
 }
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
 
@@ -423,6 +441,10 @@ body{
 
 }
 
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media(max-width:576px){
 
     .main-box{
@@ -433,7 +455,7 @@ body{
 
     .topic-title{
 
-        font-size:1.5rem;
+        font-size:1.6rem;
 
     }
 
@@ -465,13 +487,13 @@ body{
 
     <div class="header-title">
 
-        Mathematics → Chapter 1 → Topic 7
+        Mathematics → Chapter 2 → Topic 3
 
     </div>
 
     <div class="header-sub">
 
-        Number Line Representation Smart Learning Runtime
+        Prime and Composite Numbers Runtime
 
     </div>
 
@@ -497,7 +519,7 @@ body{
         <div class="info-card">
 
             <h3>
-                Topic 7
+                Topic 3
             </h3>
 
             <p>
@@ -523,34 +545,31 @@ body{
 
     <h1 class="topic-title">
 
-        Representation of Numbers on the Number Line
+        Prime and Composite Numbers
 
     </h1>
 
 
     <div class="topic-para">
 
-        The number line is a graphical representation used in mathematics to display numbers in an organized linear format. It helps students visually understand the position, order, and relationship between different types of numbers such as integers, rational numbers, irrational numbers, and real numbers. Positive numbers are placed on the right side of zero, while negative numbers are placed on the left side. Number lines are highly useful for understanding concepts like comparison, distance, inequalities, and coordinate geometry. This visual mathematical tool improves conceptual clarity and helps students solve arithmetic and algebraic problems more effectively in both academic and practical applications.
+        Prime and composite numbers are fundamental concepts in mathematics and number theory. A prime number is a number greater than one that has only two factors, namely one and itself. Composite numbers, on the other hand, have more than two factors and can be divided by multiple numbers exactly. Understanding prime and composite numbers helps students develop strong numerical reasoning and analytical thinking. These concepts are widely used in arithmetic simplification, divisibility analysis, factorization, cryptography, programming algorithms, and scientific computations. Prime numbers are especially important in cybersecurity systems where encryption methods depend heavily on mathematical properties and secure numerical structures.
 
     </div>
 
 
     <div class="topic-para">
 
-        Rational and irrational numbers can also be represented on the number line using decimal expansions and geometric constructions. For example, irrational numbers such as √2 and π can be approximated and plotted accurately. Number line representation is extremely important in coordinate systems, graph plotting, engineering calculations, physics simulations, and computer graphics. It allows learners to understand continuity and spacing between numbers in a visual manner. Modern educational systems and digital applications frequently use number lines for teaching mathematics interactively. Understanding this topic develops stronger logical reasoning and provides a foundation for higher mathematical concepts such as graph theory, calculus, vectors, and coordinate geometry.
+        Prime and composite numbers are essential for advanced mathematical applications and real world technologies. Prime numbers are used in coding systems, internet encryption, banking security, and digital communication systems. Composite numbers help in factorization, least common multiples, greatest common factors, and simplifying complex calculations. Learning these concepts strengthens logical problem solving skills and improves understanding of numerical relationships. Students who understand prime and composite numbers perform better in algebra, arithmetic operations, and higher mathematics. These concepts also build the foundation for advanced computational systems, artificial intelligence algorithms, data security structures, and efficient mathematical modeling techniques used across modern engineering and scientific research industries.
 
         <div class="example-box">
 
-            Number Line Examples:<br><br>
+            Prime Numbers → 2,3,5,7,11,13...<br><br>
 
-            ← -3  -2  -1  0  1  2  3 →<br><br>
+            Composite Numbers → 4,6,8,9,10,12...<br><br>
 
-            Positive Numbers → Right Side of Zero<br><br>
+            Factors of 7 → 1,7<br><br>
 
-            Negative Numbers → Left Side of Zero<br><br>
-
-            Rational and Irrational Numbers can both
-            be represented on the Number Line
+            Factors of 12 → 1,2,3,4,6,12
 
         </div>
 
@@ -561,7 +580,7 @@ body{
 
         <h4>
 
-            Smart Auto Read System Active
+            Smart Auto Read Runtime Active
 
         </h4>
 
@@ -584,9 +603,7 @@ body{
                         progress-bar-striped
                         progress-bar-animated
                         bg-info"
-
                  style="width:0%">
-
             </div>
 
         </div>
@@ -625,7 +642,7 @@ body{
 <footer class="footer">
 
     © 2026 Quizzone —
-    Intelligent Discipline Runtime
+    Intelligent Mathematics Discipline Runtime
 
 </footer>
 
@@ -637,18 +654,18 @@ body{
 ========================================================= */
 
 let user =
-    JSON.parse(
-        localStorage.getItem(
-            "ActiveQuizzoneUser"
-        )
-    );
+JSON.parse(
+localStorage.getItem(
+"ActiveQuizzoneUser"
+)
+);
 
 if(!user){
 
-    alert("Please login first!");
+alert("Please login first!");
 
-    location.href =
-        "/Quizzone/Home/SignIn.htm";
+location.href =
+"/Quizzone/Home/SignIn.htm";
 
 }
 
@@ -659,71 +676,71 @@ if(!user){
 
 (function(){
 
-    let width =
-        window.innerWidth;
+let width =
+window.innerWidth;
 
-    let device =
-        "Desktop";
+let device =
+"Desktop";
 
-    if(width < 576){
+if(width < 576){
 
-        device = "Mobile";
+device = "Mobile";
 
-    }
+}
 
-    else if(width < 992){
+else if(width < 992){
 
-        device = "Tablet";
+device = "Tablet";
 
-    }
+}
 
-    else if(width > 2200){
+else if(width > 2200){
 
-        device = "SmartBoard";
+device = "SmartBoard";
 
-    }
+}
 
-    document
-        .getElementById(
-            "deviceBox"
-        )
-        .innerText = device;
+document
+.getElementById(
+"deviceBox"
+)
+.innerText = device;
 
 })();
 
 
 /* =========================================================
-   MARK READ
+   MARK AS READ
 ========================================================= */
 
 function markAsRead(){
 
-    let user =
-        JSON.parse(
-            localStorage.getItem(
-                "ActiveQuizzoneUser"
-            )
-        );
+let user =
+JSON.parse(
+localStorage.getItem(
+"ActiveQuizzoneUser"
+)
+);
 
-    if(!user){
+if(!user){
 
-        return;
+return;
 
-    }
+}
 
-    user.progress =
-        user.progress || {};
+user.progress =
+user.progress || {};
 
-    user.progress.blogs =
-        (user.progress.blogs || 0) + 1;
+user.progress.blogs =
+(user.progress.blogs || 0) + 1;
 
-    localStorage.setItem(
+localStorage.setItem(
 
-        "ActiveQuizzoneUser",
+"ActiveQuizzoneUser",
 
-        JSON.stringify(user)
+JSON.stringify(user)
 
-    );
+);
 
 }
 
@@ -734,15 +751,15 @@ function markAsRead(){
 
 function getPageNumber(){
 
-    const url =
-        location.pathname;
+const url =
+window.location.pathname;
 
-    const match =
-        url.match(/Topic(\d+)\.htm/i);
+const match =
+url.match(/Topic(\d+)\.htm/i);
 
-    return match
-        ? parseInt(match[1])
-        : 1;
+return match
+? parseInt(match[1])
+: 1;
 
 }
 
@@ -753,32 +770,32 @@ function getPageNumber(){
 
 function navigateToPage(num){
 
-    fetch(`Topic${num}.htm`)
+fetch(`Topic${num}.htm`)
 
-    .then(response=>{
+.then(response=>{
 
-        if(response.ok){
+if(response.ok){
 
-            location.href =
-                `Topic${num}.htm`;
+location.href =
+`Topic${num}.htm`;
 
-        }
+}
 
-        else{
+else{
 
-            location.href =
-                "/Quizzone/404.html";
+location.href =
+"/Quizzone/404.html";
 
-        }
+}
 
-    })
+})
 
-    .catch(()=>{
+.catch(()=>{
 
-        location.href =
-            "/Quizzone/404.html";
+location.href =
+"/Quizzone/404.html";
 
-    });
+});
 
 }
 
@@ -789,20 +806,20 @@ function navigateToPage(num){
 
 function previous(){
 
-    const current =
-        getPageNumber();
+const current =
+getPageNumber();
 
-    if(current > 1){
+if(current > 1){
 
-        navigateToPage(current - 1);
+navigateToPage(current - 1);
 
-    }
+}
 
-    else{
+else{
 
-        alert("This is the first topic.");
+alert("This is the first topic.");
 
-    }
+}
 
 }
 
@@ -813,10 +830,10 @@ function previous(){
 
 function next(){
 
-    const current =
-        getPageNumber();
+const current =
+getPageNumber();
 
-    navigateToPage(current + 1);
+navigateToPage(current + 1);
 
 }
 
@@ -828,44 +845,44 @@ function next(){
 let seconds = 35;
 
 const counter =
-    document.getElementById(
-        "counter"
-    );
+document.getElementById(
+"counter"
+);
 
 const timer =
-    setInterval(()=>{
+setInterval(()=>{
 
-        seconds--;
+seconds--;
 
-        counter.innerText =
-            seconds;
+counter.innerText =
+seconds;
 
-        document
-            .getElementById(
-                "timerBox"
-            )
-            .innerText =
-                seconds + "s";
+document
+.getElementById(
+"timerBox"
+)
+.innerText =
+seconds + "s";
 
-        if(seconds <= 0){
+if(seconds <= 0){
 
-            clearInterval(timer);
+clearInterval(timer);
 
-            markAsRead();
+markAsRead();
 
-            next();
+next();
 
-        }
+}
 
-    },1000);
+},1000);
 
 
 /* =========================================================
-   RUNTIME SEO
+   DYNAMIC TITLE
 ========================================================= */
 
 document.title =
-    "Mathematics Topic 7 | Quizzone";
+"Prime and Composite Numbers | Quizzone";
 
 
 /* =========================================================
@@ -876,19 +893,19 @@ fetch(window.location.href)
 
 .then(res=>{
 
-    if(!res.ok){
+if(!res.ok){
 
-        location.href =
-            "/Quizzone/404.html";
+location.href =
+"/Quizzone/404.html";
 
-    }
+}
 
 })
 
 .catch(()=>{
 
-    location.href =
-        "/Quizzone/404.html";
+location.href =
+"/Quizzone/404.html";
 
 });
 
